@@ -70,6 +70,24 @@ public class GloriaRomanusController{
 
   private Map<String, Integer> provinceToNumberTroopsMap;
 
+  // Wealth
+  private Map<String, Long> factionToWealth;
+
+  // Roads(Infrasture)
+  private Map<String, Road> provinceToRoad;
+
+  // Walls
+  private Map<String, Wall> provinceToWall;
+
+  // Troop production Building
+  private Map<String, Troopproduction_building> provinceToTroopProductionBuilding;
+
+  // Wealth Generation Building
+  private Map<String, Wealthgenerate_building> provinceToWealthGenerationBuilding;
+
+  // Smith
+  private Map<String, Smith> provinceToSmith;
+
   private String humanFaction;
 
   private Feature currentlySelectedHumanProvince;
