@@ -298,6 +298,7 @@ public class GloriaRomanusController{
     return flp;
   }
 
+  // return the faction with its provinces
   private Map<String, String> getProvinceToOwningFactionMap() throws IOException {
     String content = Files.readString(Paths.get("src/unsw/gloriaromanus/initial_province_ownership.json"));
     JSONObject ownership = new JSONObject(content);
