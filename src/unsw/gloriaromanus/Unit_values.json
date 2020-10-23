@@ -1,0 +1,13 @@
+{
+    "heavy infantry": {
+        "numTroops":50,
+        "range": 1,
+        "armour": 5,
+        "morale": 10,
+        "speed": 10,
+        "attack": 6,
+        "defenseSkill": 10,
+        "shieldDefense": 3, 
+        "movementpoints": 10
+    }
+}
