@@ -34,5 +34,7 @@ public class UnitTest{
         Highway q = new Highway();
         assertEquals(q.get_MovementPoints(), 1);
     }
+
+    
 }
 
