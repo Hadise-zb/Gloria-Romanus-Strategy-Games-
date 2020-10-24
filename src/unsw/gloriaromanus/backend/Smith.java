@@ -5,6 +5,14 @@ import unsw.gloriaromanus.*;
 public class Smith {
     private int cost;
 
+    public Smith(int cost) {
+        this.cost = cost;
+    }
+
+    public abstract Integer getScalarsSpeed();
+    public abstract Double getPrortionSpeed();
+
+
     public void upgraded_helmets(int i, Unit unit) {
         unit.set_helmet(i);
     } 
