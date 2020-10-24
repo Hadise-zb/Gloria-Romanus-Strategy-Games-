@@ -53,6 +53,8 @@ import org.geojson.LngLatAlt;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import unsw.gloriaromanus.backend.*;
+
 public class GloriaRomanusController{
 
   @FXML

@@ -1,15 +1,19 @@
-package test;
+package unsw.gloriaromanus;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import unsw.gloriaromanus.*;
+//import unsw.gloriaromanus.*;
+import org.json.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
-
-public class UnitTest{
+public class UnitTest1{
     @Test
     public void blahTest(){
         assertEquals("a", "a");
@@ -19,7 +23,7 @@ public class UnitTest{
     public void blahTest2(){
         Unit u = new Unit("heavy infantry");
         //System.out.println(u.getNumTroops());
-        assertEquals(u.getNumTroops(), 0);
+        assertEquals(u.getNumTroops(), 5);
     }
 
     @Test
