@@ -1,13 +1,13 @@
+
 package unsw.gloriaromanus.backend;
 
 import java.util.ArrayList;
+import unsw.gloriaromanus.*;
 
 public class faction {
     private ArrayList<faction> occupations;
     private ArrayList<faction> neighboors;
-    private Soldier Cavalry;
-    private Soldier Infantry;
-    private Soldier Artillery;
+    private Unit unit;
     private Road road;
     private boolean turn;
     private String belong; 
@@ -20,11 +20,9 @@ public class faction {
         
     }
 
-    public ArrayList<Soldier> get_soldiers() {
-        ArrayList<Soldier> soldiers = new ArrayList<Soldier>();
-        soldiers.add(this.Cavalry);
-        soldiers.add(this.Infantry);
-        soldiers.add(this.Artillery);
+    public ArrayList<Unit> get_soldiers() {
+        ArrayList<Unit> soldiers = new ArrayList<Unit>();
+        soldiers.add(this.unit);
         return soldiers;
     }
 
@@ -32,7 +30,7 @@ public class faction {
         return this.occupations;
     }
 
-    public ArrayList<faction> set_occupations(faction occupation) {
+    public void set_occupations(faction occupation) {
         this.occupations.add(occupation);
     }
 
@@ -40,7 +38,7 @@ public class faction {
         return this.neighboors;
     }
 
-    public ArrayList<faction> set_neighboors(faction neighboor) {
+    public void set_neighboors(faction neighboor) {
         this.occupations.add(neighboor);
     }
 

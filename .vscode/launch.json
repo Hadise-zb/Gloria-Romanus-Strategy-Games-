@@ -7,6 +7,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Unit",
+            "request": "launch",
+            "mainClass": "unsw.gloriaromanus.Unit",
+            "projectName": "w11b-hello_java_751a8282"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - GloriaRomanusApplication",
             "request": "launch",
             "mainClass": "unsw.gloriaromanus.GloriaRomanusApplication",
