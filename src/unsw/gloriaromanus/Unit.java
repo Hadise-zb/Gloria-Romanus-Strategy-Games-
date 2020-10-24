@@ -23,10 +23,10 @@ public class Unit {
     private String category;
     private int numTroops; // the number of troops in this unit (should reduce based on depletion)
     private int range; // range of the unit
-    private float armour; // armour defense
+    private double armour; // armour defense
     private int morale; // resistance to fleeing
     private int helmet;
-    private float speed; // ability to disengage from disadvantageous battle
+    private double speed; // ability to disengage from disadvantageous battle
     private int attack; // can be either missile or melee attack to simplify. Could improve
                    // implementation by differentiating!
     private int defenseSkill; // skill to defend in battle. Does not protect from arrows!
@@ -63,7 +63,7 @@ public class Unit {
         this.helmet = new_helmet;
     }
 
-    public void set_armour(float new_armour) {
+    public void set_armour(double new_armour) {
         this.armour = new_armour;
     }
 
@@ -71,7 +71,7 @@ public class Unit {
         this.speed = new_speed;
     }
 
-    public float get_speed() {
+    public double get_speed() {
         return this.speed;
     }
 

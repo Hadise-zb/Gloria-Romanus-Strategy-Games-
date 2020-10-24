@@ -3,7 +3,8 @@ import unsw.gloriaromanus.*;
 
 
 public class Smith {
-    
+    private int cost;
+
     public void upgraded_helmets(int i, Unit unit) {
         unit.set_helmet(i);
     } 
@@ -16,7 +17,7 @@ public class Smith {
 
     }
 
-    
+
 
 
 }
