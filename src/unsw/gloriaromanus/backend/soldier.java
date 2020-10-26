@@ -22,6 +22,18 @@ public class soldier {
         this.armed = armed;
     }
     
+    public String get_name() {
+
+    }
+
+    public int get_speed() {
+
+    }
+
+    public int get_attack() {
+        
+    }
+
     public Integer get_speed(){
         Double speed = this.speed/1.0;
         Province province = this.troop.get_province();
