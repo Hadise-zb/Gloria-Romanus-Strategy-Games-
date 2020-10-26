@@ -1,6 +1,6 @@
 package unsw.gloriaromanus.backend;
 
-public class troop_production {
+public class troop_production extends Infrastructure {
     
     private int heavy_infantry;
     private int spearmen;
@@ -10,6 +10,9 @@ public class troop_production {
     private int elephants;
     private int chariots;
     private int artillery;
+
+    private int attack;
+    private int speed;
 
     public void troop_production() {
         this.heavy_infantry = 0;

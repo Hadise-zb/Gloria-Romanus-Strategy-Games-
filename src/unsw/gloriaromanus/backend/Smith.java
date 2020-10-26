@@ -2,15 +2,22 @@ package unsw.gloriaromanus.backend;
 import unsw.gloriaromanus.*;
 
 
-public class Smith {
+public abstract class Smith {
     private int cost;
+    private Double portion_speed;
+    private Double scalar_speed;
 
     public Smith(int cost) {
         this.cost = cost;
     }
 
-    public abstract Integer getScalarsSpeed();
-    public abstract Double getPrortionSpeed();
+    public Double getScalarsSpeed(){
+        return this.scalar_speed;
+    }
+
+    public Double getPrortionSpeed(){
+        return this.portion_speed;
+    }
 
 
     public void upgraded_helmets(int i, Unit unit) {
@@ -25,7 +32,7 @@ public class Smith {
 
     }
 
-
+    
 
 
 }
