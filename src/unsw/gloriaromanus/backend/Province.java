@@ -10,6 +10,7 @@ public class Province {
     private ArrayList<Smith> smithes;
     private faction onwer;
     private Double tax;
+    private ArrayList<Troop> troops;
 
     public Province(String name, faction owner, Integer wealth, Double tax) {
         this.name = name;
@@ -17,9 +18,20 @@ public class Province {
         this.wealth = wealth;
         this.tax = tax; 
         this.smithes = new ArrayList<Smith>();
-        this.buildings = new ArrayList<Building>();       
+        //this.buildings = new ArrayList<Building>();
+        this.troops = new ArrayList<Troop>();    
     }
 
+    // add ablities to soldiers
+    public void ablility_add() {
+        for (Troop troop : troops) {
+            for (soldier soldier : troop.get_soldiers()) {                
+                troop.ability_add(soldier);      
+            }
+        }
+    }
+
+    /*
     public ArrayList<Smith> getsmith() {
         return this.smithes;
     }
@@ -45,4 +57,5 @@ public class Province {
 
         this.building.add(building);
     }
+    */
 }
