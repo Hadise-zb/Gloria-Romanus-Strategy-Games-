@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import unsw.gloriaromanus.*;
 
 public class faction {
-    private ArrayList<faction> occupations;
+    private ArrayList<Province> occupations;
     private ArrayList<faction> neighboors;
     private Unit unit;
     private Road road;
@@ -26,11 +26,11 @@ public class faction {
         return soldiers;
     }
 
-    public ArrayList<faction> get_occupations() {
+    public ArrayList<Province> get_occupations() {
         return this.occupations;
     }
 
-    public void set_occupations(faction occupation) {
+    public void set_occupations(Province occupation) {
         this.occupations.add(occupation);
     }
 
@@ -42,9 +42,22 @@ public class faction {
         this.occupations.add(neighboor);
     }
 
-    public void attack(faction enermy) {
+    public void attack(Province enermy) {
+        boolean occupied = false;
+        for (Province i : occupations) {
+            if (enermy.equals(i)) {
+                occupied = true;
+            }
+        }
+
+        if (occupied = true) {
+            return;
+        }
+
         
+
     }
+
     
 
 }
