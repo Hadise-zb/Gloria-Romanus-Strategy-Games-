@@ -27,8 +27,10 @@ public class Troop {
             Ability ability = new Ability();
             ability.set_name("skirmisher anti-armour");
             ability.ability_add(soldier);
-        } else if (this.name.equals("javelin-skirmisher")) {
+        } else if (this.name.equals("melee cavalry")) {
 
+        } else if () {
+            
         }
         
         //ArrayList<Ability> abilities = soldier.get_abilities();
