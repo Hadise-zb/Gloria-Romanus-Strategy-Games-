@@ -13,6 +13,6 @@ public class System {
             this.treasure += province.getTreasure();
             faction.update();
         }
-
+        
     }
 }

@@ -32,6 +32,8 @@ public class Ability {
 
         } else if (this.name.equals("skirmisher anti-armour")) {
             skirmisher_add(soldier);
+        } else if () {
+            
         }
         
         ArrayList<Ability> abilities = soldier.get_abilities();
@@ -75,5 +77,6 @@ public class Ability {
         
     }
 
+    public void 
 
 }
