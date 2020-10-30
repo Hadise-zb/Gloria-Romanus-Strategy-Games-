@@ -19,7 +19,7 @@ class Node implements Comparator<Node> {
 
   
 
-    public Node(int node, int cost) 
+    public Node(String node, int cost) 
 
     { 
 

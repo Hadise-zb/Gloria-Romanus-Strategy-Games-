@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import unsw.gloriaromanus.*;
 import org.json.*;
 
 /**
@@ -59,7 +59,7 @@ public class Unit {
                     Files.readString(Paths.get("src/unsw/gloriaromanus/Unit_values.json")));
             
             JSONObject chosen_unit = new_unit.getJSONObject(type);
-            this.category = chosen_unit.getString("category");
+            //this.category = chosen_unit.getString("category");
             this.numSoldiers = chosen_unit.getInt("numTroops");
             this.armour = 1;
             //this.armour = chosen_unit.getInt("armour");
@@ -74,6 +74,17 @@ public class Unit {
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] arg){
+        String name = "skirmishers";
+        Unit new_unit = new Unit(name);
+        assert(new_unit.getNumSoldiers()==20);
+        //System.out.println(new_unit.getNumSoldiers());
+
+        Unit x = new Unit("heavy infantry");
+        //System.out.println(x.getNumSoldiers());
+        assertEquals(x.getNumSoldiers(), 5);
     }
 
     public double get_blood() {
