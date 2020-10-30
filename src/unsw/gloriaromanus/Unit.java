@@ -21,7 +21,7 @@ import org.json.*;
  */
 public class Unit {
     private String category;
-    private int numTroops; // the number of troops in this unit (should reduce based on depletion)
+    private int numSoldiers; // the number of troops in this unit (should reduce based on depletion)
     private int range; // range of the unit
     private double armour; // armour defense
     private int morale; // resistance to fleeing
@@ -33,6 +33,7 @@ public class Unit {
     private int shieldDefense; // a shield
     private int movementpoints;
     private String unit_name;
+    private int numTroops;
 
 
     public Unit(String type) {
@@ -76,7 +77,7 @@ public class Unit {
     }
 
     public int getNumTroops(){
-        return numTroops;
+        return this.numSoldiers;
     }
 
 
