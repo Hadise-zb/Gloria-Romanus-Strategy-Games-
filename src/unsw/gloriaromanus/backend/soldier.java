@@ -5,7 +5,8 @@ import java.util.List;
 
 
 public class soldier {
-    private Boolean mercenary;
+    //private Boolean mercenary;
+    private String type;
     private Boolean armed;
     private Troop troop;
     private String name;
@@ -18,24 +19,27 @@ public class soldier {
     private int turns;
     private String province;
     private int cost;
-    private String faction;
+    private faction faction;
     private ArrayList<Ability> abilities;
 
-    public void Soldier(String faction, int cost, Boolean mercenary, String name, Integer morale, Integer speed, Double attack, Integer shield, Boolean armed, Troop troop) {
+    public soldier (faction faction, String type, String name, String province) {
         this.faction = faction;
-        this.mercenary = mercenary;
+        this.type = type;
         this.name = name;
-        this.morale = 1.0;
-        this.speed = speed;
-        this.attack = attack;
-        this.shield = shield;
-        this.armed = armed;
+        //this.mercenary = mercenary;
+        //this.name = name;
+        //this.morale = 1.0;
+        //this.speed = speed;
+        //this.attack = attack;
+        //this.shield = shield;
+        //this.armed = armed;
         this.training_completed = false;
         this.turns = 0;
-        this.province = null;
-        this.cost = 0;
-        this.abilities = new ArrayList<Ability>();
+        this.province = province;
+        //this.cost = 0;
+        //this.abilities = new ArrayList<Ability>();
     }
+
     public double get_defence() {
         return this.defence;
     }
@@ -44,7 +48,7 @@ public class soldier {
         this.defence = new_defence;
     }
 
-    public String get_faction() {
+    public faction get_faction() {
         return this.faction;
     }
 
@@ -92,6 +96,7 @@ public class soldier {
         if (this.turns == 3) {
             this.training_completed = true;
         }
+
     }
 
 

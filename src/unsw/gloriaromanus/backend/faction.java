@@ -10,7 +10,8 @@ public class faction {
     private Unit unit;
     private Road road;
     private boolean turn;
-    private String belong; 
+    private String belong;
+    private String name; 
 
     public faction() {
 
@@ -18,6 +19,10 @@ public class faction {
 
     public void set_soldiers(int a, int b, int c) {
         
+    }
+
+    public String get_name() {
+        return this.name;
     }
 
     public ArrayList<Unit> get_soldiers() {
@@ -39,7 +44,7 @@ public class faction {
     }
 
     public void set_neighboors(faction neighboor) {
-        this.occupations.add(neighboor);
+        //this.occupations.add(neighboor);
     }
 
     public void attack(Province enermy) {

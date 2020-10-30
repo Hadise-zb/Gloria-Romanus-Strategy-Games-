@@ -1,3 +1,4 @@
+/*
 package unsw.gloriaromanus.backend.Ability_package;
 
 import unsw.gloriaromanus.backend.*;
@@ -21,3 +22,4 @@ public class Berserker_rage extends Ability {
         soldier.set_abilities(abilities);
     }
 }
+*/
