@@ -1,10 +1,17 @@
 package unsw.gloriaromanus.backend;
 
 import java.util.*; 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import unsw.gloriaromanus.*;
+import org.json.*;
 
 public class DPQ { 
 
-    private int dist[]; 
+    private int dist[][]; 
 
     private Set<Integer> settled; 
 
@@ -136,7 +143,75 @@ public class DPQ {
 
     } 
 
-  
+    public void movement(String start) {
+        try {
+            JSONObject matrix = new JSONObject(
+                Files.readString(Paths.get("src/unsw/gloriaromanus/province_adjacency_matrix.json")));
+            
+            int count = 0;
+            for (String key : matrix.keySet()) {
+                count++;
+            }
+
+            for (int i = 0; i < count; i++) 
+                for (int j = 0; j < count; j++) 
+                    dist[i][j] = Integer.MAX_VALUE;
+            
+            
+            for (String key : matrix.keySet()) {
+                JSONArray ja = matrix.getJSONArray(key);
+                for (int i = 0; i < ja.length(); i++) {
+                    String value = ja.getString(i);
+                    
+                }
+                
+            }
+
+            JSONObject province = matrix.getJSONObject(start);
+            //this.category = province.getString("category");
+
+            
+
+            JSONArray key = matrix.names ();
+            for (int i = 0; i < key.length (); i++) {
+                String keys = key.getString (i); 
+                String adjacent = matrix.getString (keys);
+
+            }
+
+            /*
+            String content = Files.readString(Paths.get("src/unsw/gloriaromanus/initial_province_ownership.json"));
+            JSONObject ownership = new JSONObject(content);
+            Map<String, String> m = new HashMap<String, String>();
+            for (String key : ownership.keySet()) {
+            // key will be the faction name
+                JSONArray ja = ownership.getJSONArray(key);
+                // value is province name
+                for (int i = 0; i < ja.length(); i++) {
+                    String value = ja.getString(i);
+                    m.put(value, key);
+                }
+            }
+            return m;
+            */
+
+            for (int i = 0; i < V; i++) 
+                dist[i] = Integer.MAX_VALUE;
+            
+            pq.add(new Node(start, 0));
+            
+            dist[start] = 0;
+
+            JSONArray key = province.names ();
+            for (int i = 0; i < key.length (); i++) {
+                String keys = key.getString (i); 
+                String adjacent = province.getString (keys);
+
+            }
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Driver code 
 
@@ -168,7 +243,9 @@ public class DPQ {
 
         } 
 
-  
+        
+    
+
 
         // Inputs for the DPQ graph 
 

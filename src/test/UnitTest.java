@@ -19,7 +19,7 @@ public class UnitTest{
     public void blahTest2(){
         Unit u = new Unit("heavy infantry");
         //System.out.println(u.getNumTroops());
-        assertEquals(u.getNumTroops(), 0);
+        assertEquals(u.getNumTroops(), 50);
     }
 
     @Test

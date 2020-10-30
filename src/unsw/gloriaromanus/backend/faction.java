@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import unsw.gloriaromanus.*;
 
 public class faction {
-    private ArrayList<Province> occupations;
-    private ArrayList<faction> neighboors;
+    private ArrayList<Province> occupations = new ArrayList<Province>();
+    private ArrayList<faction> neighboors = new ArrayList<faction>();
     private Unit unit;
     private Road road;
     private boolean turn;
