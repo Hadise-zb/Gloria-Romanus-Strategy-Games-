@@ -1,6 +1,7 @@
 package unsw.gloriaromanus.backend;
 import unsw.gloriaromanus.*;
 
+/*
 public class Armour extends Smith {
     private double damage;
     private double speed;
@@ -25,4 +26,4 @@ public class Armour extends Smith {
     public abstract Double getPrortionSpeed(){
         return this.speed;
     }
-}
+}*/

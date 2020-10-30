@@ -53,8 +53,6 @@ import org.geojson.LngLatAlt;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import unsw.gloriaromanus.backend.*;
-
 public class GloriaRomanusController{
 
   @FXML
@@ -71,24 +69,6 @@ public class GloriaRomanusController{
   private Map<String, String> provinceToOwningFactionMap;
 
   private Map<String, Integer> provinceToNumberTroopsMap;
-
-  // Wealth
-  private Map<String, Long> factionToWealth;
-
-  // Roads(Infrasture)
-  private Map<String, Road> provinceToRoad;
-
-  // Walls
-  private Map<String, Wall> provinceToWall;
-
-  // Troop production Building
-  private Map<String, Troopproduction_building> provinceToTroopProductionBuilding;
-
-  // Wealth Generation Building
-  private Map<String, Wealthgenerate_building> provinceToWealthGenerationBuilding;
-
-  // Smith
-  private Map<String, Smith> provinceToSmith;
 
   private String humanFaction;
 
@@ -318,7 +298,6 @@ public class GloriaRomanusController{
     return flp;
   }
 
-  // return the faction with its provinces
   private Map<String, String> getProvinceToOwningFactionMap() throws IOException {
     String content = Files.readString(Paths.get("src/unsw/gloriaromanus/initial_province_ownership.json"));
     JSONObject ownership = new JSONObject(content);
