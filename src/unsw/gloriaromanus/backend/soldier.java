@@ -24,14 +24,12 @@ public class soldier {
     
     public String get_name() {
 
+        return this.name;
     }
 
-    public int get_speed() {
-
-    }
 
     public int get_attack() {
-        
+        return this.attack;    
     }
 
     public Integer get_speed(){

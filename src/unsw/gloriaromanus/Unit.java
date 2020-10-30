@@ -42,7 +42,7 @@ public class Unit {
                     Files.readString(Paths.get("src/unsw/gloriaromanus/Unit_values.json")));
             
             JSONObject chosen_unit = new_unit.getJSONObject(type);
-            this.category = chosen_unit.getString("category");
+            //this.category = chosen_unit.getString("category");
             this.numTroops = chosen_unit.getInt("numTroops");
             this.armour = 1;
             //this.armour = chosen_unit.getInt("armour");
