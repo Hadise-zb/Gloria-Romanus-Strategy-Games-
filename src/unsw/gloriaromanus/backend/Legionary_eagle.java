@@ -1,5 +1,7 @@
 package unsw.gloriaromanus.backend;
 
 import java.util.ArrayList;
-import unsw.gloriaromanus.*;
 
+public class Legionary_eagle implements Ablility() {
+    
+}
