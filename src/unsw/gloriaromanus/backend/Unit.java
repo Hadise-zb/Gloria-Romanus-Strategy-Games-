@@ -212,4 +212,8 @@ public class Unit {
         assertEquals(x.getNumTroops(), 5);
     }
     */
+
+    public void decreaseMorale(){
+        this.morale -= 1;
+    }
 }
