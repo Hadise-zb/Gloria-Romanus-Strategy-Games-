@@ -16,8 +16,17 @@ public class UnitTest{
     
     @Test
     public void blahTest2(){
-        Unit u = new Unit();
-        assertEquals(u.getNumTroops(), 50);
+        // Unit u = new Unit("heavy infantry");
+        // assertEquals(u.getNumTroops(), 50);
+
+        Unit v = new Unit("skirmishers");
+        assertEquals(v.getNumTroops(), 20);
+    }
+
+    @Test
+    public void test1(){
+        Unit v = new Unit("skirmishers");
+        assertEquals(v.get_type(), "skirmishers");
     }
 
     @Test
@@ -35,6 +44,14 @@ public class UnitTest{
         assertEquals(q.get_MovementPoints(), 1);
     }
 
-    
+    public static void main(String[] arg){
+        String name = "skirmishers";
+        Unit new_unit = new Unit(name);
+        assert(new_unit.getNumTroops()==20);
+        System.out.println(new_unit.getNumTroops());
+
+        Unit x = new Unit("heavy infantry");
+        System.out.println(x.getNumTroops());
+    }
 }
 

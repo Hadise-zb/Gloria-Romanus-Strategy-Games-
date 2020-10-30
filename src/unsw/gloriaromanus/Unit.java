@@ -31,13 +31,13 @@ public class Unit {
     private int shieldDefense; // a shield
     private int movementpoints;
     private String unit_name;
-
+//
 
     public Unit(String type) {
-        this.unit_name = type;
+        
         try {
             JSONObject new_unit = new JSONObject(
-                    Files.readString(Paths.get("src/unsw/gloriaromanus/Unit_values.json")));
+                    Files.readString(Paths.get("values/Unit_values.json")));
             
             JSONObject chosen_unit = new_unit.getJSONObject(type);
             this.numTroops = chosen_unit.getInt("numTroops");
@@ -48,6 +48,7 @@ public class Unit {
             this.movementpoints = chosen_unit.getInt("movementpoints");
             this.range = chosen_unit.getInt("range");
             this.shieldDefense = chosen_unit.getInt("shieldDefense");
+            this.unit_name = type;
     
         } catch (JSONException | IOException e) {
             e.printStackTrace();
@@ -55,12 +56,16 @@ public class Unit {
     }
 
     public int getNumTroops(){
-        return numTroops;
+        return this.numTroops;
     }
 
 
     public void set_movementpoints(int num){
         this.movementpoints = num;
+    }
+
+    public String get_type(){
+        return this.unit_name;
     }
 
     public static void main(String[] arg){
