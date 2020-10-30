@@ -8,23 +8,61 @@ import java.util.Random;
 public class Province {
     private ArrayList<Infrastructure> infrastructures;
     private String name;
-    private Integer wealth;
+    private double wealth;
     private ArrayList<Smith> smithes;
-    private faction owner;
-    private Double tax;
-    private ArrayList<Troop> troops;
-    private ArrayList<Troop> Enermy_troops;
+    private Faction owner;
+    private Double taxRate;
+    private ArrayList<Troop> troops = new ArrayList<Troop>();
+    private ArrayList<Troop> Enermy_troops = new ArrayList<Troop>();
+    private int numTown;
 
-    public Province(String name, faction owner, Integer wealth, Double tax) {
+    public Province(String name, Faction owner, int wealth, Double tax) {
         this.name = name;
         this.owner = owner;
         this.wealth = wealth;
-        this.tax = tax; 
+        this.taxRate = tax; 
         this.smithes = new ArrayList<Smith>();
         //this.buildings = new ArrayList<Building>();
         this.troops = new ArrayList<Troop>(); 
         this.Enermy_troops = new ArrayList<Troop>();
+        this.numTown = 0;
     }
+
+    public void addTown(){
+        numTown+=1;
+    }
+    public int getNumTown(){
+        return numTown;
+    }
+
+    public double getWealth(){
+        return wealth;
+    }
+
+    public void solicitTownWealth(){
+        if (taxRate == 0.1){
+            wealth += (10*numTown);
+        }
+        if (taxRate == 0.2){
+            wealth -= (10*numTown);
+        }
+        if (taxRate == 0.25){
+            wealth -= (30*numTown);
+            for (Troop t: troops){
+                t.decreaseMorale();
+            }
+        }
+        if (this.wealth < 0){
+            this.wealth = 0;
+        }
+    }
+
+    public double tributeTax(){
+        double tax = (taxRate*wealth);
+        wealth = wealth - (taxRate*wealth);
+        return tax;
+    }
+
 
     //recuit soldiers
     public void recuit(String type, String name) {

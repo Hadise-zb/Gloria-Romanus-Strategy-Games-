@@ -19,10 +19,10 @@ public class soldier {
     private int turns;
     private String province;
     private int cost;
-    private faction faction;
+    private Faction faction;
     private ArrayList<Ability> abilities;
 
-    public soldier (faction faction, String type, String name, String province) {
+    public soldier (Faction faction, String type, String name, String province) {
         this.faction = faction;
         this.type = type;
         this.name = name;
@@ -48,7 +48,7 @@ public class soldier {
         this.defence = new_defence;
     }
 
-    public faction get_faction() {
+    public Faction get_faction() {
         return this.faction;
     }
 
