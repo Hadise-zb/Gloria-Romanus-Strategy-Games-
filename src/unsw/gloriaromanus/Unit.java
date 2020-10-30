@@ -21,7 +21,7 @@ import org.json.*;
  */
 public class Unit {
     private String category;
-    private int numTroops; // the number of troops in this unit (should reduce based on depletion)
+    private int numSoldiers; // the number of troops in this unit (should reduce based on depletion)
     private int range; // range of the unit
     private double armour; // armour defense
     private int morale; // resistance to fleeing
@@ -43,7 +43,7 @@ public class Unit {
             
             JSONObject chosen_unit = new_unit.getJSONObject(type);
             this.category = chosen_unit.getString("category");
-            this.numTroops = chosen_unit.getInt("numTroops");
+            this.numSoldiers = chosen_unit.getInt("numTroops");
             this.armour = 1;
             //this.armour = chosen_unit.getInt("armour");
             this.attack = chosen_unit.getInt("attack");
@@ -76,7 +76,7 @@ public class Unit {
     }
 
     public int getNumTroops(){
-        return numTroops;
+        return this.numSoldiers;
     }
 
 

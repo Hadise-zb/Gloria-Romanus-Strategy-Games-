@@ -8,6 +8,7 @@ public class System {
     private Integer turn;
     private Integer treasure;
 
+    /*
     public void update() {
         for (Province province: this.provinces) {
             this.treasure += province.getTreasure();
@@ -15,4 +16,6 @@ public class System {
         }
         
     }
+    */
+    
 }

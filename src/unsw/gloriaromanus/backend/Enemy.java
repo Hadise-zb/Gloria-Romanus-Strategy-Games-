@@ -9,11 +9,13 @@ public class Enemy {
     private ArrayList<Enemy> subscriber;
 
     public void update() {
+        /*
         int spendBuilding = faction.getTreasure() / 2;
         while (speedBuilding > 0) {
             Province.build();
             spendBuilding -= cost;
         }
+        */
         //speedn on miltery
         //move troop
         //invade province
@@ -24,13 +26,13 @@ public class Enemy {
     //province, soildier in province
     public void Obsever() {
         for (faction faction: this.observers) {
-            faction.getInformation();
+            //faction.getInformation();
         }
     }
 
     public void sendMessageToSubscriber() {
         for (Enemy enemy : this.subscriber) {
-            enemy.Observer();
+            //enemy.Observer();
         }
     }
     
