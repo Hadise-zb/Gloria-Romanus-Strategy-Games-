@@ -1,0 +1,25 @@
+{
+    "heavy infantry": {
+        "numTroops":50,
+        "range": 1,
+        "armour": 5,
+        "morale": 10,
+        "speed": 10,
+        "attack": 6,
+        "defenseSkill": 10,
+        "shieldDefense": 3, 
+        "movementpoints": 10
+    },
+
+    "skirmishers": {
+        "numTroops":20,
+        "range": 1,
+        "armour": 6,
+        "morale": 20,
+        "speed": 7,
+        "attack": 8,
+        "defenseSkill": 8,
+        "shieldDefense": 4, 
+        "movementpoints": 6
+    }
+}
