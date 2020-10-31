@@ -42,6 +42,7 @@ public class UnitTest{
         assertEquals(q.get_MovementPoints(), 1);
     }
 
+<<<<<<< HEAD
     @Test
     public void wealthTest(){
         Faction au = new Faction();
@@ -71,5 +72,16 @@ public class UnitTest{
     }
 
     
+=======
+    public static void main(String[] arg){
+        String name = "skirmishers";
+        Unit new_unit = new Unit(name);
+        assert(new_unit.getNumTroops()==20);
+        System.out.println(new_unit.getNumTroops());
+
+        Unit x = new Unit("heavy infantry");
+        System.out.println(x.getNumTroops());
+    }
+>>>>>>> origin/YZ_m2
 }
 
