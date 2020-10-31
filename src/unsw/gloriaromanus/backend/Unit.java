@@ -23,7 +23,7 @@ import org.json.*;
  */
 public class Unit {
     private String category;
-    private int numSoldiers; // the number of troops in this unit (should reduce based on depletion)
+    private double numSoldiers; // the number of troops in this unit (should reduce based on depletion)
     private int range; // range of the unit
     private double armour; // armour defense
     private double morale; // resistance to fleeing
@@ -40,12 +40,13 @@ public class Unit {
     private Troop troop;
     private String name;
     private Double defence;
-    private Integer shield;
+    private Double shield;
     private boolean training_completed;
     private int turns;
     private String province;
     private int cost;
     private String faction;
+    private double charge;
     
     // maybe used in each soldier.
     private Double blood_volume;
@@ -70,10 +71,28 @@ public class Unit {
             this.range = chosen_unit.getInt("range");
             this.shieldDefense = chosen_unit.getInt("shieldDefense");
             this.helmet = 0;
+            this.charge = 0;
+            this.shield = 0.0;
 
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public double get_shield() {
+        return this.charge;
+    }
+
+    public void set_shield(double shield) {
+        this.shield = shield;
+    }
+
+    public double get_charge() {
+        return this.charge;
+    }
+
+    public void set_charge(double charge) {
+        this.charge = charge;
     }
 
     public static void main(String[] arg){
@@ -153,6 +172,10 @@ public class Unit {
         this.armour = new_armour;
     }
 
+    public double get_armour() {
+        return this.armour;
+    }
+
     public void set_speed(double new_speed) {
         this.speed = new_speed;
     }
@@ -161,11 +184,11 @@ public class Unit {
         return this.speed;
     }
 
-    public int getNumSoldiers(){
+    public double getNumSoldiers(){
         return this.numSoldiers;
     }
 
-    public void setNumSoldiers(int num){
+    public void setNumSoldiers(double num){
         this.numSoldiers = num;
     }
 
@@ -223,4 +246,8 @@ public class Unit {
         assertEquals(x.getNumTroops(), 5);
     }
     */
+
+    public void decreaseMorale(){
+        this.morale -= 1;
+    }
 }

@@ -5,8 +5,8 @@ import unsw.gloriaromanus.*;
 
 public class System {
     private ArrayList<Province> provinces;
-    private Integer turn;
-    private Integer treasure;
+    private int turn;
+    private int treasure;
 
     /*
     public void update() {
@@ -17,5 +17,17 @@ public class System {
         
     }
     */
+
+    public System(){
+        this.turn = 0;
+    }
+
+    public void startTurn(){
+        turn +=1;
+    }
+
+    public void endTurn(){
+        
+    }
     
 }

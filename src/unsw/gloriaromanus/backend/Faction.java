@@ -4,16 +4,18 @@ package unsw.gloriaromanus.backend;
 import java.util.ArrayList;
 import unsw.gloriaromanus.*;
 
-public class faction {
+public class Faction {
     private ArrayList<Province> occupations = new ArrayList<Province>();
-    private ArrayList<faction> neighboors = new ArrayList<faction>();
+    private ArrayList<Faction> neighboors = new ArrayList<Faction>();
     private Unit unit;
     private Road road;
     private boolean turn;
     private String belong;
     private String name; 
+    private double trasure;
 
-    public faction() {
+    public Faction() {
+        this.unit = null;
 
     }
 
@@ -35,15 +37,15 @@ public class faction {
         return this.occupations;
     }
 
-    public void set_occupations(Province occupation) {
+    public void addOccupations(Province occupation) {
         this.occupations.add(occupation);
     }
 
-    public ArrayList<faction> get_neighboors() {
+    public ArrayList<Faction> get_neighboors() {
         return this.neighboors;
     }
 
-    public void set_neighboors(faction neighboor) {
+    public void set_neighboors(Faction neighboor) {
         //this.occupations.add(neighboor);
     }
 
@@ -63,6 +65,15 @@ public class faction {
 
     }
 
-    
+
+    public void solicitTax(){
+        for (Province p: occupations){
+            trasure += p.tributeTax();
+        }
+    }
+
+    public double getTreasure(){
+        return this.trasure;
+    }
 
 }

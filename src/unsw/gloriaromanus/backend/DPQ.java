@@ -21,6 +21,8 @@ public class DPQ {
 
     List<List<Node> > adj; 
 
+    private ArrayList<String> path;
+
   
 
     public DPQ(int V) 
@@ -41,128 +43,49 @@ public class DPQ {
 
     // Function for Dijkstra's Algorithm 
 
-    public void dijkstra(List<List<Node> > adj, int src) 
-
-    { 
-
-        this.adj = adj; 
-
-  
-
-        for (int i = 0; i < V; i++) 
-
-            dist[i] = Integer.MAX_VALUE; 
-
-  
-
-        // Add source node to the priority queue 
-
-        pq.add(new Node(src, 0)); 
-
-  
-
-        // Distance to the source is 0 
-
-        dist[src] = 0; 
-
-        while (settled.size() != V) { 
-
-  
-
-            // remove the minimum distance node  
-
-            // from the priority queue  
-
-            int u = pq.remove().node; 
-
-  
-
-            // adding the node whose distance is 
-
-            // finalized 
-
-            settled.add(u); 
-
-  
-
-            e_Neighbours(u); 
-
-        } 
-
-    } 
-
-  
-
-    // Function to process all the neighbours  
-
-    // of the passed node 
-
-    private void e_Neighbours(int u) 
-
-    { 
-
-        int edgeDistance = -1; 
-
-        int newDistance = -1; 
-
-  
-
-        // All the neighbors of v 
-
-        for (int i = 0; i < adj.get(u).size(); i++) { 
-
-            Node v = adj.get(u).get(i); 
-
-  
-
-            // If current node hasn't already been processed 
-
-            if (!settled.contains(v.node)) { 
-
-                edgeDistance = v.cost; 
-
-                newDistance = dist[u] + edgeDistance; 
-
-  
-
-                // If new distance is cheaper in cost 
-
-                if (newDistance < dist[v.node]) 
-
-                    dist[v.node] = newDistance; 
-
-  
-
-                // Add the current node to the queue 
-
-                pq.add(new Node(v.node, dist[v.node])); 
-
-            } 
-
-        } 
-
-    } 
+    
 
     public void movement(String start) {
         try {
             JSONObject matrix = new JSONObject(
                 Files.readString(Paths.get("src/unsw/gloriaromanus/province_adjacency_matrix.json")));
             
+            JSONObject dist = new JSONObject();
+
             int count = 0;
             for (String key : matrix.keySet()) {
+                dist.put(key, Integer.MAX_VALUE);
                 count++;
             }
+            
+            //dist.getJSONObject(start).put(0);
+            dist.remove(start);
+            dist.put(start, 0);
 
-            for (int i = 0; i < count; i++) 
-                for (int j = 0; j < count; j++) 
-                    dist[i][j] = Integer.MAX_VALUE;
-            
-            
+            int edgeDistance = -1; 
+            int newDistance = -1; 
+
+
             for (String key : matrix.keySet()) {
-                JSONArray ja = matrix.getJSONArray(key);
-                for (int i = 0; i < ja.length(); i++) {
-                    String value = ja.getString(i);
-                    
+                JSONObject ja = matrix.getJSONObject(key);
+                JSONArray k = ja.names ();
+                Node v = new Node(key, 1);
+                if (!settled.contains(v.node)) { 
+                    edgeDistance = v.cost; 
+                    newDistance = dist[u] + edgeDistance;
+                }
+
+            }
+
+            for (String key : matrix.keySet()) {
+                JSONObject ja = matrix.getJSONObject(key);
+                JSONArray k = ja.names ();
+                for (int i = 0; i < k.length (); i++) {
+                    String keys = k.getString (i); 
+                    Boolean adjacent = matrix.getBoolean(keys);
+                    if () {
+
+                    }
                 }
                 
             }
@@ -286,4 +209,6 @@ public class DPQ {
                                //+ dpq.dist[i]); 
 
     } 
+
+    
 } 

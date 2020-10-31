@@ -21,5 +21,12 @@ public class Troop {
     public ArrayList<Unit> get_soldiers() {
         return this.units;
     }
+
+    public void decreaseMorale(){
+        for (Unit u : units){
+            u.decreaseMorale();
+        }
+    }
+    
 }
 
