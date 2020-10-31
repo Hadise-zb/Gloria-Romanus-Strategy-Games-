@@ -4,7 +4,7 @@ package unsw.gloriaromanus.backend;
 import java.util.ArrayList;
 import unsw.gloriaromanus.*;
 
-public class Faction {
+public class Faction implements TurnObserver{
     private ArrayList<Province> provinces_belong = new ArrayList<Province>();
     private ArrayList<Faction> neighboors = new ArrayList<Faction>();
     
@@ -96,5 +96,10 @@ public class Faction {
 
     public int getNumProvince(){
         return provinces_belong.size();
+    }
+
+    @Override
+    public void update(){
+        this.setWealth();
     }
 }

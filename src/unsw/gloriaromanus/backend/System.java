@@ -3,11 +3,29 @@ package unsw.gloriaromanus.backend;
 import java.util.ArrayList;
 import unsw.gloriaromanus.*;
 
-public class System {
+public class System implements TurnSubject{
     private Faction myFaction;
     private ArrayList<Faction> enermyFactions = new ArrayList<Faction>();
     private int turn;
+    private ArrayList<TurnObserver> observers = new ArrayList<TurnObserver>();
     
+    @Override
+    public void attach(TurnObserver o){
+        observers.add(o);
+    }
+
+    @Override
+    public void detach(TurnObserver o){
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyobservers(){
+        for (TurnObserver o : observers){
+            o.update();
+        }
+    }
+
 
     /*
     public void update() {
@@ -23,12 +41,8 @@ public class System {
         this.myFaction = f;
     }
 
-    public void startTurn(){
-        turn +=1;
-    }
-
     public void endTurn(){
-        
+        turn += 1;
     }
 
     public void solveProgress(){
