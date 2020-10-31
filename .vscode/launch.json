@@ -7,6 +7,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Systemcontrol",
+            "request": "launch",
+            "mainClass": "unsw.gloriaromanus.backend.Systemcontrol",
+            "projectName": "w11b-hello_java_89b460e3"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - System",
+            "request": "launch",
+            "mainClass": "unsw.gloriaromanus.backend.System",
+            "projectName": "w11b-hello_java_89b460e3"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Unit",
             "request": "launch",
             "mainClass": "unsw.gloriaromanus.Unit",
