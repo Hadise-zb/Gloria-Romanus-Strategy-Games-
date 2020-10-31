@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import unsw.gloriaromanus.*;
 //import org.json.*;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,8 +123,9 @@ public class DPQ {
             }
            
         } catch (JSONException | IOException e) {
-            //e.printStackTrace();
+            ((Throwable) e).printStackTrace();
         }
+        return -1;
     }
 
 } 

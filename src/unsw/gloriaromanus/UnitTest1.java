@@ -94,6 +94,8 @@ public class UnitTest1{
         assertEquals(Gallic_berserker.get_attack(), 10);
         assertEquals(Gallic_berserker.get_armour(), 0);
         assertEquals(Gallic_berserker.get_shield(), 0);
+        double POSITIVE_INFINITY = 1.0 / 0.0;
+        assertEquals(Gallic_berserker.get_morale(), POSITIVE_INFINITY);
 
     }
 
