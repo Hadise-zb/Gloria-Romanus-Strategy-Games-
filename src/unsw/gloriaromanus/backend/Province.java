@@ -37,8 +37,16 @@ public class Province {
         return this.troops;
     }
 
-    public ArrayList<Troop> set_enermy_troops() {
+    public void set_my_troops(ArrayList<Troop> new_troops) {
+        this.troops = new_troops;
+    }
+
+    public ArrayList<Troop> get_enermy_troops() {
         return this.Enermy_troops;
+    }
+
+    public void set_enermy_troops(ArrayList<Troop> new_troops) {
+        this.Enermy_troops = new_troops;
     }
 
     public void set_engaged(boolean i) {

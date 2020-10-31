@@ -33,18 +33,11 @@ public class Unit2 {
     private int shieldDefense; // a shield
     private int movementpoints;
     private String unit_name;
-<<<<<<< HEAD:src/unsw/gloriaromanus/Unit2.java
     private int numTroops;
 
 
     public Unit2(String type) {
         this.unit_name = type;
-=======
-//
-
-    public Unit(String type) {
-        
->>>>>>> origin/YZ_m2:src/unsw/gloriaromanus/Unit.java
         try {
             JSONObject new_unit = new JSONObject(
                     Files.readString(Paths.get("values/Unit_values.json")));

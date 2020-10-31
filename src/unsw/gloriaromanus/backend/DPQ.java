@@ -11,7 +11,11 @@ import org.json.*;
 
 public class DPQ { 
 
-    private int dist[][]; 
+    private int dist[];
+
+    private int adjacent[][];
+    
+    private String provinces[];
 
     private Set<Integer> settled; 
 
@@ -50,14 +54,49 @@ public class DPQ {
             JSONObject matrix = new JSONObject(
                 Files.readString(Paths.get("src/unsw/gloriaromanus/province_adjacency_matrix.json")));
             
-            JSONObject dist = new JSONObject();
+            //JSONObject dist = new JSONObject();
+
+            //ArrayList<String> dist = new ArrayList<String>();
 
             int count = 0;
+            int src = 0;
+            boolean find = false;
             for (String key : matrix.keySet()) {
-                dist.put(key, Integer.MAX_VALUE);
+                //dist.put(key, Integer.MAX_VALUE);
+                provinces[count] = key;
+                if (start.equals(key)) {
+                    find = true;
+                }
                 count++;
+                if (find == false) {
+                    src++;
+                }
             }
             
+            //JSONObject ownership = new JSONObject(matrix);
+            for (String key : matrix.keySet()) {
+                JSONArray ja = matrix.getJSONObject(key);
+                // name is province name
+                for (int i = 0; i < ja.length(); i++) {
+                    String name = ja.getString(i);
+                    adjacent[][] = 
+                }
+            }
+
+            for (String key : matrix.keySet()) {
+                JSONObject ja = matrix.getJSONObject(key);
+                JSONArray k = ja.names ();
+                for (int i = 0; i < k.length (); i++) {
+                    String keys = k.getString (i); 
+                    //Boolean adjacent = matrix.getBoolean(keys);
+                    if () {
+
+                    }
+                }
+                
+            }
+
+
             //dist.getJSONObject(start).put(0);
             dist.remove(start);
             dist.put(start, 0);
@@ -82,7 +121,7 @@ public class DPQ {
                 JSONArray k = ja.names ();
                 for (int i = 0; i < k.length (); i++) {
                     String keys = k.getString (i); 
-                    Boolean adjacent = matrix.getBoolean(keys);
+                    //Boolean adjacent = matrix.getBoolean(keys);
                     if () {
 
                     }
