@@ -29,6 +29,26 @@ public class Systemcontrol implements TurnSubject{
         }
     }
 
+    public void engage(String destination) {
+        String result = "draw";
+        for (Faction faction : enermyFactions) {
+            for (Province province : faction.getProvinces()) {
+                if (province.get_name().equal(destination)) {
+                    result = province.battle();
+                    break;
+                }
+            }
+        }
+        // to do
+        // update the information for province
+        if (result.equals("win")) {
+
+        } else if (result.equals("lose")) {
+
+        } else {
+            // draw
+        }
+    }
 
     /*
     public void update() {
