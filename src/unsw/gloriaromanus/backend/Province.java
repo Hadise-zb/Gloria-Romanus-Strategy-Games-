@@ -330,14 +330,15 @@ public class Province {
     }
 
     public double nextGaussian() {
+        Random rand = new Random();
         if (haveNextNextGaussian) {
           haveNextNextGaussian = false;
           return nextNextGaussian;
         } else {
           double v1, v2, s;
           do {
-            v1 = 2 * nextDouble() - 1;   // between -1.0 and 1.0
-            v2 = 2 * nextDouble() - 1;   // between -1.0 and 1.0
+            v1 = 2 * rand.nextDouble() - 1;   // between -1.0 and 1.0
+            v2 = 2 * rand.nextDouble() - 1;   // between -1.0 and 1.0
             s = v1 * v1 + v2 * v2;
           } while (s >= 1 || s == 0);
           double multiplier = StrictMath.sqrt(-2 * StrictMath.log(s)/s);
@@ -345,5 +346,7 @@ public class Province {
           haveNextNextGaussian = true;
           return v1 * multiplier;
         }
-      }
+    }
+
+    
 }
