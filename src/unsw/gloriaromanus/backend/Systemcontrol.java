@@ -29,6 +29,37 @@ public class Systemcontrol implements TurnSubject{
         }
     }
 
+    public void movement(Province start, Province end) {
+        String start_province = start.get_name();
+        String destination = end.get_name();
+        DPQ shortest_path = new DPQ();
+        int movement_point_need = shortest_path.movement(start_province, destination, enermyFactions);
+        // to do
+        // if can arrive, update the province.
+        // if can't , raise error.
+
+    }
+
+    public void engage(String destination) {
+        String result = "draw";
+        for (Faction faction : enermyFactions) {
+            for (Province province : faction.getProvinces()) {
+                if (province.get_name().equal(destination)) {
+                    result = province.battle();
+                    break;
+                }
+            }
+        }
+        // to do
+        // update the information for province
+        if (result.equals("win")) {
+
+        } else if (result.equals("lose")) {
+
+        } else {
+            // draw
+        }
+    }
 
     /*
     public void update() {
@@ -133,7 +164,7 @@ public class Systemcontrol implements TurnSubject{
 
 
     public static void main(String[] args){
-        Faction my_faction = new Faction();
+        Faction my_faction = new Faction("");
         Systemcontrol testSystem = new Systemcontrol(my_faction);
         Province p = new Province("NSW", my_faction, 0, 0.1);
         testSystem.attach(my_faction);

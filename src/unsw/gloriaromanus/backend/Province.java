@@ -15,6 +15,10 @@ public class Province {
     private ArrayList<Troop> troops = new ArrayList<Troop>();
     private ArrayList<Troop> Enermy_troops = new ArrayList<Troop>();
     private int numTown;
+    private boolean engaged;
+
+    private double nextNextGaussian;
+    private boolean haveNextNextGaussian = false;
 
     public Province(String name, Faction owner, int wealth, Double tax) {
         this.name = name;
@@ -26,6 +30,39 @@ public class Province {
         this.troops = new ArrayList<Troop>(); 
         this.Enermy_troops = new ArrayList<Troop>();
         this.numTown = 0;
+        this.engaged = false;
+    }
+
+    public String get_name() {
+        return this.name;
+    }
+    /*
+    public void set_name(String new_name) {
+        this.name = new_name;
+    }
+    */
+    public ArrayList<Troop> get_my_troops() {
+        return this.troops;
+    }
+
+    public void set_my_troops(ArrayList<Troop> new_troops) {
+        this.troops = new_troops;
+    }
+
+    public ArrayList<Troop> get_enermy_troops() {
+        return this.Enermy_troops;
+    }
+
+    public void set_enermy_troops(ArrayList<Troop> new_troops) {
+        this.Enermy_troops = new_troops;
+    }
+
+    public void set_engaged(boolean i) {
+        this.engaged = i;
+    }
+
+    public boolean get_engaged() {
+        return this.engaged;
     }
 
     public String get_name(){
@@ -78,14 +115,14 @@ public class Province {
 
     // add ablities to soldiers
     public void ablility_add() {
-        int my_num = 0;
+        double my_num = 0;
         for (Troop troop : troops) {
             for (Unit unit : troop.get_soldiers()) {
                 my_num = my_num + unit.getNumSoldiers();
             }
         }
 
-        int enermy_num = 0;
+        double enermy_num = 0;
         for (Troop troop : Enermy_troops) {
             for (Unit unit : troop.get_soldiers()) {
                 enermy_num = enermy_num + unit.getNumSoldiers();
@@ -115,7 +152,7 @@ public class Province {
         if (Druid != 0) {
             Druidic_fervour(Druid);
         }
-
+        /*
         boolean Cantabrian_circle_1 = false;
         for (Troop troop : troops) {
             for (Unit unit : troop.get_soldiers()) {
@@ -136,9 +173,43 @@ public class Province {
                 }
             }
         }
+        */
+    }
 
+    public void enermy_ablility_add() {
+        double my_num = 0;
+        for (Troop troop : Enermy_troops) {
+            for (Unit unit : troop.get_soldiers()) {
+                my_num = my_num + unit.getNumSoldiers();
+            }
+        }
 
+        double enermy_num = 0;
+        for (Troop troop : troops) {
+            for (Unit unit : troop.get_soldiers()) {
+                enermy_num = enermy_num + unit.getNumSoldiers();
+            }
+        }
+        boolean heroic = false;
+        if (my_num < (enermy_num / 2)) {
+            heroic = true;
+        }
 
+        int Druid = 0;
+        for (Troop troop : Enermy_troops) {
+            for (Unit unit : troop.get_soldiers()) {
+                Whole_army_bonus bonus = unit.ability_add(heroic);
+                if (!bonus.get_name().equals("")) {
+                    if (bonus.get_name().equals("Elephants_running_amok")) {
+                        damage_inflited(bonus);
+                    }
+                }
+                if (unit.get_name().equals("druid")) {
+                    Druid += unit.getNumSoldiers();
+                }
+
+            }
+        }
     }
 
     
@@ -165,14 +236,17 @@ public class Province {
     }
     
     public void damage_inflited(Whole_army_bonus bonus) {
-        for (Troop troop : troops) {
-            //List<Integer> givenList = Arrays.asList(1, 2, 3);
-            Random rand = new Random();
-            ArrayList<Unit> units = troop.get_soldiers();
-            int randomIndex = rand.nextInt(units.size());
-            Unit randomElement = units.get(randomIndex);
-            randomElement.set_blood(randomElement.get_blood() - bonus.get_damage());
-        }
+        Random rand = new Random();
+        ArrayList<Troop> troops = this.troops;
+        int randomIndex = rand.nextInt(troops.size());
+        Troop randomElement = troops.get(randomIndex);
+        
+        Random rand2 = new Random();
+        ArrayList<Unit> units = randomElement.get_soldiers();
+        int randomIndex2 = rand2.nextInt(units.size());
+        Unit randomElement2 = units.get(randomIndex2);
+        randomElement2.set_blood(randomElement2.get_blood() - bonus.get_damage());
+
     }
     
     public String battle() {
@@ -346,4 +420,175 @@ public class Province {
     }
 
 
+    public String battle() {
+        String win = "draw";
+        int count = 0;
+
+        // add ability to units before battle, some ability will be added during battle
+        this.ablility_add();
+        this.enermy_ablility_add();
+
+        while (this.troops.isEmpty() || this.Enermy_troops.isEmpty()) {
+            Random rand = new Random();
+            ArrayList<Troop> troops = this.troops;
+            int randomIndex = rand.nextInt(troops.size());
+            Troop randomElement = troops.get(randomIndex);
+
+            Random rand2 = new Random();
+            ArrayList<Unit> units = randomElement.get_soldiers();
+            int randomIndex2 = rand2.nextInt(units.size());
+            Unit my_randomUnit = units.get(randomIndex2);
+
+            Random enermy_rand = new Random();
+            ArrayList<Troop> enermy_troops = this.Enermy_troops;
+            int randomIndex3 = enermy_rand.nextInt(enermy_troops.size());
+            Troop randomElement3 = troops.get(randomIndex3);
+
+            Random enermy_rand2 = new Random();
+            ArrayList<Unit> enermy_units = randomElement3.get_soldiers();
+            int randomIndex4 = enermy_rand2.nextInt(enermy_units.size());
+            Unit enermy_randomUnit = units.get(randomIndex4);
+
+            //set numbers of engagement
+            my_randomUnit.set_num_engagements(my_randomUnit.get_num_engagements() + 1);
+            enermy_randomUnit.set_num_engagements(enermy_randomUnit.get_num_engagements() + 1);
+            
+            //set ablility for engagement
+            if (my_randomUnit.get_name().equals("melee infantry")) {
+                if (my_randomUnit.get_num_engagements() == 4) {
+                    my_randomUnit.set_attack(my_randomUnit.get_attack()+my_randomUnit.get_shield());
+                }
+            } else if (my_randomUnit.get_name().equals("javelin skirmisher")) {
+                enermy_randomUnit.set_armour(enermy_randomUnit.get_armour() / 2);
+            } else if (my_randomUnit.get_name().equals("horse archer") && unit_type(my_randomUnit).equals("missile")) {
+                enermy_randomUnit.setNumSoldiers(enermy_randomUnit.getNumSoldiers() / 2);
+            }
+
+            if (enermy_randomUnit.get_name().equals("melee infantry")) {
+                if (enermy_randomUnit.get_num_engagements() == 4) {
+                    enermy_randomUnit.set_attack(enermy_randomUnit.get_attack()+enermy_randomUnit.get_shield());
+                } 
+            } else if (enermy_randomUnit.get_name().equals("javelin skirmisher")) {
+                my_randomUnit.set_armour(my_randomUnit.get_armour() / 2);
+            } else if (enermy_randomUnit.get_name().equals("horse archer") && unit_type(my_randomUnit).equals("missile")) {
+                my_randomUnit.setNumSoldiers(my_randomUnit.getNumSoldiers() / 2);
+            }
+
+            String engagement = "";
+
+            double melee_speed = 0;
+            double missile_speed = 0; 
+
+            if (unit_type(my_randomUnit).equals("melee") && unit_type(enermy_randomUnit).equals("melee")) {
+                engagement = "melee";
+            } else if (unit_type(my_randomUnit).equals("missile") && unit_type(enermy_randomUnit).equals("missile")) {
+                engagement = "missile";
+            } else {
+                if (unit_type(my_randomUnit).equals("melee") && !(unit_type(enermy_randomUnit).equals("melee"))) {
+                    melee_speed = my_randomUnit.getNumSoldiers();
+                    missile_speed = enermy_randomUnit.getNumSoldiers();
+                } else if (!(unit_type(my_randomUnit).equals("melee")) && (unit_type(enermy_randomUnit).equals("melee"))) {
+                    melee_speed = enermy_randomUnit.getNumSoldiers();
+                    missile_speed = my_randomUnit.getNumSoldiers();
+                }
+
+                Double probability = 50 + 0.1 * (melee_speed - missile_speed);
+
+                Random rnd = new Random();
+                int i = rnd.nextInt(100);
+
+                if(i <= probability){
+                    engagement = "melee";
+                } else {
+                    engagement = "missile";
+                }
+
+                
+            }
+
+            Double my_dead_num = 0.0;
+            Double enermy_dead_num = 0.0;
+            if (engagement == "melee") {
+                if (unit_type(my_randomUnit).equals("melee")) {
+                    enermy_dead_num = (0.1 * enermy_randomUnit.getNumSoldiers()) * (my_randomUnit.get_attack() / (enermy_randomUnit.get_armour() + enermy_randomUnit.get_shield() + enermy_randomUnit.get_defence())) * nextGaussian();
+                } else if (unit_type(my_randomUnit).equals("missile")) {
+                    enermy_dead_num = (0.1 * enermy_randomUnit.getNumSoldiers()) * (my_randomUnit.get_attack() / (enermy_randomUnit.get_armour() + enermy_randomUnit.get_shield())) * nextGaussian();
+                }
+                if (unit_type(enermy_randomUnit).equals("melee")) {
+                    my_dead_num = (0.1 *my_randomUnit.getNumSoldiers()) * (enermy_randomUnit.get_attack() / (my_randomUnit.get_armour() + my_randomUnit.get_shield() + enermy_randomUnit.get_defence())) * nextGaussian();
+                } else if (unit_type(enermy_randomUnit).equals("missile")) {
+                    my_dead_num = (0.1 *my_randomUnit.getNumSoldiers()) * (enermy_randomUnit.get_attack() / (my_randomUnit.get_armour() + my_randomUnit.get_shield())) * nextGaussian();
+                }
+            }
+
+            if (engagement == "missile") {
+                if (unit_type(my_randomUnit).equals("melee")) {
+                    enermy_dead_num = 0.0;
+                } else if (unit_type(my_randomUnit).equals("missile")) {
+                    enermy_dead_num = (0.1 * enermy_randomUnit.getNumSoldiers()) * (my_randomUnit.get_attack() / (enermy_randomUnit.get_armour() + enermy_randomUnit.get_shield())) * nextGaussian();
+                }
+                if (unit_type(enermy_randomUnit).equals("melee")) {
+                    my_dead_num = 0.0;
+                } else if (unit_type(enermy_randomUnit).equals("missile")) {
+                    my_dead_num = (0.1 *my_randomUnit.getNumSoldiers()) * (enermy_randomUnit.get_attack() / (my_randomUnit.get_armour() + my_randomUnit.get_shield())) * nextGaussian();
+                }
+            }
+
+            double my_left_soldiers = my_randomUnit.getNumSoldiers() - my_dead_num;
+            if (my_left_soldiers <= 0) {
+                randomElement.get_soldiers().remove(my_randomUnit);
+            } else {
+                my_randomUnit.setNumSoldiers(my_left_soldiers);;
+            }
+
+            double enermy_left_soldiers = enermy_randomUnit.getNumSoldiers() - enermy_dead_num;
+            if (enermy_left_soldiers <= 0) {
+                randomElement3.get_soldiers().remove(enermy_randomUnit);
+            } else {
+                my_randomUnit.setNumSoldiers(enermy_left_soldiers);
+            }
+            count++;
+        }
+        if (this.troops.isEmpty() && this.Enermy_troops.isEmpty()) {
+            win = "draw";
+        } else if (this.troops.isEmpty()) {
+            win = "lose";
+        } else if (this.Enermy_troops.isEmpty()) {
+            win = "win";
+        } 
+
+        if (count == 200) {
+            win = "draw";
+        }
+        return win;
+    }
+
+    public String unit_type(Unit unit) {
+        if (unit.get_name().equals("artillery") || unit.get_name().equals("horse archers") || unit.get_name().equals("missile infantry")) {
+            return "missile";
+        } else {
+            return "melee";
+        }
+    }
+
+    public double nextGaussian() {
+        Random rand = new Random();
+        if (haveNextNextGaussian) {
+          haveNextNextGaussian = false;
+          return nextNextGaussian;
+        } else {
+          double v1, v2, s;
+          do {
+            v1 = 2 * rand.nextDouble() - 1;   // between -1.0 and 1.0
+            v2 = 2 * rand.nextDouble() - 1;   // between -1.0 and 1.0
+            s = v1 * v1 + v2 * v2;
+          } while (s >= 1 || s == 0);
+          double multiplier = StrictMath.sqrt(-2 * StrictMath.log(s)/s);
+          nextNextGaussian = v2 * multiplier;
+          haveNextNextGaussian = true;
+          return v1 * multiplier;
+        }
+    }
+
+    
 }

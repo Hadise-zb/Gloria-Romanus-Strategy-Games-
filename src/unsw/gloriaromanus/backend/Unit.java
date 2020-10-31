@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import unsw.gloriaromanus.*;
 import org.json.*;
 
 /**
@@ -23,7 +23,7 @@ import org.json.*;
  */
 public class Unit {
     private String category;
-    private int numSoldiers; // the number of troops in this unit (should reduce based on depletion)
+    private double numSoldiers; // the number of troops in this unit (should reduce based on depletion)
     private int range; // range of the unit
     private double armour; // armour defense
     private double morale; // resistance to fleeing
@@ -40,26 +40,40 @@ public class Unit {
     private Troop troop;
     private String name;
     private Double defence;
-    private Integer shield;
+    private Double shield;
     private boolean training_completed;
-    private int turns;
+    private int engagments;
     private String province;
     private int cost;
     private String faction;
+    private double charge;
     
     // maybe used in each soldier.
     private Double blood_volume;
 
 
 
-    public Unit(String type) {
-        this.unit_name = type;
+    public Unit(String name) {
+        this.unit_name = name;
+        this.name = name;
+        this.defence = 5.0;
+        this.morale = 5.0;
+        this.attack = 5.0;
+        this.speed = 2;
+        this.armour = 5;
+        this.numSoldiers = 5;
+        /*
+        if (type = ) {
+            this.attack = ;
+        }
+        */
+        /*
         try {
             JSONObject new_unit = new JSONObject(
                     Files.readString(Paths.get("src/unsw/gloriaromanus/Unit_values.json")));
             
-            JSONObject chosen_unit = new_unit.getJSONObject(type);
-            this.category = chosen_unit.getString("category");
+            JSONObject chosen_unit = new_unit.getJSONObject(name);
+            //this.category = chosen_unit.getString("category");
             this.numSoldiers = chosen_unit.getInt("numTroops");
             this.armour = 1;
             //this.armour = chosen_unit.getInt("armour");
@@ -70,11 +84,43 @@ public class Unit {
             this.range = chosen_unit.getInt("range");
             this.shieldDefense = chosen_unit.getInt("shieldDefense");
             this.helmet = 0;
+            this.charge = 0;
+            this.shield = 0.0;
 
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
+        */
     }
+
+    public double get_shield() {
+        return this.charge;
+    }
+
+    public void set_shield(double shield) {
+        this.shield = shield;
+    }
+
+    public double get_charge() {
+        return this.charge;
+    }
+
+    public void set_charge(double charge) {
+        this.charge = charge;
+    }
+
+    /*
+    public static void main(String[] arg){
+        String name = "skirmishers";
+        Unit new_unit = new Unit(name);
+        assert(new_unit.getNumSoldiers()==20);
+        //System.out.println(new_unit.getNumSoldiers());
+
+        Unit x = new Unit("heavy infantry");
+        //System.out.println(x.getNumSoldiers());
+        assertEquals(x.getNumSoldiers(), 5);
+    }
+    */
 
     public double get_blood() {
         return this.blood_volume;
@@ -94,6 +140,10 @@ public class Unit {
 
     public String get_faction() {
         return this.faction;
+    }
+
+    public void set_faction(String faction) {
+        this.faction = faction;
     }
 
     public void set_armed(boolean i) {
@@ -128,10 +178,12 @@ public class Unit {
         return this.name;
     }
 
-    public void complete_training() {
-        if (this.turns == 3) {
-            this.training_completed = true;
-        }
+    public void set_num_engagements(int i) {
+        this.engagments = i;
+    }
+
+    public int get_num_engagements() {
+        return this.engagments;
     }
 
     public void set_helmet(int new_helmet) {
@@ -142,6 +194,10 @@ public class Unit {
         this.armour = new_armour;
     }
 
+    public double get_armour() {
+        return this.armour;
+    }
+
     public void set_speed(double new_speed) {
         this.speed = new_speed;
     }
@@ -150,11 +206,11 @@ public class Unit {
         return this.speed;
     }
 
-    public int getNumSoldiers(){
+    public double getNumSoldiers(){
         return this.numSoldiers;
     }
 
-    public void setNumSoldiers(int num){
+    public void setNumSoldiers(double num){
         this.numSoldiers = num;
     }
 
@@ -164,36 +220,34 @@ public class Unit {
     }
 
     public Whole_army_bonus ability_add(boolean heroic){
-        if (this.faction.equals("Gallic") || this.faction.equals("Celtic") || this.faction.equals("Germanic")) {
+        
+        Whole_army_bonus bonus = new Whole_army_bonus();
+
+        if ((this.faction.equals("Gallic") || this.faction.equals("Celtic") || this.faction.equals("Germanic")) && this.name.equals("berserker")) {
             Ability ability = new Ability();
             ability.set_name("Berserker rage");
             ability.ability_add(this);
-        } else if (this.faction.equals("Roman")) {
+        } else if (this.faction.equals("Roman") && this.name.equals("legionary")) {
             Ability ability = new Ability();
             ability.set_name("Legionary eagle");
             ability.ability_add(this);
-        }
-        
-        Whole_army_bonus bonus = new Whole_army_bonus();
-        if (this.name.equals("pikemen") || this.name.equals("hoplite")) {
+        } else if (this.name.equals("pikemen") || this.name.equals("hoplite")) {
             Ability ability = new Ability();
             ability.set_name("Phalanx");
-            bonus = ability.ability_add(this);
-        } else if (this.name.equals("javelin-skirmisher")) {
-            Ability ability = new Ability();
-            ability.set_name("skirmisher anti-armour");
-            bonus = ability.ability_add(this);
+            ability.ability_add(this);
         } else if (this.name.equals("melee cavalry")) {
             if (heroic == true) {
                 Ability ability = new Ability();
                 ability.set_name("Heroic charge");
                 ability.ability_add(this);
             }
-        } else if (this.name.equals("druid")) {
+        } 
+        /*
+        else if (this.name.equals("druid")) {
             Ability ability = new Ability();
             ability.set_name("Druidic fervour");
             bonus = ability.ability_add(this);
-        }
+        } */
         
         return bonus;
         //ArrayList<Ability> abilities = soldier.get_abilities();
