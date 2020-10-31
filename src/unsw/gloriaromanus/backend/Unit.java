@@ -53,13 +53,13 @@ public class Unit {
 
 
 
-    public Unit(String type) {
-        this.unit_name = type;
+    public Unit(String name) {
+        this.unit_name = name;
         try {
             JSONObject new_unit = new JSONObject(
                     Files.readString(Paths.get("src/unsw/gloriaromanus/Unit_values.json")));
             
-            JSONObject chosen_unit = new_unit.getJSONObject(type);
+            JSONObject chosen_unit = new_unit.getJSONObject(name);
             //this.category = chosen_unit.getString("category");
             this.numSoldiers = chosen_unit.getInt("numTroops");
             this.armour = 1;

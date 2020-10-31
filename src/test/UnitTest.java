@@ -5,10 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import unsw.gloriaromanus.*;
 import unsw.gloriaromanus.backend.*;
-
+import org.json.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class UnitTest{
     @Test
@@ -20,7 +24,7 @@ public class UnitTest{
     public void blahTest2(){
         Unit u = new Unit("heavy infantry");
         //System.out.println(u.getNumTroops());
-        assertEquals(u.getNumTroops(), 50);
+        assertEquals(u.getNumSoldiers(), 50);
     }
 
     @Test
@@ -52,6 +56,17 @@ public class UnitTest{
 
         au.solicitTax();
         assertEquals(au.getTreasure(), 2);
+
+    }
+
+    // test soldier ablility
+    @Test
+    public void legionary_test() {
+        Faction owner = new Faction();
+        Province province = new Province("Britannia", owner, 50, 2.2);
+        Unit Roman_melee = new Unit("melee cavalry");
+        Troop new_troop = new Troop();
+        province.get_my_troops().add(Roman_melee);
 
     }
 
