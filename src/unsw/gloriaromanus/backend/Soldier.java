@@ -90,27 +90,4 @@ public class Soldier {
 
     }
 
-
-    /*
-    public Double get_speed2(){
-        Double speed = this.speed/1.0;
-        Province province = this.troop.get_province();
-        ArrayList<Smith> smiths = province.getsmith();
-        for (Smith smith : smiths) {
-            if (smith.getPrortionSpeed() != -1) {
-                speed = speed*smith.getPrortionSpeed();
-            } else if (smith.getScalarsSpeed() != -1) {
-                speed += smith.getScalarsSpeed();
-            }
-        }
-        
-        //Integer output = (int) speed; 
-        return speed;
-    }
-    /*
-    public Integer get_attack2() {
-        Double attack = this.attack/1.0;
-       
-
-    }*/
 }

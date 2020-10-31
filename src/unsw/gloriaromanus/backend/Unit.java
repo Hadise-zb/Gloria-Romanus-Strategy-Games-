@@ -62,35 +62,6 @@ public class Unit {
         this.speed = 2;
         this.armour = 5;
         this.numSoldiers = 5;
-        /*
-        if (type = ) {
-            this.attack = ;
-        }
-        */
-        /*
-        try {
-            JSONObject new_unit = new JSONObject(
-                    Files.readString(Paths.get("src/unsw/gloriaromanus/Unit_values.json")));
-            
-            JSONObject chosen_unit = new_unit.getJSONObject(name);
-            //this.category = chosen_unit.getString("category");
-            this.numSoldiers = chosen_unit.getInt("numTroops");
-            this.armour = 1;
-            //this.armour = chosen_unit.getInt("armour");
-            this.attack = chosen_unit.getInt("attack");
-            this.defenseSkill = chosen_unit.getInt("defenseSkill");
-            this.morale = chosen_unit.getInt("morale");
-            this.movementpoints = chosen_unit.getInt("movementpoints");
-            this.range = chosen_unit.getInt("range");
-            this.shieldDefense = chosen_unit.getInt("shieldDefense");
-            this.helmet = 0;
-            this.charge = 0;
-            this.shield = 0.0;
-
-        } catch (JSONException | IOException e) {
-            e.printStackTrace();
-        }
-        */
     }
 
     public double get_shield() {
@@ -254,19 +225,7 @@ public class Unit {
         //abilities.add(this);
         //soldier.set_abilities(abilities);
     }
-    /*
-    public static void main(String[] arg){
-        String name = "skirmishers";
-        Unit new_unit = new Unit(name);
-        assert(new_unit.getNumTroops()==20);
-        System.out.println(new_unit.getNumTroops());
-
-        Unit x = new Unit("heavy infantry");
-        System.out.println(x.getNumTroops());
-        assertEquals(x.getNumTroops(), 5);
-    }
-    */
-
+   
     public void decreaseMorale(){
         this.morale -= 1;
     }
