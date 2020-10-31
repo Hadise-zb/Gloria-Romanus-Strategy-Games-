@@ -43,6 +43,7 @@ public class System implements TurnSubject{
 
     public void endTurn(){
         turn += 1;
+        notifyobservers();
     }
 
     public void solveProgress(){
