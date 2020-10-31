@@ -29,5 +29,16 @@ public class System {
     public void endTurn(){
         
     }
+
+    public void solveProgress(){
+        // TODO
+    }
     
+    public void continueProgress(){
+        // TODO
+    }
+
+    public void campaignVictory(){
+        
+    }
 }
