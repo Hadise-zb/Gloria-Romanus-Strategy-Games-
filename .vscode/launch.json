@@ -18,6 +18,13 @@
             "name": "CodeLens (Launch) - Unit",
             "request": "launch",
             "mainClass": "unsw.gloriaromanus.Unit",
+            "projectName": "w11b-hello_java_89b460e3"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Unit",
+            "request": "launch",
+            "mainClass": "unsw.gloriaromanus.Unit",
             "projectName": "w11b-hello_java_751a8282"
         },
         {

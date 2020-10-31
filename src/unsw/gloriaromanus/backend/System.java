@@ -71,7 +71,12 @@ public class System {
         LeafConquered conquereGoal = new LeafConquered(this);
         LeafTreasury treasuryGoal = new LeafTreasury(this);
         LeafWealth wealthGoal = new LeafWealth(this);
-        
+
+        CompositeGoal newGoal = new CompositeGoal();
+        newGoal.addComponent(conquereGoal);
+        newGoal.addComponent(treasuryGoal);
+        newGoal.addComponent(wealthGoal);
+        return newGoal.goalAchieved();
     }
 
 
