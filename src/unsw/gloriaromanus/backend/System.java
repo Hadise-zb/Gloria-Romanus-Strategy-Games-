@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import unsw.gloriaromanus.*;
 
 public class System {
-    private ArrayList<Province> provinces;
+    private Faction myFaction;
+    private ArrayList<Faction> enermyFactions = new ArrayList<Faction>();
     private int turn;
-    private int treasure;
+    
 
     /*
     public void update() {
@@ -16,10 +17,10 @@ public class System {
         }
         
     }
-    */
-
-    public System(){
+ */
+    public System(Faction f){
         this.turn = 0;
+        this.myFaction = f;
     }
 
     public void startTurn(){
@@ -41,4 +42,37 @@ public class System {
     public void campaignVictory(){
         
     }
+
+    // check if any faction been eliminated
+    public void checkFaction(){
+        for (Faction f : enermyFactions){
+            if (f.getNumProvince() == 0) {
+                enermyFactions.remove(f);
+            }
+        }
+    }
+
+    public boolean goalConquered(){
+        if (enermyFactions.size() == 0) return true;
+        else return false;
+    }
+
+    public boolean goalTreasury(){
+        if (myFaction.getTreasure() >= 100000 ) return true;
+        else return false;
+    }
+
+    public boolean goalWealth(){
+        if (myFaction.getWealth() >= 400000) return true;
+        else return false;
+    }
+
+    public boolean setGoal(){
+        LeafConquered conquereGoal = new LeafConquered(this);
+        LeafTreasury treasuryGoal = new LeafTreasury(this);
+        LeafWealth wealthGoal = new LeafWealth(this);
+        
+    }
+
+
 }
