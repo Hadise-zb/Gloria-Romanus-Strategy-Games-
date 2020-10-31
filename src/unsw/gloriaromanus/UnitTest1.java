@@ -54,13 +54,9 @@ public class UnitTest1{
         
         Province province = new Province("Britannia", owner, 50, 2.2);
         
-        Unit Roman_legionary = new Unit("legionary");
-        Unit Roman_pikemen = new Unit("pikemen");
-        Unit Gallic_berserker = new Unit("berserker");
-        
-        Roman_legionary.set_faction(owner.get_name());
-        Roman_pikemen.set_faction(owner.get_name());
-        Gallic_berserker.set_faction(enermy.get_name());
+        Unit Roman_legionary = new Unit("legionary", "Roman", "Cavalry");
+        Unit Roman_pikemen = new Unit("pikemen", "Roman", "Cavalry");
+        Unit Gallic_berserker = new Unit("berserker", "Gallic", "Cavalry");
 
         Troop new_troop = new Troop(owner.get_name());
         Troop enermy_troop = new Troop(enermy.get_name());
@@ -76,10 +72,6 @@ public class UnitTest1{
         owner.getProvinces().add(province);
         
         //add ability
-        
-        //Roman_legionary.ability_add(false);
-        //Roman_pikemen.ability_add(false);
-
         province.ablility_add();
         province.enermy_ablility_add();
 
@@ -91,7 +83,7 @@ public class UnitTest1{
         assertEquals(Roman_pikemen.get_speed(), 1);
 
         //berseker get double attack and infinity morale and no armour, shield
-        assertEquals(Gallic_berserker.get_attack(), 10);
+        assertEquals(Gallic_berserker.get_attack(), 20);
         assertEquals(Gallic_berserker.get_armour(), 0);
         assertEquals(Gallic_berserker.get_shield(), 0);
         double POSITIVE_INFINITY = 1.0 / 0.0;
@@ -99,7 +91,8 @@ public class UnitTest1{
 
     }
 
-    public void legionary_test() {
+    @Test
+    public void battle_ability_test() {
         Faction owner = new Faction("Gallic");
         Province province = new Province("Britannia", owner, 50, 2.2);
         Unit Roman_melee = new Unit("pikemen");
