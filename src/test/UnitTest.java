@@ -61,9 +61,17 @@ public class UnitTest{
         // Create a faction
         Faction my_faction = new Faction();
         System testSystem = new System(my_faction);
-        
+        Province p = new Province("NSW", my_faction, 0, 0.1);
+        testSystem.attach(my_faction);
+        my_faction.addProvince(p);  
 
-        
+        p.addTown();
+        p.addTown();
+        assertEquals(my_faction.getWealth(), 0);
+        assertEquals(my_faction.getTreasure(), 50);
+        testSystem.endTurn();
+        assertEquals(my_faction.getWealth(), 18);
+        assertEquals(my_faction.getTreasure(), 52);
     }
 
     

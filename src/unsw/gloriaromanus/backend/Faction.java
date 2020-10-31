@@ -15,9 +15,10 @@ public class Faction implements TurnObserver{
     private double treasure;
     private double wealth;
 
+    // Initially every faction have 50 treasure but 0 wealth
     public Faction() {
         this.treasure = 50;
-        this.wealth = 50;
+        this.wealth = 0;
     }
 
     public void setWealth(){
@@ -100,6 +101,10 @@ public class Faction implements TurnObserver{
 
     @Override
     public void update(){
+        for (Province p : provinces_belong){
+            p.solicitTownWealth();
+        }
+        this.solicitTax();
         this.setWealth();
     }
 }

@@ -39,6 +39,7 @@ public class Province {
         return wealth;
     }
 
+    // this function will be called in the begining of each turn
     public void solicitTownWealth(){
         if (taxRate == 0.1){
             wealth += (10*numTown);
