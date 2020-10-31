@@ -34,16 +34,18 @@ public class Ability {
         } else if (this.name.equals("Heroic charge")) {
             Heroic_charge(soldier);
         } else if (this.name.equals("skirmisher anti-armour")) {
-            skirmisher_add(soldier);
+            //skirmisher_add(soldier);
         } else if (this.name.equals("Elephants running amok")) {
             bonus = Elephants_running_amok_add(soldier);
-        } else if (this.name.equals("Druidic fervour")) {
+        } 
+        /*
+        else if (this.name.equals("Druidic fervour")) {
             bonus.set_name("Druidic fervour"); 
         }
-        
-        ArrayList<Ability> abilities = soldier.get_abilities();
-        abilities.add(this);
-        soldier.set_abilities(abilities);
+        */
+        //ArrayList<Ability> abilities = soldier.get_abilities();
+        //abilities.add(this);
+        //soldier.set_abilities(abilities);
 
         return bonus;
     } 
@@ -54,19 +56,23 @@ public class Ability {
         soldier.set_abilities(abilities);
     }
 
+    /*
     public void skirmisher_add(Unit soldier) {
-        soldier.set_defence((soldier.get_defence()) / 2);
+        soldier.set_armour((soldier.get_armour()) / 2);
     }
+    */
 
     public void Phalanx_add(Unit soldier) {
-        soldier.set_defence((soldier.get_defence()) * 2);
+        soldier.set_armour((soldier.get_armour()) * 2);
         soldier.set_speed((soldier.get_speed()) / 2);
     }
 
     public void Berserker_rage_add(Unit soldier){      
         soldier.set_morale(POSITIVE_INFINITY);
         soldier.set_attack((soldier.get_attack()) * 2);
-        soldier.set_armed(false);  
+        soldier.set_armed(false);
+        soldier.set_armour(0.0);
+        soldier.set_shield(0.0);  
     }
 
     public void Legionary_eagle_add(Unit soldier){
