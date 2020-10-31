@@ -52,7 +52,12 @@ public class UnitTest{
 
         au.solicitTax();
         assertEquals(au.getTreasure(), 2);
+    }
 
+    @Test
+    public void campaignvictoryTest(){
+        // Create a faction
+        Faction new = new Faction();
     }
 
     
