@@ -65,9 +65,10 @@ public class Province {
     }
 
 
+    // Each province can train at most two units of soldiers at the same time
     //recuit soldiers
     public void recuit(String type, String name) {
-        Soldier soldier = new Soldier(this.owner, type, name, this.name);
+        //Soldier soldier = new Soldier(this.owner, type, name, this.name);
         
     }
 
