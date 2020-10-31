@@ -42,7 +42,7 @@ public class Unit {
     private Double defence;
     private Double shield;
     private boolean training_completed;
-    private int turns;
+    private int engagments;
     private String province;
     private int cost;
     private String faction;
@@ -55,6 +55,19 @@ public class Unit {
 
     public Unit(String name) {
         this.unit_name = name;
+        this.name = name;
+        this.defence = 5.0;
+        this.morale = 5.0;
+        this.attack = 5.0;
+        this.speed = 2;
+        this.armour = 5;
+        this.numSoldiers = 5;
+        /*
+        if (type = ) {
+            this.attack = ;
+        }
+        */
+        /*
         try {
             JSONObject new_unit = new JSONObject(
                     Files.readString(Paths.get("src/unsw/gloriaromanus/Unit_values.json")));
@@ -77,6 +90,7 @@ public class Unit {
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
+        */
     }
 
     public double get_shield() {
@@ -95,6 +109,7 @@ public class Unit {
         this.charge = charge;
     }
 
+    /*
     public static void main(String[] arg){
         String name = "skirmishers";
         Unit new_unit = new Unit(name);
@@ -105,6 +120,7 @@ public class Unit {
         //System.out.println(x.getNumSoldiers());
         assertEquals(x.getNumSoldiers(), 5);
     }
+    */
 
     public double get_blood() {
         return this.blood_volume;
@@ -162,10 +178,12 @@ public class Unit {
         return this.name;
     }
 
-    public void complete_training() {
-        if (this.turns == 3) {
-            this.training_completed = true;
-        }
+    public void set_num_engagements(int i) {
+        this.engagments = i;
+    }
+
+    public int get_num_engagements() {
+        return this.engagments;
     }
 
     public void set_helmet(int new_helmet) {
@@ -202,36 +220,34 @@ public class Unit {
     }
 
     public Whole_army_bonus ability_add(boolean heroic){
-        if (this.faction.equals("Gallic") || this.faction.equals("Celtic") || this.faction.equals("Germanic")) {
+        
+        Whole_army_bonus bonus = new Whole_army_bonus();
+
+        if ((this.faction.equals("Gallic") || this.faction.equals("Celtic") || this.faction.equals("Germanic")) && this.name.equals("berserker")) {
             Ability ability = new Ability();
             ability.set_name("Berserker rage");
             ability.ability_add(this);
-        } else if (this.faction.equals("Roman")) {
+        } else if (this.faction.equals("Roman") && this.name.equals("legionary")) {
             Ability ability = new Ability();
             ability.set_name("Legionary eagle");
             ability.ability_add(this);
-        }
-        
-        Whole_army_bonus bonus = new Whole_army_bonus();
-        if (this.name.equals("pikemen") || this.name.equals("hoplite")) {
+        } else if (this.name.equals("pikemen") || this.name.equals("hoplite")) {
             Ability ability = new Ability();
             ability.set_name("Phalanx");
-            bonus = ability.ability_add(this);
-        } else if (this.name.equals("javelin-skirmisher")) {
-            Ability ability = new Ability();
-            ability.set_name("skirmisher anti-armour");
-            bonus = ability.ability_add(this);
+            ability.ability_add(this);
         } else if (this.name.equals("melee cavalry")) {
             if (heroic == true) {
                 Ability ability = new Ability();
                 ability.set_name("Heroic charge");
                 ability.ability_add(this);
             }
-        } else if (this.name.equals("druid")) {
+        } 
+        /*
+        else if (this.name.equals("druid")) {
             Ability ability = new Ability();
             ability.set_name("Druidic fervour");
             bonus = ability.ability_add(this);
-        }
+        } */
         
         return bonus;
         //ArrayList<Ability> abilities = soldier.get_abilities();

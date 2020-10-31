@@ -5,7 +5,7 @@ import java.util.*;
 
 class Node implements Comparator<Node> { 
 
-    public String node; 
+    public int node; 
 
     public int cost; 
 
@@ -19,7 +19,7 @@ class Node implements Comparator<Node> {
     */
   
 
-    public Node(String node, int cost) 
+    public Node(int node, int cost) 
 
     { 
 

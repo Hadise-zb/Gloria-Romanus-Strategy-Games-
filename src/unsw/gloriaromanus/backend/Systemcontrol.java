@@ -2,12 +2,33 @@ package unsw.gloriaromanus.backend;
 
 import java.util.ArrayList;
 import unsw.gloriaromanus.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class System {
+import org.junit.jupiter.api.Test;
+
+public class Systemcontrol implements TurnSubject{
     private Faction myFaction;
     private ArrayList<Faction> enermyFactions = new ArrayList<Faction>();
     private int turn;
+    private ArrayList<TurnObserver> observers = new ArrayList<TurnObserver>();
     
+    @Override
+    public void attach(TurnObserver o){
+        observers.add(o);
+    }
+
+    @Override
+    public void detach(TurnObserver o){
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyobservers(){
+        for (TurnObserver o : observers){
+            o.update();
+        }
+    }
+
 
     /*
     public void update() {
@@ -18,17 +39,14 @@ public class System {
         
     }
  */
-    public System(Faction f){
+    public Systemcontrol(Faction f){
         this.turn = 0;
         this.myFaction = f;
     }
 
-    public void startTurn(){
-        turn +=1;
-    }
-
     public void endTurn(){
-        
+        turn += 1;
+        notifyobservers();
     }
 
     public void solveProgress(){
@@ -77,6 +95,34 @@ public class System {
         newGoal.addComponent(treasuryGoal);
         newGoal.addComponent(wealthGoal);
         return newGoal.goalAchieved();
+    }
+
+
+    public static void main(String[] args){
+        Faction my_faction = new Faction("");
+        Systemcontrol testSystem = new Systemcontrol(my_faction);
+        Province p = new Province("NSW", my_faction, 0, 0.1);
+        testSystem.attach(my_faction);
+        my_faction.addProvince(p);  
+
+        p.addTown();
+        p.addTown();
+        assertEquals(my_faction.getWealth(), 0);
+        assertEquals(my_faction.getTreasure(), 50);
+
+        testSystem.endTurn();
+
+        assertEquals(my_faction.getWealth(), 18);
+        assertEquals(my_faction.getTreasure(), 52);
+
+        testSystem.endTurn();
+
+        assertEquals(my_faction.getWealth(), 34.2);
+        assertEquals(my_faction.getTreasure(), 55.8);
+
+        testSystem.endTurn();
+        assertEquals(my_faction.getWealth(), 48.78);
+        assertEquals(my_faction.getTreasure(), 61.22);
     }
 
 

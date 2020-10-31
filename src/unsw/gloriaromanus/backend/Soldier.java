@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Soldier {
     //private Boolean mercenary;
-    private String type;
+    private Unit type;
     private Boolean armed;
     private Troop troop;
     private String name;
@@ -22,22 +22,13 @@ public class Soldier {
     private Faction faction;
     private ArrayList<Ability> abilities;
 
-    public Soldier (Faction faction, String type, String name, String province) {
+    public Soldier (Faction faction, Unit type, String name, String province) {
         this.faction = faction;
         this.type = type;
         this.name = name;
-        //this.mercenary = mercenary;
-        //this.name = name;
-        //this.morale = 1.0;
-        //this.speed = speed;
-        //this.attack = attack;
-        //this.shield = shield;
-        //this.armed = armed;
         this.training_completed = false;
         this.turns = 0;
         this.province = province;
-        //this.cost = 0;
-        //this.abilities = new ArrayList<Ability>();
     }
 
     public double get_defence() {

@@ -12,11 +12,15 @@ import unsw.gloriaromanus.*;
 import unsw.gloriaromanus.Unit;
 import unsw.gloriaromanus.backend.*;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.json.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 =======
 import unsw.gloriaromanus.backend.System;
+=======
+import unsw.gloriaromanus.backend.Systemcontrol;
+>>>>>>> origin/YZ_new
 
 >>>>>>> origin/YZ_new
 
@@ -62,17 +66,36 @@ public class UnitTest{
         assertEquals(p.getWealth(), 20);
 
         au.solicitTax();
-        assertEquals(au.getTreasure(), 2);
+        assertEquals(au.getTreasure(), 52);
     }
 
     @Test
     public void campaignvictoryTest(){
         // Create a faction
         Faction my_faction = new Faction();
-        System testSystem = new System(my_faction);
-        
+        Systemcontrol testSystem = new Systemcontrol(my_faction);
+        Province p = new Province("NSW", my_faction, 0, 0.1);
+        testSystem.attach(my_faction);
+        my_faction.addProvince(p);  
 
-        
+        p.addTown();
+        p.addTown();
+        assertEquals(my_faction.getWealth(), 0);
+        assertEquals(my_faction.getTreasure(), 50);
+
+        testSystem.endTurn();
+
+        assertEquals(my_faction.getWealth(), 18);
+        assertEquals(my_faction.getTreasure(), 52);
+
+        testSystem.endTurn();
+
+        assertEquals(my_faction.getWealth(), 34.2);
+        assertEquals(my_faction.getTreasure(), 55.8);
+
+        testSystem.endTurn();
+        assertEquals(my_faction.getWealth(), 48.78);
+        assertEquals(my_faction.getTreasure(), 61.22);
     }
 
     // test soldier ablility
