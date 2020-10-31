@@ -33,14 +33,21 @@ public class Unit2 {
     private int shieldDefense; // a shield
     private int movementpoints;
     private String unit_name;
+<<<<<<< HEAD:src/unsw/gloriaromanus/Unit2.java
     private int numTroops;
 
 
     public Unit2(String type) {
         this.unit_name = type;
+=======
+//
+
+    public Unit(String type) {
+        
+>>>>>>> origin/YZ_m2:src/unsw/gloriaromanus/Unit.java
         try {
             JSONObject new_unit = new JSONObject(
-                    Files.readString(Paths.get("src/unsw/gloriaromanus/Unit_values.json")));
+                    Files.readString(Paths.get("values/Unit_values.json")));
             
             JSONObject chosen_unit = new_unit.getJSONObject(type);
             //this.category = chosen_unit.getString("category");
@@ -85,6 +92,10 @@ public class Unit2 {
         this.movementpoints = num;
     }
 
+    public String get_type(){
+        return this.unit_name;
+    }
+
     public static void main(String[] arg){
         String name = "skirmishers";
         Unit2 new_unit = new Unit2(name);
@@ -93,6 +104,6 @@ public class Unit2 {
 
         Unit2 x = new Unit2("heavy infantry");
         System.out.println(x.getNumTroops());
-        assertEquals(x.getNumTroops(), 5);
+        assertEquals(x.getNumTroops(), 50);
     }
 }
