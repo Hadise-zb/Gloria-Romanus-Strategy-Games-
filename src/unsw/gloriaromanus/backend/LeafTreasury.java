@@ -2,8 +2,8 @@ package unsw.gloriaromanus.backend;
 
 public class LeafTreasury implements GoalComponent{
 
-    private System f;
-    public LeafTreasury(System f){
+    private Systemcontrol f;
+    public LeafTreasury(Systemcontrol f){
         this.f = f;
     }
     @Override

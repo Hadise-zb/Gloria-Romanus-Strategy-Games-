@@ -23,7 +23,7 @@ public class Faction implements TurnObserver{
 
     public void setWealth(){
         for (Province p : provinces_belong){
-            wealth += p.getWealth();
+            wealth = p.getWealth();
         }
     }
 
