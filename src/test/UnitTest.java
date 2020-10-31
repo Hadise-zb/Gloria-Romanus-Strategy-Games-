@@ -5,12 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import unsw.gloriaromanus.*;
-import unsw.gloriaromanus.Unit;
 import unsw.gloriaromanus.backend.*;
+import org.json.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import unsw.gloriaromanus.backend.Systemcontrol;
-
+import unsw.gloriaromanus.backend.Systemcontrol;
 
 public class UnitTest{
     @Test
@@ -22,7 +26,7 @@ public class UnitTest{
     public void blahTest2(){
         Unit u = new Unit("heavy infantry");
         //System.out.println(u.getNumTroops());
-        assertEquals(u.getNumTroops(), 50);
+        assertEquals(u.getNumSoldiers(), 50);
     }
 
     @Test
@@ -85,6 +89,26 @@ public class UnitTest{
         assertEquals(my_faction.getTreasure(), 61.22);
     }
 
+    // test soldier ablility
+    @Test
+    public void legionary_test() {
+        Faction owner = new Faction();
+        Province province = new Province("Britannia", owner, 50, 2.2);
+        Unit Roman_melee = new Unit("melee cavalry");
+        Troop new_troop = new Troop();
+        province.get_my_troops().add(Roman_melee);
+
+    }
+
     
+    public static void main(String[] arg){
+        String name = "skirmishers";
+        Unit new_unit = new Unit(name);
+        assert(new_unit.getNumTroops()==20);
+        System.out.println(new_unit.getNumTroops());
+
+        Unit x = new Unit("heavy infantry");
+        System.out.println(x.getNumTroops());
+    }
 }
 

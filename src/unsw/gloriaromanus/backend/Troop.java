@@ -9,6 +9,9 @@ public class Troop {
     private Province current_province;
     
 
+    public Troop(String faction) {
+        this.units = new ArrayList<Unit>();
+    }
 
     public void move(Province destination) {
         

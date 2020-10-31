@@ -1,4 +1,3 @@
-
 package unsw.gloriaromanus.backend;
 
 import java.util.ArrayList;
@@ -16,10 +15,12 @@ public class Faction implements TurnObserver{
     private double wealth;
 
     // Initially every faction have 50 treasure but 0 wealth
-    public Faction() {
+    public Faction(String name) {
         this.treasure = 50;
         this.wealth = 0;
+        this.name = name;
     }
+
 
     public void setWealth(){
         for (Province p : provinces_belong){
