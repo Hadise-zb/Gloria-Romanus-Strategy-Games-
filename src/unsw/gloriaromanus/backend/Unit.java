@@ -31,8 +31,8 @@ public class Unit {
     private double speed; // ability to disengage from disadvantageous battle
     private double attack; // can be either missile or melee attack to simplify. Could improve
                    // implementation by differentiating!
-    private int defenseSkill; // skill to defend in battle. Does not protect from arrows!
-    private int shieldDefense; // a shield
+    //private int defenseSkill; // skill to defend in battle. Does not protect from arrows!
+    //private int shieldDefense; // a shield
     private int movementpoints;
     private String unit_name;
     private ArrayList<Ability> abilities;
@@ -41,7 +41,7 @@ public class Unit {
     private String name;
     private Double defence;
     private Double shield;
-    private boolean training_completed;
+    //private boolean training_completed;
     private int engagments;
     private String province;
     private int cost;
