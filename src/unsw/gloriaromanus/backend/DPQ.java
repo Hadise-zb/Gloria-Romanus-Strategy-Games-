@@ -39,7 +39,15 @@ public class DPQ {
 
     
 
-    public int movement(String start, String end) {
+    public int movement(String start, String end, ArrayList<Faction> enemry) {
+        ArrayList<String> enermy_pro = new ArrayList<String>();
+        for (Faction f : enemry) {
+            for (Province p : f.getProvinces()) {
+                enermy_pro.add(p.get_name());
+            }
+            
+        }
+        
         try {
             JSONObject matrix = new JSONObject(
                 Files.readString(Paths.get("src/unsw/gloriaromanus/province_adjacency_matrix.json")));
@@ -90,19 +98,19 @@ public class DPQ {
             
         
             dist[src] = 0; 
-        
+            passed[src] = 0;
             int k = 0;
             for (int i = 1; i <= this.V; i++) {
                 int min = Integer.MAX_VALUE;
                 for (int j = 1; j <= this.V; j++) {
-                    if (passed[j] != -1 && dist[j] < min) {
+                    if (passed[j] == -1 && dist[j] < min && !enermy_pro.contains(provinces.get(j))) {
                         min = dist[j];
                         k = j;
                     }
                 }
                 passed[k] = 1;
                 for (int j = 1; j <= this.V; j++) {
-                    if(adjacent[k][j]!=0 && passed[j] != -1 && dist[j]>dist[k]+adjacent[k][j])
+                    if(adjacent[k][j]!=0 && passed[j] == -1 && dist[j]>dist[k]+adjacent[k][j] && !enermy_pro.contains(provinces.get(j)))
                         dist[j]=dist[k]+adjacent[k][j];
                 }
             }

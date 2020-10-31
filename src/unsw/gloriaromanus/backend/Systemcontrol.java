@@ -29,6 +29,17 @@ public class Systemcontrol implements TurnSubject{
         }
     }
 
+    public void movement(Province start, Province end) {
+        String start_province = start.get_name();
+        String destination = end.get_name();
+        DPQ shortest_path = new DPQ();
+        int movement_point_need = shortest_path.movement(start_province, destination, enermyFactions);
+        // to do
+        // if can arrive, update the province.
+        // if can't , raise error.
+
+    }
+
     public void engage(String destination) {
         String result = "draw";
         for (Faction faction : enermyFactions) {

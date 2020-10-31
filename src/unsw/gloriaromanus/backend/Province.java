@@ -33,6 +33,14 @@ public class Province {
         this.engaged = false;
     }
 
+    public String get_name() {
+        return this.name;
+    }
+    /*
+    public void set_name(String new_name) {
+        this.name = new_name;
+    }
+    */
     public ArrayList<Troop> get_my_troops() {
         return this.troops;
     }
