@@ -33,6 +33,7 @@ public class Unit {
     private int shieldDefense; // a shield
     private int movementpoints;
     private String unit_name;
+    private int numTroops;
 
 
     public Unit(String type) {
@@ -43,7 +44,7 @@ public class Unit {
             
             JSONObject chosen_unit = new_unit.getJSONObject(type);
             //this.category = chosen_unit.getString("category");
-            this.numSoldiers = chosen_unit.getInt("numTroops");
+            this.numTroops = chosen_unit.getInt("numTroops");
             this.armour = 1;
             //this.armour = chosen_unit.getInt("armour");
             this.attack = chosen_unit.getInt("attack");
@@ -76,7 +77,7 @@ public class Unit {
     }
 
     public int getNumTroops(){
-        return this.numSoldiers;
+        return this.numTroops;
     }
 
 

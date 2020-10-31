@@ -5,18 +5,18 @@ import java.util.*;
 
 class Node implements Comparator<Node> { 
 
-    public int node; 
+    public String node; 
 
     public int cost; 
 
   
-
+    /*
     public Node() 
 
     { 
 
     } 
-
+    */
   
 
     public Node(String node, int cost) 

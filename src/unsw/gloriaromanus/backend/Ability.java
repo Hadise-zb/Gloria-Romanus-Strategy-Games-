@@ -55,11 +55,11 @@ public class Ability {
     }
 
     public void skirmisher_add(Unit soldier) {
-        soldier.set_defence((soldier.get_defence()) / 2);
+        soldier.set_armour((soldier.get_armour()) / 2);
     }
 
     public void Phalanx_add(Unit soldier) {
-        soldier.set_defence((soldier.get_defence()) * 2);
+        soldier.set_armour((soldier.get_armour()) * 2);
         soldier.set_speed((soldier.get_speed()) / 2);
     }
 

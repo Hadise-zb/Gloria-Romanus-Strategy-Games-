@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import unsw.gloriaromanus.*;
 
 public class Enemy {
-    private faction faction;
-    private ArrayList<faction> observers;
+    private Faction faction;
+    private ArrayList<Faction> observers;
     private ArrayList<Enemy> subscriber;
 
     public void update() {
@@ -25,7 +25,7 @@ public class Enemy {
     //design Observer design patter
     //province, soildier in province
     public void Obsever() {
-        for (faction faction: this.observers) {
+        for (Faction faction: this.observers) {
             //faction.getInformation();
         }
     }

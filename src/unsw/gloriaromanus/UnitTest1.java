@@ -19,10 +19,14 @@ public class UnitTest1{
         assertEquals("a", "a");
     }
     
+    private String testfile = "{\r\n    \"heavy infantry\": {\r\n        \"numTroops\":5,\r\n        \"range\": 1,\r\n        \"armour\": 5,\r\n        \"morale\": 10,\r\n        \"speed\": 10,\r\n        \"attack\": 6,\r\n        \"defenseSkill\": 10,\r\n        \"shieldDefense\": 3, \r\n        \"movementpoints\": 10\r\n    },\r\n\r\n    \"skirmishers\": {\r\n        \"numTroops\":20,\r\n        \"range\": 1,\r\n        \"armour\": 6,\r\n        \"morale\": 20,\r\n        \"speed\": 7,\r\n        \"attack\": 8,\r\n        \"defenseSkill\": 8,\r\n        \"shieldDefense\": 4, \r\n        \"movementpoints\": 6\r\n    }\r\n}";
+   
     @Test
     public void blahTest2(){
         Unit u = new Unit("heavy infantry");
         //System.out.println(u.getNumTroops());
+        
+        //Unit te = new Unit(testfile);
         assertEquals(u.getNumTroops(), 5);
     }
 
