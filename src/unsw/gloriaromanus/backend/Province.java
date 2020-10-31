@@ -68,6 +68,7 @@ public class Province {
         return wealth;
     }
 
+    // this function will be called in the begining of each turn
     public void solicitTownWealth(){
         if (taxRate == 0.1){
             wealth += (10*numTown);
@@ -93,9 +94,10 @@ public class Province {
     }
 
 
+    // Each province can train at most two units of soldiers at the same time
     //recuit soldiers
     public void recuit(String type, String name) {
-        Soldier soldier = new Soldier(this.owner, type, name, this.name);
+        //Soldier soldier = new Soldier(this.owner, type, name, this.name);
         
     }
 
@@ -138,7 +140,7 @@ public class Province {
         if (Druid != 0) {
             Druidic_fervour(Druid);
         }
-
+        /*
         boolean Cantabrian_circle_1 = false;
         for (Troop troop : troops) {
             for (Unit unit : troop.get_soldiers()) {
@@ -159,9 +161,43 @@ public class Province {
                 }
             }
         }
+        */
+    }
 
+    public void enermy_ablility_add() {
+        double my_num = 0;
+        for (Troop troop : Enermy_troops) {
+            for (Unit unit : troop.get_soldiers()) {
+                my_num = my_num + unit.getNumSoldiers();
+            }
+        }
 
+        double enermy_num = 0;
+        for (Troop troop : troops) {
+            for (Unit unit : troop.get_soldiers()) {
+                enermy_num = enermy_num + unit.getNumSoldiers();
+            }
+        }
+        boolean heroic = false;
+        if (my_num < (enermy_num / 2)) {
+            heroic = true;
+        }
 
+        int Druid = 0;
+        for (Troop troop : Enermy_troops) {
+            for (Unit unit : troop.get_soldiers()) {
+                Whole_army_bonus bonus = unit.ability_add(heroic);
+                if (!bonus.get_name().equals("")) {
+                    if (bonus.get_name().equals("Elephants_running_amok")) {
+                        damage_inflited(bonus);
+                    }
+                }
+                if (unit.get_name().equals("druid")) {
+                    Druid += unit.getNumSoldiers();
+                }
+
+            }
+        }
     }
 
     
@@ -231,6 +267,11 @@ public class Province {
     public String battle() {
         String win = "draw";
         int count = 0;
+
+        // add ability to units before battle, some ability will be added during battle
+        this.ablility_add();
+        this.enermy_ablility_add();
+
         while (this.troops.isEmpty() || this.Enermy_troops.isEmpty()) {
             Random rand = new Random();
             ArrayList<Troop> troops = this.troops;
@@ -252,11 +293,36 @@ public class Province {
             int randomIndex4 = enermy_rand2.nextInt(enermy_units.size());
             Unit enermy_randomUnit = units.get(randomIndex4);
 
+            //set numbers of engagement
+            my_randomUnit.set_num_engagements(my_randomUnit.get_num_engagements() + 1);
+            enermy_randomUnit.set_num_engagements(enermy_randomUnit.get_num_engagements() + 1);
+            
+            //set ablility for engagement
+            if (my_randomUnit.get_name().equals("melee infantry")) {
+                if (my_randomUnit.get_num_engagements() == 4) {
+                    my_randomUnit.set_attack(my_randomUnit.get_attack()+my_randomUnit.get_shield());
+                }
+            } else if (my_randomUnit.get_name().equals("javelin skirmisher")) {
+                enermy_randomUnit.set_armour(enermy_randomUnit.get_armour() / 2);
+            } else if (my_randomUnit.get_name().equals("horse archer") && unit_type(my_randomUnit).equals("missile")) {
+                enermy_randomUnit.setNumSoldiers(enermy_randomUnit.getNumSoldiers() / 2);
+            }
+
+            if (enermy_randomUnit.get_name().equals("melee infantry")) {
+                if (enermy_randomUnit.get_num_engagements() == 4) {
+                    enermy_randomUnit.set_attack(enermy_randomUnit.get_attack()+enermy_randomUnit.get_shield());
+                } 
+            } else if (enermy_randomUnit.get_name().equals("javelin skirmisher")) {
+                my_randomUnit.set_armour(my_randomUnit.get_armour() / 2);
+            } else if (enermy_randomUnit.get_name().equals("horse archer") && unit_type(my_randomUnit).equals("missile")) {
+                my_randomUnit.setNumSoldiers(my_randomUnit.getNumSoldiers() / 2);
+            }
+
             String engagement = "";
 
             double melee_speed = 0;
             double missile_speed = 0; 
-            
+
             if (unit_type(my_randomUnit).equals("melee") && unit_type(enermy_randomUnit).equals("melee")) {
                 engagement = "melee";
             } else if (unit_type(my_randomUnit).equals("missile") && unit_type(enermy_randomUnit).equals("missile")) {
@@ -342,7 +408,11 @@ public class Province {
     }
 
     public String unit_type(Unit unit) {
-        return "";
+        if (unit.get_name().equals("artillery") || unit.get_name().equals("horse archers") || unit.get_name().equals("missile infantry")) {
+            return "missile";
+        } else {
+            return "melee";
+        }
     }
 
     public double nextGaussian() {

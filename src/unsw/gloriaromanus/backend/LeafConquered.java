@@ -2,8 +2,8 @@ package unsw.gloriaromanus.backend;
 
 public class LeafConquered implements GoalComponent{
 
-    private System f;
-    public LeafConquered(System f){
+    private Systemcontrol f;
+    public LeafConquered(Systemcontrol f){
         this.f = f;
     }
 

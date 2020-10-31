@@ -3,7 +3,7 @@ package unsw.gloriaromanus.backend;
 import java.util.ArrayList;
 import unsw.gloriaromanus.*;
 
-public class Faction {
+public class Faction implements TurnObserver{
     private ArrayList<Province> provinces_belong = new ArrayList<Province>();
     private ArrayList<Faction> neighboors = new ArrayList<Faction>();
     
@@ -14,16 +14,17 @@ public class Faction {
     private double treasure;
     private double wealth;
 
+    // Initially every faction have 50 treasure but 0 wealth
     public Faction(String name) {
         this.treasure = 50;
-        this.wealth = 50;
+        this.wealth = 0;
         this.name = name;
     }
 
 
     public void setWealth(){
         for (Province p : provinces_belong){
-            wealth += p.getWealth();
+            wealth = p.getWealth();
         }
     }
 
@@ -97,5 +98,14 @@ public class Faction {
 
     public int getNumProvince(){
         return provinces_belong.size();
+    }
+
+    @Override
+    public void update(){
+        for (Province p : provinces_belong){
+            p.solicitTownWealth();
+        }
+        this.solicitTax();
+        this.setWealth();
     }
 }

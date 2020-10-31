@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.json.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import unsw.gloriaromanus.backend.*;
 
 public class UnitTest1{
     @Test
@@ -27,7 +28,7 @@ public class UnitTest1{
         //System.out.println(u.getNumTroops());
         
         //Unit te = new Unit(testfile);
-        assertEquals(u.getNumTroops(), 5);
+        //assertEquals(u.getNumTroops(), 5);
     }
 
     @Test
@@ -45,6 +46,76 @@ public class UnitTest1{
         assertEquals(q.get_MovementPoints(), 1);
     }
 
-    
+    @Test
+    public void ablility_test1() {
+        //test for ablility addition
+        Faction owner = new Faction("Roman");
+        Faction enermy = new Faction("Gallic");
+        
+        Province province = new Province("Britannia", owner, 50, 2.2);
+        
+        Unit Roman_legionary = new Unit("legionary");
+        Unit Roman_pikemen = new Unit("pikemen");
+        Unit Gallic_berserker = new Unit("berserker");
+        
+        Roman_legionary.set_faction(owner.get_name());
+        Roman_pikemen.set_faction(owner.get_name());
+        Gallic_berserker.set_faction(enermy.get_name());
+
+        Troop new_troop = new Troop(owner.get_name());
+        Troop enermy_troop = new Troop(enermy.get_name());
+        
+        new_troop.get_soldiers().add(Roman_legionary);
+        new_troop.get_soldiers().add(Roman_pikemen);
+        
+        enermy_troop.get_soldiers().add(Gallic_berserker);
+
+        province.get_my_troops().add(new_troop);
+        province.get_my_troops().add(enermy_troop);
+
+        owner.getProvinces().add(province);
+        
+        //add ability
+        
+        //Roman_legionary.ability_add(false);
+        //Roman_pikemen.ability_add(false);
+
+        province.ablility_add();
+        province.enermy_ablility_add();
+
+        //Roman can get morale plus 1, so it should be 6
+        assertEquals(Roman_legionary.get_morale(), 6);
+        //pikemen can have double armour, so it should be 10
+        assertEquals(Roman_pikemen.get_armour(), 10);
+        //pikemen can have half speed, so it should be 1
+        assertEquals(Roman_pikemen.get_speed(), 1);
+
+        //berseker get double attack and infinity morale and no armour, shield
+        assertEquals(Gallic_berserker.get_attack(), 10);
+        assertEquals(Gallic_berserker.get_armour(), 0);
+        assertEquals(Gallic_berserker.get_shield(), 0);
+
+    }
+
+    public void legionary_test() {
+        Faction owner = new Faction("Gallic");
+        Province province = new Province("Britannia", owner, 50, 2.2);
+        Unit Roman_melee = new Unit("pikemen");
+        Roman_melee.set_faction(owner.get_name());
+        Troop new_troop = new Troop(owner.get_name());
+        new_troop.get_soldiers().add(Roman_melee);
+        province.get_my_troops().add(new_troop);
+        owner.getProvinces().add(province);
+        Roman_melee.ability_add(false);
+        
+        //Roman can get morale plus 1, so it should be 6
+        assertEquals(Roman_melee.get_morale(), 6);
+        //pikemen can have double armour, so it should be 10
+        assertEquals(Roman_melee.get_armour(), 10);
+        //pikemen can have half speed, so it should be 1
+        assertEquals(Roman_melee.get_speed(), 1);
+        
+
+    }
 }
 

@@ -2,8 +2,8 @@ package unsw.gloriaromanus.backend;
 
 public class LeafWealth implements GoalComponent{
 
-    private System f;
-    public LeafWealth(System f){
+    private Systemcontrol f;
+    public LeafWealth(Systemcontrol f){
         this.f = f;
     }
     @Override
