@@ -9,10 +9,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import unsw.gloriaromanus.*;
+import unsw.gloriaromanus.Unit;
 import unsw.gloriaromanus.backend.*;
+<<<<<<< HEAD
 import org.json.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+=======
+import unsw.gloriaromanus.backend.System;
+
+>>>>>>> origin/YZ_new
 
 public class UnitTest{
     @Test
@@ -47,7 +53,7 @@ public class UnitTest{
     public void wealthTest(){
         Faction au = new Faction();
         Province p = new Province("NSW", au, 0, 0.1);
-        au.addOccupations(p);
+        au.addProvince(p);
         p.addTown();
         p.addTown();
         assertEquals(p.getNumTown(), 2);
@@ -57,7 +63,16 @@ public class UnitTest{
 
         au.solicitTax();
         assertEquals(au.getTreasure(), 2);
+    }
 
+    @Test
+    public void campaignvictoryTest(){
+        // Create a faction
+        Faction my_faction = new Faction();
+        System testSystem = new System(my_faction);
+        
+
+        
     }
 
     // test soldier ablility

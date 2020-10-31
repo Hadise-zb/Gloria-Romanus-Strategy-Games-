@@ -6,12 +6,12 @@ import unsw.gloriaromanus.*;
 import java.util.Random;
 
 public class Province {
-    private ArrayList<Infrastructure> infrastructures;
+    //private ArrayList<Infrastructure> infrastructures;
     private String name;
     private double wealth;
     private ArrayList<Smith> smithes;
     private Faction owner;
-    private Double taxRate;
+    private double taxRate;
     private ArrayList<Troop> troops = new ArrayList<Troop>();
     private ArrayList<Troop> Enermy_troops = new ArrayList<Troop>();
     private int numTown;
@@ -87,7 +87,7 @@ public class Province {
 
     //recuit soldiers
     public void recuit(String type, String name) {
-        soldier soldier = new soldier(this.owner, type, name, this.name);
+        Soldier soldier = new Soldier(this.owner, type, name, this.name);
         
     }
 
