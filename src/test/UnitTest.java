@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import unsw.gloriaromanus.*;
 import unsw.gloriaromanus.Unit;
 import unsw.gloriaromanus.backend.*;
-import unsw.gloriaromanus.backend.System;
+import unsw.gloriaromanus.backend.Systemcontrol;
 
 
 public class UnitTest{
@@ -53,14 +53,14 @@ public class UnitTest{
         assertEquals(p.getWealth(), 20);
 
         au.solicitTax();
-        assertEquals(au.getTreasure(), 2);
+        assertEquals(au.getTreasure(), 52);
     }
 
     @Test
     public void campaignvictoryTest(){
         // Create a faction
         Faction my_faction = new Faction();
-        System testSystem = new System(my_faction);
+        Systemcontrol testSystem = new Systemcontrol(my_faction);
         Province p = new Province("NSW", my_faction, 0, 0.1);
         testSystem.attach(my_faction);
         my_faction.addProvince(p);  
@@ -69,9 +69,20 @@ public class UnitTest{
         p.addTown();
         assertEquals(my_faction.getWealth(), 0);
         assertEquals(my_faction.getTreasure(), 50);
+
         testSystem.endTurn();
+
         assertEquals(my_faction.getWealth(), 18);
         assertEquals(my_faction.getTreasure(), 52);
+
+        testSystem.endTurn();
+
+        assertEquals(my_faction.getWealth(), 34.2);
+        assertEquals(my_faction.getTreasure(), 55.8);
+
+        testSystem.endTurn();
+        assertEquals(my_faction.getWealth(), 48.78);
+        assertEquals(my_faction.getTreasure(), 61.22);
     }
 
     
