@@ -33,6 +33,14 @@ public class Province {
         this.engaged = false;
     }
 
+    public ArrayList<Troop> get_my_troops() {
+        return this.troops;
+    }
+
+    public ArrayList<Troop> set_enermy_troops() {
+        return this.Enermy_troops;
+    }
+
     public void set_engaged(boolean i) {
         this.engaged = i;
     }

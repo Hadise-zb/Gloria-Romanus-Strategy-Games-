@@ -19,7 +19,7 @@ import org.json.*;
  * current version represents a heavy infantry unit (almost no range, decent
  * armour and morale)
  */
-public class Unit {
+public class Unit2 {
     private String category;
     private int numSoldiers; // the number of troops in this unit (should reduce based on depletion)
     private int range; // range of the unit
@@ -36,7 +36,7 @@ public class Unit {
     private int numTroops;
 
 
-    public Unit(String type) {
+    public Unit2(String type) {
         this.unit_name = type;
         try {
             JSONObject new_unit = new JSONObject(
@@ -87,11 +87,11 @@ public class Unit {
 
     public static void main(String[] arg){
         String name = "skirmishers";
-        Unit new_unit = new Unit(name);
+        Unit2 new_unit = new Unit2(name);
         assert(new_unit.getNumTroops()==20);
         System.out.println(new_unit.getNumTroops());
 
-        Unit x = new Unit("heavy infantry");
+        Unit2 x = new Unit2("heavy infantry");
         System.out.println(x.getNumTroops());
         assertEquals(x.getNumTroops(), 5);
     }
