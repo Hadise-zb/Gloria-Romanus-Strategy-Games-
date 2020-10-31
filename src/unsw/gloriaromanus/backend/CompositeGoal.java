@@ -15,19 +15,28 @@ public class CompositeGoal implements GoalComponent{
         else this.logical = "OR";
     }
 
+    public void addComponent(GoalComponent o){
+        components.add(o);
+    }
+
+    public void detachComponent(GoalComponent o){
+        components.remove(o);
+    }
+
+
     @Override
-    public boolean goalAchieved(Faction f){
+    public boolean goalAchieved(){
         if (this.logical.equals("AND")){
             boolean result = true;
             for (GoalComponent p : components){
-                if (!p.goalAchieved(f)) result = false;
+                if (!p.goalAchieved()) result = false;
             }
             return result;
         }
         else {
             boolean result = false;
             for (GoalComponent p: components){
-                if (!p.goalAchieved(f)) result = true;
+                if (!p.goalAchieved()) result = true;
             }
             return result;
         }

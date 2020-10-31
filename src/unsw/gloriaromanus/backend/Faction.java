@@ -12,11 +12,12 @@ public class Faction {
     //private Road road;
     private boolean turn;
     private String name; 
-    private double trasure;
+    private double treasure;
     private double wealth;
 
     public Faction() {
-
+        this.treasure = 50;
+        this.wealth = 50;
     }
 
     public void setWealth(){
@@ -43,8 +44,8 @@ public class Faction {
         return this.provinces_belong;
     }
 
-    public void addProvince(Province occupation) {
-        this.provinces_belong.add(occupation);
+    public void addProvince(Province province) {
+        this.provinces_belong.add(province);
     }
 
     public ArrayList<Faction> get_neighboors() {
@@ -71,29 +72,29 @@ public class Faction {
 
     public void solicitTax(){
         for (Province p: provinces_belong){
-            trasure += p.tributeTax();
+            treasure += p.tributeTax();
         }
     }
 
     public double getTreasure(){
-        return this.trasure;
+        return this.treasure;
     }
+
+    public double getWealth(){
+        return this.wealth;
+    }
+
 
     // this function will check if all the province have been conquered
-    public boolean goalConquered(){
-        if (neighboors.size() == 0) return true;
-        else return false;
-    }
+    
 
     // This function will check if the treasury goal have been achieved
-    public boolean goalTreasury(){
-        if (this.trasure >= 100000 ) return true;
-        else return false;
-    }
+    
     
     // This function will check if the wealth goal have been achieved
-    public boolean goalWealth(){
-        if (this.wealth >= 400000) return true;
-        else return false;
+    
+
+    public int getNumProvince(){
+        return provinces_belong.size();
     }
 }

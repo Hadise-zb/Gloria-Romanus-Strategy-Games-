@@ -7,7 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import unsw.gloriaromanus.*;
+import unsw.gloriaromanus.Unit;
 import unsw.gloriaromanus.backend.*;
+import unsw.gloriaromanus.backend.System;
 
 
 public class UnitTest{
@@ -42,7 +44,7 @@ public class UnitTest{
     public void wealthTest(){
         Faction au = new Faction();
         Province p = new Province("NSW", au, 0, 0.1);
-        au.addOccupations(p);
+        au.addProvince(p);
         p.addTown();
         p.addTown();
         assertEquals(p.getNumTown(), 2);
@@ -57,7 +59,11 @@ public class UnitTest{
     @Test
     public void campaignvictoryTest(){
         // Create a faction
-        Faction new = new Faction();
+        Faction my_faction = new Faction();
+        System testSystem = new System(my_faction);
+        
+
+        
     }
 
     

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class soldier {
+public class Soldier {
     //private Boolean mercenary;
     private String type;
     private Boolean armed;
@@ -22,7 +22,7 @@ public class soldier {
     private Faction faction;
     private ArrayList<Ability> abilities;
 
-    public soldier (Faction faction, String type, String name, String province) {
+    public Soldier (Faction faction, String type, String name, String province) {
         this.faction = faction;
         this.type = type;
         this.name = name;
