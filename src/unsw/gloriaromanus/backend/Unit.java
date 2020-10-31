@@ -126,6 +126,10 @@ public class Unit {
         return this.faction;
     }
 
+    public void set_faction(String faction) {
+        this.faction = faction;
+    }
+
     public void set_armed(boolean i) {
         this.armed = i;
     }
