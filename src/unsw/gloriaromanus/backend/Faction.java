@@ -5,35 +5,24 @@ import java.util.ArrayList;
 import unsw.gloriaromanus.*;
 
 public class Faction {
-    private ArrayList<Province> provinces_belong = new ArrayList<Province>();
+    private ArrayList<Province> occupations = new ArrayList<Province>();
     private ArrayList<Faction> neighboors = new ArrayList<Faction>();
-    
     private Unit unit;
-    //private Road road;
+    private Road road;
     private boolean turn;
+    private String belong;
     private String name; 
-    private double treasure;
-    private double wealth;
+    private double trasure;
 
     public Faction() {
-<<<<<<< HEAD
-        this.unit = null;
-=======
         this.treasure = 50;
         this.wealth = 50;
     }
->>>>>>> origin/YZ_new
 
-    public void setWealth(){
-        for (Province p : provinces_belong){
-            wealth += p.getWealth();
-        }
-    }
 
     public void set_soldiers(int a, int b, int c) {
         
     }
-
     public String get_name() {
         return this.name;
     }
@@ -44,12 +33,12 @@ public class Faction {
         return soldiers;
     }
 
-    public ArrayList<Province> getProvinces() {
-        return this.provinces_belong;
+    public ArrayList<Province> get_occupations() {
+        return this.occupations;
     }
 
-    public void addProvince(Province province) {
-        this.provinces_belong.add(province);
+    public void addOccupations(Province occupation) {
+        this.occupations.add(occupation);
     }
 
     public ArrayList<Faction> get_neighboors() {
@@ -57,12 +46,12 @@ public class Faction {
     }
 
     public void set_neighboors(Faction neighboor) {
-        
+        //this.occupations.add(neighboor);
     }
 
     public void attack(Province enermy) {
         boolean occupied = false;
-        for (Province i : provinces_belong) {
+        for (Province i : occupations) {
             if (enermy.equals(i)) {
                 occupied = true;
             }
@@ -71,34 +60,20 @@ public class Faction {
         if (occupied = true) {
             return;
         }
+
+        
+
     }
 
 
     public void solicitTax(){
-        for (Province p: provinces_belong){
-            treasure += p.tributeTax();
+        for (Province p: occupations){
+            trasure += p.tributeTax();
         }
     }
 
     public double getTreasure(){
-        return this.treasure;
+        return this.trasure;
     }
 
-    public double getWealth(){
-        return this.wealth;
-    }
-
-
-    // this function will check if all the province have been conquered
-    
-
-    // This function will check if the treasury goal have been achieved
-    
-    
-    // This function will check if the wealth goal have been achieved
-    
-
-    public int getNumProvince(){
-        return provinces_belong.size();
-    }
 }
