@@ -1,8 +1,8 @@
 package unsw.gloriaromanus.backend;
 
 import java.util.ArrayList;
-import java.util.List;
-import unsw.gloriaromanus.*;
+//import java.util.List;
+//import unsw.gloriaromanus.*;
 import java.util.Random;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -11,7 +11,7 @@ public class Province {
     //private ArrayList<Infrastructure> infrastructures;
     private String name;
     private double wealth;
-    private ArrayList<Smith> smithes;
+    //private ArrayList<Smith> smithes;
     private Faction owner;
     private double taxRate;
     private ArrayList<Troop> troops = new ArrayList<Troop>();
@@ -54,7 +54,7 @@ public class Province {
         this.owner = owner;
         this.wealth = wealth;
         this.taxRate = tax; 
-        this.smithes = new ArrayList<Smith>();
+        //this.smithes = new ArrayList<Smith>();
         this.troops = new ArrayList<Troop>(); 
         this.Enermy_troops = new ArrayList<Troop>();
         this.my_units = new ArrayList<Unit>();
@@ -144,10 +144,10 @@ public class Province {
 
     // Each province can train at most two units of soldiers at the same time
     //recuit soldiers
-    public void recuit(String type, String name) {
+    //public void recuit(String type, String name) {
         //Soldier soldier = new Soldier(this.owner, type, name, this.name);
         
-    }
+    //}
 
     public void units_add() {
         
@@ -289,7 +289,7 @@ public class Province {
     
 
 
-    public String battle() {
+    public String battle(Faction me, Faction enermy) {
         String win = "draw";
         int count = 0;
 
@@ -299,10 +299,9 @@ public class Province {
         this.ablility_add();
         this.enermy_ablility_add();
 
-        //System.out.println("haha");
-        while (!this.my_units.isEmpty() || !this.enermy_units.isEmpty()) {
-            //System.out.println("haha");
 
+        while (!this.my_units.isEmpty() || !this.enermy_units.isEmpty()) {
+    
             Random rand = new Random();
             ArrayList<Unit> m_units = this.my_units;
             int randomIndex = rand.nextInt(m_units.size());
@@ -427,12 +426,15 @@ public class Province {
 
             if (this.my_units.isEmpty() && this.enermy_units.isEmpty()) {
                 win = "draw";
+                troops_return_back(this); 
                 return win;
             } else if (this.my_units.isEmpty()) {
                 win = "lose";
                 return win;
             } else if (this.enermy_units.isEmpty()) {
                 win = "win";
+                this.owner.getProvinces().remove(this);
+                this.owner = me;
                 return win;
             } 
     
@@ -444,6 +446,12 @@ public class Province {
         }
         return win;
         
+    }
+
+    public void troops_return_back(Province province) {
+        for (Troop t : province.get_my_troops()) {
+            t.get_province().get_my_troops().add(t);
+        }
     }
 
     public String unit_type(Unit unit) {
