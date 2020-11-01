@@ -5,6 +5,7 @@ import unsw.gloriaromanus.*;
 
 public class Systemcontrol implements TurnSubject{
     private Faction myFaction;
+    //private Faction enermyFaction;
     private ArrayList<Faction> enermyFactions = new ArrayList<Faction>();
     private int turn;
     private ArrayList<TurnObserver> observers = new ArrayList<TurnObserver>();
@@ -37,35 +38,47 @@ public class Systemcontrol implements TurnSubject{
         notifyobservers();
     }
 
-    public void movement(Troop troop, Province start, Province end) {
+    public boolean movement(Troop troop, Province start, Province end) {
+        boolean accept = true;
         String start_province = start.get_name();
         String destination = end.get_name();
         DPQ shortest_path = new DPQ();
         int movement_point_need = shortest_path.movement(start_province, destination, enermyFactions);
-        // to do
-        // if can arrive, update the province.
-        // if can't , raise error.
 
-    }
-
-    public void engage(String destination) {
-        String result = "draw";
-        for (Faction faction : enermyFactions) {
-            for (Province province : faction.getProvinces()) {
-                if (province.get_name().equals(destination)) {
-                    result = province.battle();
-                    break;
-                }
+        int minimum_movement_point = Integer.MAX_VALUE;
+        for (Unit unit : troop.get_soldiers()) {
+            if (unit.get_movementpoint() < minimum_movement_point) {
+                minimum_movement_point = unit.get_movementpoint();
             }
         }
-        // to do
-        // update the information for province
-        if (result.equals("win")) {
+        // if can arrive, update the province.
+        // if can't , return false.
+        if (minimum_movement_point < (movement_point_need * 4)) {
+            accept = false;
+            return accept;
+        }
 
-        } else if (result.equals("lose")) {
+        start.get_my_troops().remove(troop);
+        
+        end.get_my_troops().add(troop);
+        
+        if (movement_point_need == Integer.MAX_VALUE) {
+            accept = false;
+            return accept;
+        }
+        return accept;
+    }
 
-        } else {
-            // draw
+    public void engage(String enermy_faction, String destination) {
+        for (Faction enermyfaction : enermyFactions) {
+            if (enermyfaction.get_name().equals(enermy_faction)) {
+                for (Province province : enermyfaction.getProvinces()) {
+                    if (province.get_name().equals(destination)) {
+                        province.battle(myFaction, enermyfaction);
+                        break;
+                    }
+                }
+            }
         }
     }
 
