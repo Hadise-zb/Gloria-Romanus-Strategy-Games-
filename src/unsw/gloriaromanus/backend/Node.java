@@ -9,6 +9,16 @@ class Node implements Comparator<Node> {
 
     public int cost; 
 
+  
+    /*
+    public Node() 
+
+    { 
+
+    } 
+    */
+  
+
     public Node(int node, int cost) 
 
     { 
