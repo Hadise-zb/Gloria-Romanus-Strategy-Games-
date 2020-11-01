@@ -21,6 +21,12 @@ import java.math.RoundingMode;
 
 
 public class UnitTest{
+
+    @Test
+    public void blahTest(){
+        assertEquals("a", "a");
+    }
+
        
     @Test
     public void blahTest2(){
