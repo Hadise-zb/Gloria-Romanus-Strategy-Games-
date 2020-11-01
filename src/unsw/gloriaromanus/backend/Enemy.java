@@ -1,7 +1,8 @@
+/*
 package unsw.gloriaromanus.backend;
 
 import java.util.ArrayList;
-import unsw.gloriaromanus.*;
+//import unsw.gloriaromanus.*;
 
 public class Enemy {
     private Faction faction;
@@ -15,7 +16,7 @@ public class Enemy {
             Province.build();
             spendBuilding -= cost;
         }
-        */
+        
         //speedn on miltery
         //move troop
         //invade province
@@ -24,8 +25,8 @@ public class Enemy {
     }
     //design Observer design patter
     //province, soildier in province
-    public void Obsever() {
-        for (Faction faction: this.observers) {
+    //public void Obsever() {
+    //    for (Faction faction: this.observers) {
             //faction.getInformation();
         }
     }
@@ -38,4 +39,4 @@ public class Enemy {
     
 
 }
-
+*/
