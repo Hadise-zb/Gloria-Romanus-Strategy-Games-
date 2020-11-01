@@ -2,9 +2,6 @@ package unsw.gloriaromanus.backend;
 
 import java.util.ArrayList;
 import unsw.gloriaromanus.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
 
 public class Systemcontrol implements TurnSubject{
     private Faction myFaction;
