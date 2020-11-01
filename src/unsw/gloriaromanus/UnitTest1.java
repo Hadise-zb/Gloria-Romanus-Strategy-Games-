@@ -1,4 +1,3 @@
-/*
 package unsw.gloriaromanus;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -265,7 +264,23 @@ public class UnitTest1{
         my_province.get_my_troops().add(new_troop2);
         boolean accept2 = system.movement(new_troop, my_province, enermy_province2);
         assertEquals(accept2, false);
+    }*/
+
+    public static void main(String[] arg) throws ClassNotFoundException {
+        Faction owner = new Faction("Roman");;
+        Faction enermy = new Faction("Gallic");
+
+        Systemcontrol system = new Systemcontrol(owner);
+        system.set_enermy(enermy);
+
+        system.saveProgress();
+
+        owner.set_name("test_name");
+        
+        system.continueProgress();
+
+        assertEquals(system.get_myfaction().get_name(), "Roman");
     }
 }
-*/
+
 

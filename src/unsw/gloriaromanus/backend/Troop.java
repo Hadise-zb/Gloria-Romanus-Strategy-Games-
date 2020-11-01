@@ -15,10 +15,6 @@ public class Troop {
         this.current_province = province;
     }
 
-    public void move(Province destination) {
-        
-    }
-
     public Province get_province() {
         return this.current_province;
     }

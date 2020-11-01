@@ -311,6 +311,7 @@ public class UnitTest{
         Faction enermy = new Faction("Gallic");
 
         Systemcontrol system = new Systemcontrol(owner);
+        system.set_enermy(enermy);
 
         Province my_province = new Province("Britannia", owner, 50, 2.2);
         Province enermy_province = new Province("Belgica", owner, 50, 2.2);
@@ -333,6 +334,7 @@ public class UnitTest{
         Faction enermy = new Faction("Gallic");
 
         Systemcontrol system = new Systemcontrol(owner);
+        system.set_enermy(enermy);
 
         Province my_province = new Province("Britannia", owner, 50, 2.2);
         Province enermy_province = new Province("Belgica", owner, 50, 2.2);
@@ -358,6 +360,23 @@ public class UnitTest{
         // win this battle and the faction change to me
         assertEquals(enermy_province.getFaction(), owner);
         
+    }
+
+    @Test
+    public void testsave() throws ClassNotFoundException {
+        Faction owner = new Faction("Roman");;
+        Faction enermy = new Faction("Gallic");
+
+        Systemcontrol system = new Systemcontrol(owner);
+        system.set_enermy(enermy);
+
+        system.saveProgress();
+
+        owner.set_name("test_name");
+        
+        system.continueProgress();
+
+        assertEquals(owner.get_name(), "Roman");
     }
 
 
