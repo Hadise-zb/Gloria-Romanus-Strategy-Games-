@@ -6,10 +6,11 @@ import unsw.gloriaromanus.*;
 public class Faction implements TurnObserver{
     private ArrayList<Province> provinces_belong = new ArrayList<Province>();
     private ArrayList<Faction> neighboors = new ArrayList<Faction>();
+    private ArrayList<TrainingRequest> requests = new ArrayList<TrainingRequest>();
     
     private Unit unit;
     //private Road road;
-    private boolean turn;
+    //private int turn;
     private String name; 
     private double treasure;
     private double wealth;
@@ -21,6 +22,29 @@ public class Faction implements TurnObserver{
         this.name = name;
     }
 
+    public boolean requestTraining(Province p, Unit type, int numSoldiers, int turn){
+        int budget = type.training_budget(numSoldiers);
+
+        // check if this faction have enough balance
+        if (budget > this.treasure) return false;
+        if (!p.trainingSlot_available()) return false;
+        
+        else {
+            treasure -= budget;
+            TrainingRequest newReuest = new TrainingRequest(p, type, numSoldiers, turn);
+            requests.add(newReuest);
+            p.occupyTrainningSlot(type);
+            return true;
+        }
+    }
+
+    public void addRequest(TrainingRequest request){
+        requests.add(request);
+    }
+
+    public void rmRequest(TrainingRequest request){
+        requests.remove(request);
+    }
 
     public void setWealth(){
         for (Province p : provinces_belong){
@@ -101,11 +125,27 @@ public class Faction implements TurnObserver{
     }
 
     @Override
-    public void update(){
+    public void update(int turn){
+
+        // update the wealth
         for (Province p : provinces_belong){
             p.solicitTownWealth();
         }
         this.solicitTax();
         this.setWealth();
+
+        // update the training soldiers
+        for (TrainingRequest r : requests){
+            if (r.getFinishTurn() == turn){
+                // check if the province occupied
+                if (!provinces_belong.contains(r.getProvince())){
+                    rmRequest(r);
+                }
+                else{
+                    r.vocateTrainingSlot();
+                    r.sentTrainedSoldier();
+                }
+            }
+        }
     }
 }

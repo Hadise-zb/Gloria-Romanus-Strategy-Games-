@@ -25,7 +25,7 @@ public class Systemcontrol implements TurnSubject{
     @Override
     public void notifyobservers(){
         for (TurnObserver o : observers){
-            o.update();
+            o.update(this.turn);
         }
     }
 
@@ -55,7 +55,7 @@ public class Systemcontrol implements TurnSubject{
         String result = "draw";
         for (Faction faction : enermyFactions) {
             for (Province province : faction.getProvinces()) {
-                if (province.get_name().equal(destination)) {
+                if (province.get_name().equals(destination)) {
                     result = province.battle();
                     break;
                 }
@@ -122,32 +122,22 @@ public class Systemcontrol implements TurnSubject{
         return newGoal.goalAchieved();
     }
 
+    public int getTurn(){
+        return this.turn;
+    }
 
     public static void main(String[] args){
-        Faction my_faction = new Faction("");
+        Faction my_faction = new Faction("AUSTRALIA");
         Systemcontrol testSystem = new Systemcontrol(my_faction);
         Province p = new Province("NSW", my_faction, 0, 0.1);
         testSystem.attach(my_faction);
-        my_faction.addProvince(p);  
+        my_faction.addProvince(p);
 
-        p.addTown();
-        p.addTown();
-        assertEquals(my_faction.getWealth(), 0);
-        assertEquals(my_faction.getTreasure(), 50);
-
-        testSystem.endTurn();
-
-        assertEquals(my_faction.getWealth(), 18);
-        assertEquals(my_faction.getTreasure(), 52);
-
-        testSystem.endTurn();
-
-        assertEquals(my_faction.getWealth(), 34.2);
-        assertEquals(my_faction.getTreasure(), 55.8);
-
-        testSystem.endTurn();
-        assertEquals(my_faction.getWealth(), 48.78);
-        assertEquals(my_faction.getTreasure(), 61.22);
+        Unit new_unit = new Unit("legionary", "AUSTRALIA", "Cavalry");
+        my_faction.requestTraining(p, new_unit, 5, testSystem.getTurn());
+        
+        //testSystem.endTurn();
+        System.out.println(p.getUnit());
     }
 
 

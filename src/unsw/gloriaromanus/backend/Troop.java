@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class Troop {
     private String faction;
     private String name;
-    private ArrayList<Unit> units;
+    private ArrayList<Unit> units =  new ArrayList<Unit>();
     private Province current_province;
     
 
     public Troop(String faction) {
-        this.units = new ArrayList<Unit>();
+        this.faction = faction;
     }
 
     public void move(Province destination) {
@@ -29,6 +29,10 @@ public class Troop {
         for (Unit u : units){
             u.decreaseMorale();
         }
+    }
+
+    public void addUnit(Unit u){
+        units.add(u);
     }
     
 }
