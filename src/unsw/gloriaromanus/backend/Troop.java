@@ -10,6 +10,7 @@ public class Troop {
     
 
     public Troop(String faction) {
+        this.units = new ArrayList<Unit>();
         this.faction = faction;
     }
 
