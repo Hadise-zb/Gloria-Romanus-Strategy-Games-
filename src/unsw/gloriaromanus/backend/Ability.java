@@ -91,7 +91,7 @@ public class Ability {
     }
 
     public void Heroic_charge(Unit soldier) {
-        soldier.set_attack(soldier.get_attack() * 2);
+        soldier.set_charge(soldier.get_charge() * 2);
         soldier.set_morale(soldier.get_morale() * 1.5);
     }
     public Whole_army_bonus Elephants_running_amok_add(Unit soldier) {

@@ -29,7 +29,7 @@ public class Systemcontrol implements TurnSubject{
         }
     }
 
-    public void movement(Province start, Province end) {
+    public void movement(Troop troop, Province start, Province end) {
         String start_province = start.get_name();
         String destination = end.get_name();
         DPQ shortest_path = new DPQ();
