@@ -90,4 +90,8 @@ public class Soldier {
 
     }
 
+    public void recruit(){
+        
+    }
+
 }

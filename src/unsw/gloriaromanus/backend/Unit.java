@@ -22,17 +22,15 @@ import org.json.*;
  * armour and morale)
  */
 public class Unit {
-    private String category;
-    private double numSoldiers; // the number of troops in this unit (should reduce based on depletion)
-    private int range; // range of the unit
-    private double armour; // armour defense
-    private double morale; // resistance to fleeing
+    private double numSoldiers; 
+    private int range; 
+    private double armour;
+    private double morale; 
     private int helmet;
-    private double speed; // ability to disengage from disadvantageous battle
-    private double attack; // can be either missile or melee attack to simplify. Could improve
-                   // implementation by differentiating!
-    private int defenseSkill; // skill to defend in battle. Does not protect from arrows!
-    private int shieldDefense; // a shield
+    private double speed; 
+    private double attack;
+    private int defenseSkill; 
+    private int shieldDefense;
     private int movementpoints;
     private String unit_name;
     private ArrayList<Ability> abilities;
@@ -41,31 +39,150 @@ public class Unit {
     private String name;
     private Double defence;
     private Double shield;
-    private boolean training_completed;
     private int engagments;
     private String province;
     private int cost;
     private String faction;
     private double charge;
-    
+    private int trainingTurns;
+
     // maybe used in each soldier.
     private Double blood_volume;
 
 
 
-    public Unit(String name) {
-        this.unit_name = name;
-        this.name = name;
-        this.defence = 5.0;
-        this.morale = 5.0;
-        this.attack = 5.0;
-        this.speed = 2;
-        this.armour = 5;
-        this.numSoldiers = 5;
+    public Unit(String name, String faction, String category) {
+        if (name.equals("legionary")) {
+            this.faction = faction;
+            this.unit_name = name;
+            this.name = name;
+            this.defence = 5.0;
+            this.morale = 5.0;
+            this.attack = 5.0;
+            this.speed = 2;
+            this.armour = 5;
+            this.numSoldiers = 0;
+            this.trainingTurns = 1;
+        } else if (name.equals("berserker")) {
+            this.faction = faction;
+            this.unit_name = name;
+            this.name = name;
+            this.defence = 5.0;
+            this.morale = 0;
+            this.attack = 10.0;
+            this.speed = 2;
+            this.armour = 0;
+            this.numSoldiers = 0;
+            this.trainingTurns = 2;
+        } else if (name.equals("melee cavalry")) {
+            this.faction = faction;
+            this.unit_name = name;
+            this.name = name;
+            this.defence = 5.0;
+            this.morale = 5.0;
+            this.attack = 6.0;
+            this.speed = 7;
+            this.armour = 5;
+            this.numSoldiers = 0;
+            this.trainingTurns = 3;
+        } else if (name.equals("pikemen")) {
+            this.faction = faction;
+            this.unit_name = name;
+            this.name = name;
+            this.defence = 5.0;
+            this.morale = 5.0;
+            this.attack = 5.0;
+            this.speed = 2;
+            this.armour = 5;
+            this.numSoldiers = 0;
+            this.trainingTurns = 4;
+        } else if (name.equals("hoplite")) {
+            this.faction = faction;
+            this.unit_name = name;
+            this.name = name;
+            this.defence = 5.0;
+            this.morale = 5.0;
+            this.attack = 5.0;
+            this.speed = 2;
+            this.armour = 5;
+            this.numSoldiers = 0;
+            this.trainingTurns = 3;
+        } else if (name.equals("javelin skirmisher")) {
+            this.faction = faction;
+            this.unit_name = name;
+            this.name = name;
+            this.defence = 5.0;
+            this.morale = 5.0;
+            this.attack = 5.0;
+            this.speed = 2;
+            this.armour = 5;
+            this.numSoldiers = 0;
+            this.trainingTurns = 2;
+        } else if (name.equals("elephant")) {
+            this.faction = faction;
+            this.unit_name = name;
+            this.name = name;
+            this.defence = 5.0;
+            this.morale = 5.0;
+            this.attack = 5.0;
+            this.speed = 2;
+            this.armour = 5;
+            this.numSoldiers = 0;
+            this.trainingTurns = 1;
+        } else if (name.equals("horse archer")) {
+            this.faction = faction;
+            this.unit_name = name;
+            this.name = name;
+            this.defence = 5.0;
+            this.morale = 5.0;
+            this.attack = 5.0;
+            this.speed = 2;
+            this.armour = 5;
+            this.numSoldiers = 0;
+            this.trainingTurns = 6;
+        } else if (name.equals("druid")) {
+            this.faction = faction;
+            this.unit_name = name;
+            this.name = name;
+            this.defence = 5.0;
+            this.morale = 5.0;
+            this.attack = 5.0;
+            this.speed = 2;
+            this.armour = 5;
+            this.numSoldiers = 0;
+            this.trainingTurns = 1;
+        } else if (name.equals("melee infantry")) {
+            this.faction = faction;
+            this.unit_name = name;
+            this.name = name;
+            this.defence = 5.0;
+            this.morale = 5.0;
+            this.attack = 5.0;
+            this.speed = 2;
+            this.armour = 5;
+            this.numSoldiers = 0;
+            this.trainingTurns = 5;
+        }
+
+        if (category.equals("Cavalry")) {
+            this.movementpoints = 15;
+        } else if (category.equals("Infantry")) {
+            this.movementpoints = 10;
+        } else if (category.equals("Artillery")) {
+            this.movementpoints = 4;
+        }
+    }
+
+    public int getTrainingTurn(){
+        return this.trainingTurns;
+    }
+
+    public int training_budget(int num){
+        return (num*this.cost);
     }
 
     public double get_shield() {
-        return this.charge;
+        return this.shield;
     }
 
     public void set_shield(double shield) {
@@ -79,19 +196,6 @@ public class Unit {
     public void set_charge(double charge) {
         this.charge = charge;
     }
-
-    /*
-    public static void main(String[] arg){
-        String name = "skirmishers";
-        Unit new_unit = new Unit(name);
-        assert(new_unit.getNumSoldiers()==20);
-        //System.out.println(new_unit.getNumSoldiers());
-
-        Unit x = new Unit("heavy infantry");
-        //System.out.println(x.getNumSoldiers());
-        assertEquals(x.getNumSoldiers(), 5);
-    }
-    */
 
     public double get_blood() {
         return this.blood_volume;

@@ -17,8 +17,32 @@ public class Province {
     private int numTown;
     private boolean engaged;
 
+    // When the soldiers are trainned, they will be sent to the localtroop
+    private ArrayList<Unit> units = new ArrayList<Unit>();
+
     private double nextNextGaussian;
     private boolean haveNextNextGaussian = false;
+
+    private ArrayList<Unit> trainingSlots = new ArrayList<Unit>();
+    
+    public Faction getFaction(){
+        return owner;
+    }
+
+
+    public boolean trainingSlot_available(){
+        if (trainingSlots.size()<2) return true;
+        else return false;
+    }
+
+    public void occupyTrainningSlot(Unit u){
+        if (!trainingSlots.contains(u)) trainingSlots.add(u);
+    }
+
+    public void vocateTrainingSlot(Unit u){
+        if (trainingSlots.contains(u)) trainingSlots.remove(u);    
+    }
+
 
     public Province(String name, Faction owner, int wealth, Double tax) {
         this.name = name;
@@ -26,12 +50,24 @@ public class Province {
         this.wealth = wealth;
         this.taxRate = tax; 
         this.smithes = new ArrayList<Smith>();
-        //this.buildings = new ArrayList<Building>();
         this.troops = new ArrayList<Troop>(); 
         this.Enermy_troops = new ArrayList<Troop>();
         this.numTown = 0;
         this.engaged = false;
     }
+
+    public void adjustTaxRate(double rate){
+        this.taxRate = rate;
+    }
+
+    public void addUnit(Unit u){
+        this.units.add(u);
+    }
+
+    public ArrayList<Unit> getUnit(){
+        return units;
+    }
+
 
     public String get_name() {
         return this.name;
@@ -96,14 +132,6 @@ public class Province {
         double tax = (taxRate*wealth);
         wealth = wealth - (taxRate*wealth);
         return tax;
-    }
-
-
-    // Each province can train at most two units of soldiers at the same time
-    //recuit soldiers
-    public void recuit(String type, String name) {
-        //Soldier soldier = new Soldier(this.owner, type, name, this.name);
-        
     }
 
     // add ablities to soldiers

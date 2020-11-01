@@ -46,7 +46,6 @@ public class DPQ {
             for (Province p : f.getProvinces()) {
                 enermy_pro.add(p.get_name());
             }
-            
         }
         
         try {
