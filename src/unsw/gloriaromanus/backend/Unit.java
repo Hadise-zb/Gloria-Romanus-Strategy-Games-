@@ -2,13 +2,13 @@ package unsw.gloriaromanus.backend;
 
 //import java.io.*; 
 import java.util.ArrayList;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import unsw.gloriaromanus.*;
-import org.json.*;
+//import java.io.IOException;
+//import java.nio.file.Files;
+//import java.nio.file.Paths;
+//import org.junit.jupiter.api.Test;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+//import unsw.gloriaromanus.*;
+//import org.json.*;
 
 /**
  * Represents a basic unit of soldiers
@@ -23,6 +23,7 @@ import org.json.*;
  */
 public class Unit {
     private double numSoldiers; 
+    private String category;
     private int range; 
     private double armour;
     private double morale; 
@@ -42,7 +43,6 @@ public class Unit {
     private String name;
     private Double defence;
     private Double shield;
-    //private boolean training_completed;
     private int engagments;
     private String province;
     private int cost;
@@ -56,10 +56,12 @@ public class Unit {
 
 
     public Unit(String name, String faction, String category) {
+        
+        this.faction = faction;
+        this.unit_name = name;
+        this.name = name;
+
         if (name.equals("legionary")) {
-            this.faction = faction;
-            this.unit_name = name;
-            this.name = name;
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
@@ -70,9 +72,6 @@ public class Unit {
             this.charge = 2;
             this.shield = 10.0;
         } else if (name.equals("berserker")) {
-            this.faction = faction;
-            this.unit_name = name;
-            this.name = name;
             this.defence = 5.0;
             this.morale = 0;
             this.attack = 10.0;
@@ -83,9 +82,6 @@ public class Unit {
             this.charge = 2;
             this.shield = 0.0;
         } else if (name.equals("melee cavalry")) {
-            this.faction = faction;
-            this.unit_name = name;
-            this.name = name;
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 6.0;
@@ -96,9 +92,6 @@ public class Unit {
             this.charge = 5;
             this.shield = 10.0;
         } else if (name.equals("pikemen")) {
-            this.faction = faction;
-            this.unit_name = name;
-            this.name = name;
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
@@ -109,9 +102,6 @@ public class Unit {
             this.charge = 2;
             this.shield = 10.0;
         } else if (name.equals("hoplite")) {
-            this.faction = faction;
-            this.unit_name = name;
-            this.name = name;
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
@@ -122,9 +112,6 @@ public class Unit {
             this.charge = 2;
             this.shield = 10.0;
         } else if (name.equals("javelin skirmisher")) {
-            this.faction = faction;
-            this.unit_name = name;
-            this.name = name;
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
@@ -135,9 +122,6 @@ public class Unit {
             this.charge = 2;
             this.shield = 10.0;
         } else if (name.equals("elephant")) {
-            this.faction = faction;
-            this.unit_name = name;
-            this.name = name;
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
@@ -148,9 +132,6 @@ public class Unit {
             this.charge = 2;
             this.shield = 10.0;
         } else if (name.equals("horse archer")) {
-            this.faction = faction;
-            this.unit_name = name;
-            this.name = name;
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
@@ -161,9 +142,6 @@ public class Unit {
             this.charge = 2;
             this.shield = 10.0;
         } else if (name.equals("druid")) {
-            this.faction = faction;
-            this.unit_name = name;
-            this.name = name;
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
@@ -174,9 +152,6 @@ public class Unit {
             this.charge = 2;
             this.shield = 10.0;
         } else if (name.equals("melee infantry")) {
-            this.faction = faction;
-            this.unit_name = name;
-            this.name = name;
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
@@ -184,18 +159,10 @@ public class Unit {
             this.armour = 5;
             this.numSoldiers = 0;
             this.trainingTurns = 5;
-        }
-
-        if (category.equals("Cavalry")) {
-            this.movementpoints = 15;
-        } else if (category.equals("Infantry")) {
-            this.movementpoints = 10;
-        } else if (category.equals("Artillery")) {
-            this.movementpoints = 4;
             this.charge = 2;
             this.shield = 10.0;
         }
-
+        this.category = category;
         if (category.equals("Cavalry")) {
             this.movementpoints = 15;
         } else if (category.equals("Infantry")) {
@@ -203,6 +170,7 @@ public class Unit {
         } else if (category.equals("Artillery")) {
             this.movementpoints = 4;
         }
+
         /*
         try {
             JSONObject new_unit = new JSONObject(
@@ -226,6 +194,10 @@ public class Unit {
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }*/
+    }
+
+    public int get_movementpoint() {
+        return this.movementpoints;
     }
 
     public int getTrainingTurn(){

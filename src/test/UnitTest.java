@@ -3,18 +3,18 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+//import org.junit.jupiter.params.ParameterizedTest;
+//import org.junit.jupiter.params.provider.ValueSource;
+//import org.junit.jupiter.api.Test;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import unsw.gloriaromanus.*;
 import unsw.gloriaromanus.backend.*;
-import org.json.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+//import org.json.*;
+//import java.nio.file.Files;
+//import java.nio.file.Paths;
 import unsw.gloriaromanus.backend.Systemcontrol;
-import unsw.gloriaromanus.backend.Systemcontrol;
+//import unsw.gloriaromanus.backend.Systemcontrol;
 import java.lang.Math;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -28,7 +28,7 @@ public class UnitTest{
         //System.out.println(u.getNumTroops());
         assertEquals(u.getNumSoldiers(), 0);
     }
-    /*
+
     @Test
     public void RoadTest(){
         No_road x = new No_road();
@@ -49,7 +49,6 @@ public class UnitTest{
     Treasure: 50;
     Wealth: 0;
     */
-    /*
     @Test
     public void wealthTest_esssential(){
         // Test for essential methods in wealth and tax part
@@ -149,8 +148,8 @@ public class UnitTest{
         Unit Roman_pikemen = new Unit("pikemen", "Roman", "Cavalry");
         Unit Gallic_berserker = new Unit("berserker", "Gallic", "Cavalry");
 
-        Troop new_troop = new Troop(owner.get_name());
-        Troop enermy_troop = new Troop(enermy.get_name());
+        Troop new_troop = new Troop(owner, province);
+        Troop enermy_troop = new Troop(enermy, province);
         
         new_troop.get_soldiers().add(Roman_legionary);
         new_troop.get_soldiers().add(Roman_pikemen);
@@ -208,31 +207,28 @@ public class UnitTest{
         Province province = new Province("Britannia", owner, 50, 2.2);
         
         Unit horse_archer = new Unit("horse archer", "Roman", "Cavalry");
-        //Unit Druidic = new Unit("Druidic fervour", "Roman", "Cavalry");
-        //Unit Roman_melee_cavalry = new Unit("melee cavalry", "Roman", "Cavalry");
+        
         Unit melee_infantry = new Unit("melee infantry", "Gallic", "Cavalry");
         //Unit Roman_elephant = new Unit("Shield charge", "Gallic", "Cavalry");
         
-        // set enermy 50 numbers, which is higher than the double of my armies
+        // set the same numbers, but melee_infantry is stronger, so I will lose this battle
         horse_archer.setNumSoldiers(10);
         melee_infantry.setNumSoldiers(10);
 
-        Troop new_troop = new Troop(owner.get_name());
-        Troop enermy_troop = new Troop(enermy.get_name());
+        Troop new_troop = new Troop(owner, province);
+        Troop enermy_troop = new Troop(enermy, province);
         
         new_troop.get_soldiers().add(horse_archer);
         enermy_troop.get_soldiers().add(melee_infantry);
-        //new_troop.get_soldiers().add(Roman_melee_cavalry);
-
+    
         province.get_my_troops().add(new_troop);
         province.get_enermy_troops().add(enermy_troop);
 
         owner.getProvinces().add(province);
 
-        String result = province.battle();
+        String result = province.battle(owner, enermy);
 
         assertEquals(result, "lose"); 
-        //System.out.println(result);
     }
 
     @Test
@@ -248,19 +244,26 @@ public class UnitTest{
         Unit Roman_melee_cavalry = new Unit("melee cavalry", "Roman", "Cavalry");
         Unit druid = new Unit("druid", "Roman", "Cavalry");
         Unit Gallic_berserker = new Unit("berserker", "Gallic", "Cavalry");
+        // add more elephant to increase the probability.
         Unit Roman_elephant = new Unit("elephant", "Gallic", "Cavalry");
+        Unit Roman_elephant2 = new Unit("elephant", "Gallic", "Cavalry");
+        Unit Roman_elephant3 = new Unit("elephant", "Gallic", "Cavalry");
+        Unit Roman_elephant4 = new Unit("elephant", "Gallic", "Cavalry");
         
         // set enermy 50 numbers, which is higher than the double of my armies
         Gallic_berserker.setNumSoldiers(50);
         druid.setNumSoldiers(1);
 
-        Troop new_troop = new Troop(owner.get_name());
-        Troop enermy_troop = new Troop(enermy.get_name());
+        Troop new_troop = new Troop(owner, province);
+        Troop enermy_troop = new Troop(enermy, province);
         
         new_troop.get_soldiers().add(Roman_legionary);
         new_troop.get_soldiers().add(Roman_pikemen);
         new_troop.get_soldiers().add(Roman_melee_cavalry);
         new_troop.get_soldiers().add(Roman_elephant);
+        new_troop.get_soldiers().add(Roman_elephant2);
+        new_troop.get_soldiers().add(Roman_elephant3);
+        new_troop.get_soldiers().add(Roman_elephant4);
         
     
         enermy_troop.get_soldiers().add(Gallic_berserker);
@@ -301,7 +304,63 @@ public class UnitTest{
         double improved_morale = bd.doubleValue();
         assertEquals(improved_morale, 7.7);
     }
-    */
+
+    @Test
+    public void testmovement(){
+        Faction owner = new Faction("Roman");
+        Faction enermy = new Faction("Gallic");
+
+        Systemcontrol system = new Systemcontrol(owner);
+
+        Province my_province = new Province("Britannia", owner, 50, 2.2);
+        Province enermy_province = new Province("Belgica", owner, 50, 2.2);
+        Province enermy_province2 = new Province("Lugdunensis", owner, 50, 2.2);
+
+        Troop new_troop = new Troop(owner, my_province);
+        Troop new_troop2 = new Troop(owner, my_province);
+        my_province.get_my_troops().add(new_troop);
+
+        boolean accept = system.movement(new_troop, my_province, enermy_province);
+        assertEquals(accept, false);
+        my_province.get_my_troops().add(new_troop2);
+        boolean accept2 = system.movement(new_troop, my_province, enermy_province2);
+        assertEquals(accept2, false);
+    }
+
+    @Test
+    public void testenagege(){
+        Faction owner = new Faction("Roman");
+        Faction enermy = new Faction("Gallic");
+
+        Systemcontrol system = new Systemcontrol(owner);
+
+        Province my_province = new Province("Britannia", owner, 50, 2.2);
+        Province enermy_province = new Province("Belgica", owner, 50, 2.2);
+        
+        Unit horse_archer = new Unit("horse archer", "Roman", "Cavalry");
+        
+        Unit melee_infantry = new Unit("melee infantry", "Gallic", "Cavalry");
+        
+        // set my soldiers 30 and enermy 10, I will win the battle
+        horse_archer.setNumSoldiers(30);
+        melee_infantry.setNumSoldiers(10);
+
+        Troop new_troop = new Troop(owner, my_province);
+        Troop enermy_troop = new Troop(enermy, enermy_province);
+        
+        new_troop.get_soldiers().add(horse_archer);
+        enermy_troop.get_soldiers().add(melee_infantry);
+
+        enermy_province.get_my_troops().add(new_troop);
+        enermy_province.get_enermy_troops().add(enermy_troop);
+
+        system.engage(enermy.get_name(), enermy_province.get_name());
+        // win this battle and the faction change to me
+        assertEquals(enermy_province.getFaction(), owner);
+        
+    }
+
+
 
 
 }

@@ -1,3 +1,4 @@
+/*
 package unsw.gloriaromanus;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ import org.json.*;
  * 
  * current version represents a heavy infantry unit (almost no range, decent
  * armour and morale)
- */
+ *//*
 public class Unit2 {
     private String category;
     private int numSoldiers; // the number of troops in this unit (should reduce based on depletion)
@@ -100,3 +101,4 @@ public class Unit2 {
         assertEquals(x.getNumTroops(), 50);
     }
 }
+*/

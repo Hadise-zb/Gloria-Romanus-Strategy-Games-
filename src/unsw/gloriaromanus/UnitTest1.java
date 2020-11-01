@@ -1,3 +1,4 @@
+/*
 package unsw.gloriaromanus;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -210,7 +211,7 @@ public class UnitTest1{
         assertEquals(improved_morale, 7.7);
     }
     */
-
+/*
     public static void main(String[] arg) {
         Faction owner = new Faction("Roman");
         Faction enermy = new Faction("Gallic");
@@ -244,6 +245,27 @@ public class UnitTest1{
         assertEquals(result, "lose"); 
         //System.out.println(result);
 
+    }*//*
+    public static void main(String[] arg) {
+        Faction owner = new Faction("Roman");
+        Faction enermy = new Faction("Gallic");
+
+        Systemcontrol system = new Systemcontrol(owner);
+
+        Province my_province = new Province("Britannia", owner, 50, 2.2);
+        Province enermy_province = new Province("Belgica", owner, 50, 2.2);
+        Province enermy_province2 = new Province("Lugdunensis", owner, 50, 2.2);
+
+        Troop new_troop = new Troop(owner, my_province);
+        Troop new_troop2 = new Troop(owner, my_province);
+        my_province.get_my_troops().add(new_troop);
+
+        boolean accept = system.movement(new_troop, my_province, enermy_province);
+        assertEquals(accept, false);
+        my_province.get_my_troops().add(new_troop2);
+        boolean accept2 = system.movement(new_troop, my_province, enermy_province2);
+        assertEquals(accept2, false);
     }
 }
+*/
 
