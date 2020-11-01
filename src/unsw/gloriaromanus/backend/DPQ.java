@@ -36,12 +36,11 @@ public class DPQ {
   
     // Function for Dijkstra's Algorithm 
 
-    public int movement(String start, String end, ArrayList<Faction> enemry) {
+    public int movement(String start, String end, Faction enermy) {
         ArrayList<String> enermy_pro = new ArrayList<String>();
-        for (Faction f : enemry) {
-            for (Province p : f.getProvinces()) {
-                enermy_pro.add(p.get_name());
-            }
+        
+        for (Province p : enermy.getProvinces()) {
+            enermy_pro.add(p.get_name());
         }
         
         try {

@@ -52,12 +52,12 @@ public class Faction implements TurnObserver{
         }
     }
 
-    public void set_soldiers(int a, int b, int c) {
-        
-    }
-
     public String get_name() {
         return this.name;
+    }
+
+    public void set_name(String name) {
+        this.name = name;
     }
 
     public ArrayList<Unit> get_soldiers() {
