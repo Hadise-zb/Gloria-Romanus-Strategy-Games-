@@ -64,6 +64,8 @@ public class Unit {
             this.speed = 2;
             this.armour = 5;
             this.numSoldiers = 0;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("berserker")) {
             this.faction = faction;
             this.unit_name = name;
@@ -74,6 +76,8 @@ public class Unit {
             this.speed = 2;
             this.armour = 0;
             this.numSoldiers = 0;
+            this.charge = 2;
+            this.shield = 0.0;
         } else if (name.equals("melee cavalry")) {
             this.faction = faction;
             this.unit_name = name;
@@ -84,6 +88,8 @@ public class Unit {
             this.speed = 7;
             this.armour = 5;
             this.numSoldiers = 0;
+            this.charge = 5;
+            this.shield = 10.0;
         } else if (name.equals("pikemen")) {
             this.faction = faction;
             this.unit_name = name;
@@ -94,6 +100,8 @@ public class Unit {
             this.speed = 2;
             this.armour = 5;
             this.numSoldiers = 0;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("hoplite")) {
             this.faction = faction;
             this.unit_name = name;
@@ -104,6 +112,8 @@ public class Unit {
             this.speed = 2;
             this.armour = 5;
             this.numSoldiers = 0;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("javelin skirmisher")) {
             this.faction = faction;
             this.unit_name = name;
@@ -114,6 +124,8 @@ public class Unit {
             this.speed = 2;
             this.armour = 5;
             this.numSoldiers = 0;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("elephant")) {
             this.faction = faction;
             this.unit_name = name;
@@ -124,6 +136,8 @@ public class Unit {
             this.speed = 2;
             this.armour = 5;
             this.numSoldiers = 0;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("horse archer")) {
             this.faction = faction;
             this.unit_name = name;
@@ -134,6 +148,8 @@ public class Unit {
             this.speed = 2;
             this.armour = 5;
             this.numSoldiers = 0;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("druid")) {
             this.faction = faction;
             this.unit_name = name;
@@ -144,6 +160,8 @@ public class Unit {
             this.speed = 2;
             this.armour = 5;
             this.numSoldiers = 0;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("melee infantry")) {
             this.faction = faction;
             this.unit_name = name;
@@ -154,6 +172,8 @@ public class Unit {
             this.speed = 2;
             this.armour = 5;
             this.numSoldiers = 0;
+            this.charge = 2;
+            this.shield = 10.0;
         }
 
         if (category.equals("Cavalry")) {
