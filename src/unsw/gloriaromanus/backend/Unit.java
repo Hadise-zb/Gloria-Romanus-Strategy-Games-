@@ -27,10 +27,13 @@ public class Unit {
     private double armour;
     private double morale; 
     private int helmet;
-    private double speed; 
-    private double attack;
     private int defenseSkill; 
     private int shieldDefense;
+    private double speed; // ability to disengage from disadvantageous battle
+    private double attack; // can be either missile or melee attack to simplify. Could improve
+                   // implementation by differentiating!
+    //private int defenseSkill; // skill to defend in battle. Does not protect from arrows!
+    //private int shieldDefense; // a shield
     private int movementpoints;
     private String unit_name;
     private ArrayList<Ability> abilities;
@@ -39,6 +42,7 @@ public class Unit {
     private String name;
     private Double defence;
     private Double shield;
+    //private boolean training_completed;
     private int engagments;
     private String province;
     private int cost;
@@ -63,6 +67,8 @@ public class Unit {
             this.armour = 5;
             this.numSoldiers = 0;
             this.trainingTurns = 1;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("berserker")) {
             this.faction = faction;
             this.unit_name = name;
@@ -74,6 +80,8 @@ public class Unit {
             this.armour = 0;
             this.numSoldiers = 0;
             this.trainingTurns = 2;
+            this.charge = 2;
+            this.shield = 0.0;
         } else if (name.equals("melee cavalry")) {
             this.faction = faction;
             this.unit_name = name;
@@ -85,6 +93,8 @@ public class Unit {
             this.armour = 5;
             this.numSoldiers = 0;
             this.trainingTurns = 3;
+            this.charge = 5;
+            this.shield = 10.0;
         } else if (name.equals("pikemen")) {
             this.faction = faction;
             this.unit_name = name;
@@ -96,6 +106,8 @@ public class Unit {
             this.armour = 5;
             this.numSoldiers = 0;
             this.trainingTurns = 4;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("hoplite")) {
             this.faction = faction;
             this.unit_name = name;
@@ -107,6 +119,8 @@ public class Unit {
             this.armour = 5;
             this.numSoldiers = 0;
             this.trainingTurns = 3;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("javelin skirmisher")) {
             this.faction = faction;
             this.unit_name = name;
@@ -118,6 +132,8 @@ public class Unit {
             this.armour = 5;
             this.numSoldiers = 0;
             this.trainingTurns = 2;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("elephant")) {
             this.faction = faction;
             this.unit_name = name;
@@ -129,6 +145,8 @@ public class Unit {
             this.armour = 5;
             this.numSoldiers = 0;
             this.trainingTurns = 1;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("horse archer")) {
             this.faction = faction;
             this.unit_name = name;
@@ -140,6 +158,8 @@ public class Unit {
             this.armour = 5;
             this.numSoldiers = 0;
             this.trainingTurns = 6;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("druid")) {
             this.faction = faction;
             this.unit_name = name;
@@ -151,6 +171,8 @@ public class Unit {
             this.armour = 5;
             this.numSoldiers = 0;
             this.trainingTurns = 1;
+            this.charge = 2;
+            this.shield = 10.0;
         } else if (name.equals("melee infantry")) {
             this.faction = faction;
             this.unit_name = name;
@@ -170,7 +192,40 @@ public class Unit {
             this.movementpoints = 10;
         } else if (category.equals("Artillery")) {
             this.movementpoints = 4;
+            this.charge = 2;
+            this.shield = 10.0;
         }
+
+        if (category.equals("Cavalry")) {
+            this.movementpoints = 15;
+        } else if (category.equals("Infantry")) {
+            this.movementpoints = 10;
+        } else if (category.equals("Artillery")) {
+            this.movementpoints = 4;
+        }
+        /*
+        try {
+            JSONObject new_unit = new JSONObject(
+                    Files.readString(Paths.get("src/unsw/gloriaromanus/Unit_values.json")));
+            
+            JSONObject chosen_unit = new_unit.getJSONObject(name);
+            //this.category = chosen_unit.getString("category");
+            this.numSoldiers = chosen_unit.getInt("numTroops");
+            this.armour = 1;
+            //this.armour = chosen_unit.getInt("armour");
+            this.attack = chosen_unit.getInt("attack");
+            this.defenseSkill = chosen_unit.getInt("defenseSkill");
+            this.morale = chosen_unit.getInt("morale");
+            this.movementpoints = chosen_unit.getInt("movementpoints");
+            this.range = chosen_unit.getInt("range");
+            this.shieldDefense = chosen_unit.getInt("shieldDefense");
+            this.helmet = 0;
+            this.charge = 0;
+            this.shield = 0.0;
+
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }*/
     }
 
     public int getTrainingTurn(){
