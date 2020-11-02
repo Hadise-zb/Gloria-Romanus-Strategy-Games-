@@ -8,8 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.io.FileNotFoundException;
+//import java.io.Serializable;
+//import java.io.FileNotFoundException;
 
 //import org.junit.jupiter.api.Test;
 
@@ -55,6 +55,7 @@ public class Systemcontrol implements TurnSubject{
     public Faction get_myfaction() {
         return this.myFaction;
     }
+
     public boolean movement(Troop troop, Province start, Province end) {
         boolean accept = true;
         String start_province = start.get_name();
@@ -110,15 +111,15 @@ public class Systemcontrol implements TurnSubject{
         }
     }
 
-    public void continueProgress() throws ClassNotFoundException {
+    public void continueProgress() {
         try {
             this.myFaction = my_readfile();
-        } catch (IOException e) {
+        } catch (ClassNotFoundException | IOException e) {
             System.out.println(e.getMessage());
         }
         try {
             this.enermyFaction = enermy_readfile();
-        } catch (IOException e) {
+        } catch (ClassNotFoundException | IOException e) {
             System.out.println(e.getMessage());
         }
     }
