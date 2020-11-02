@@ -1,0 +1,62 @@
+{
+    "heavy infantry": {
+        "numTroops":50,
+        "range": 1,
+        "armour": 5,
+        "morale": 10,
+        "speed": 10,
+        "attack": 6,
+        "defenseSkill": 10,
+        "shieldDefense": 3, 
+        "movementpoints": 10
+    },
+
+    "skirmishers": {
+        "numTroops":20,
+        "range": 1,
+        "armour": 6,
+        "morale": 20,
+        "speed": 7,
+        "attack": 8,
+        "defenseSkill": 8,
+        "shieldDefense": 4, 
+        "movementpoints": 6
+    },
+
+    "spearmen": {
+        "numTroops":30,
+        "range": 1,
+        "armour": 2,
+        "morale": 40,
+        "speed": 9,
+        "attack": 1,
+        "defenseSkill": 3,
+        "shieldDefense": 9, 
+        "movementpoints": 3
+    },
+
+    "lancers": {
+        "numTroops":60,
+        "range": 1,
+        "armour": 3,
+        "morale": 50,
+        "speed": 5,
+        "attack": 9,
+        "defenseSkill": 2,
+        "shieldDefense": 2, 
+        "movementpoints": 4
+    },
+
+    "heavy cavalry": {
+        "numTroops":20,
+        "range": 1,
+        "armour": 5,
+        "morale": 20,
+        "speed": 7,
+        "attack": 4,
+        "defenseSkill": 7,
+        "shieldDefense": 1, 
+        "movementpoints": 7
+    }
+    
+}
