@@ -9,8 +9,8 @@ public class Ability {
 
     public static final double POSITIVE_INFINITY = 1.0 / 0.0;
 
-    public void ability(String name) {
-        this.name = name;
+    public Ability() {
+        
     }
     
     public String get_name() {
@@ -33,28 +33,18 @@ public class Ability {
             Phalanx_add(soldier);
         } else if (this.name.equals("Heroic charge")) {
             Heroic_charge(soldier);
-        } else if (this.name.equals("skirmisher anti-armour")) {
-            //skirmisher_add(soldier);
         } else if (this.name.equals("Elephants running amok")) {
             bonus = Elephants_running_amok_add(soldier);
         } 
-        /*
-        else if (this.name.equals("Druidic fervour")) {
-            bonus.set_name("Druidic fervour"); 
-        }
-        */
-        //ArrayList<Ability> abilities = soldier.get_abilities();
-        //abilities.add(this);
-        //soldier.set_abilities(abilities);
-
+       
         return bonus;
     } 
 
-    public void ability_remove(Unit soldier){
-        ArrayList<Ability> abilities = soldier.get_abilities();
-        abilities.remove(this);
-        soldier.set_abilities(abilities);
-    }
+    //public void ability_remove(Unit soldier){
+    //    ArrayList<Ability> abilities = soldier.get_abilities();
+    //    abilities.remove(this);
+    //    soldier.set_abilities(abilities);
+    //}
 
     /*
     public void skirmisher_add(Unit soldier) {
@@ -80,15 +70,14 @@ public class Ability {
         soldier.set_morale(soldier.get_morale() + 1);        
     } 
 
-    public void Legionary_eagle_remove(Unit soldier){
+    //public void Legionary_eagle_remove(Unit soldier){
         
-        if ((soldier.get_morale() - 0.2) > 1) {
-            soldier.set_morale(soldier.get_morale() - 0.2);
-        } else {
-            soldier.set_morale(1.0);
-        }
-        
-    }
+    //    if ((soldier.get_morale() - 0.2) > 1) {
+    //        soldier.set_morale(soldier.get_morale() - 0.2);
+    //    } else {
+    //        soldier.set_morale(1.0);
+    //    }       
+    //}
 
     public void Heroic_charge(Unit soldier) {
         soldier.set_charge(soldier.get_charge() * 2);

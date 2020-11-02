@@ -317,6 +317,12 @@ public class Unit {
                 ability.set_name("Heroic charge");
                 ability.ability_add(this);
             }
+        } else if (this.name.equals("elephant")) {
+            if (heroic == true) {
+                Ability ability = new Ability();
+                ability.set_name("Elephants running amok");
+                ability.ability_add(this);
+            }
         } 
         return bonus;
     }
