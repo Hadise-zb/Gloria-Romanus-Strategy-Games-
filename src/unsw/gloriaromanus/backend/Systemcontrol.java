@@ -1,12 +1,22 @@
 package unsw.gloriaromanus.backend;
 
 import java.util.ArrayList;
-import unsw.gloriaromanus.*;
+//import unsw.gloriaromanus.*;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+//import java.io.Serializable;
+//import java.io.FileNotFoundException;
+
+//import org.junit.jupiter.api.Test;
 
 public class Systemcontrol implements TurnSubject{
     private Faction myFaction;
-    //private Faction enermyFaction;
-    private ArrayList<Faction> enermyFactions = new ArrayList<Faction>();
+    private Faction enermyFaction;
+    //private ArrayList<Faction> enermyFactions = new ArrayList<Faction>();
     private int turn;
     private ArrayList<TurnObserver> observers = new ArrayList<TurnObserver>();
     
@@ -38,12 +48,20 @@ public class Systemcontrol implements TurnSubject{
         notifyobservers();
     }
 
+    public void set_enermy(Faction enermy) {
+        this.enermyFaction = enermy;
+    }
+
+    public Faction get_myfaction() {
+        return this.myFaction;
+    }
+
     public boolean movement(Troop troop, Province start, Province end) {
         boolean accept = true;
         String start_province = start.get_name();
         String destination = end.get_name();
         DPQ shortest_path = new DPQ();
-        int movement_point_need = shortest_path.movement(start_province, destination, enermyFactions);
+        int movement_point_need = shortest_path.movement(start_province, destination, enermyFaction);
 
         int minimum_movement_point = Integer.MAX_VALUE;
         for (Unit unit : troop.get_soldiers()) {
@@ -70,43 +88,81 @@ public class Systemcontrol implements TurnSubject{
     }
 
     public void engage(String enermy_faction, String destination) {
-        for (Faction enermyfaction : enermyFactions) {
-            if (enermyfaction.get_name().equals(enermy_faction)) {
-                for (Province province : enermyfaction.getProvinces()) {
-                    if (province.get_name().equals(destination)) {
-                        province.battle(myFaction, enermyfaction);
-                        break;
-                    }
-                }
+        
+        for (Province province : enermyFaction.getProvinces()) {
+            if (province.get_name().equals(destination)) {
+                province.battle(myFaction, enermyFaction);
+                break;
             }
         }
     }
 
 
-
     public void saveProgress(){
-        // TODO
+        try {
+            my_writetofile(myFaction);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            enermy_writetofile(enermyFaction);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void continueProgress() {
+        try {
+            this.myFaction = my_readfile();
+        } catch (ClassNotFoundException | IOException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            this.enermyFaction = enermy_readfile();
+        } catch (ClassNotFoundException | IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void my_writetofile(Faction f) throws IOException {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("values/myFaction.bin"));
+        objectOutputStream.writeObject(f);
+    }
+
+    public static Faction my_readfile() throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("values/myFaction.bin"));
+        Faction my = (Faction) objectInputStream.readObject();
+        return my;
+    }
+
+    public static void enermy_writetofile(Faction f) throws IOException {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("values/enermyFaction.bin"));
+        objectOutputStream.writeObject(f);
+    }
+
+    public static Faction enermy_readfile() throws IOException, ClassNotFoundException {
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("values/enermyFaction.bin"));
+        Faction enermy = (Faction) objectInputStream.readObject();
+        return enermy;
     }
     
-    public void continueProgress(){
-        // TODO
-    }
-
     public void campaignVictory(){
         
     }
 
     // check if any faction been eliminated
     public void checkFaction(){
+        /*
         for (Faction f : enermyFactions){
             if (f.getNumProvince() == 0) {
                 enermyFactions.remove(f);
             }
-        }
+        }*/
+        
     }
 
     public boolean goalConquered(){
-        if (enermyFactions.size() == 0) return true;
+        if (enermyFaction == null) return true;
         else return false;
     }
 
@@ -135,4 +191,20 @@ public class Systemcontrol implements TurnSubject{
     public int getTurn(){
         return this.turn;
     }
+
+    public static void main(String[] args){
+        Faction my_faction = new Faction("AUSTRALIA");
+        Systemcontrol testSystem = new Systemcontrol(my_faction);
+        Province p = new Province("NSW", my_faction, 0, 0.1);
+        testSystem.attach(my_faction);
+        my_faction.addProvince(p);
+
+        Unit new_unit = new Unit("legionary", "AUSTRALIA", "Cavalry");
+        my_faction.requestTraining(p, new_unit, 5, testSystem.getTurn());
+        
+        //testSystem.endTurn();
+        System.out.println(p.getUnit());
+    }
+
+
 }

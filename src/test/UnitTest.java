@@ -308,6 +308,7 @@ public class UnitTest{
         Faction enermy = new Faction("Gallic");
 
         Systemcontrol system = new Systemcontrol(owner);
+        system.set_enermy(enermy);
 
         Province my_province = new Province("Britannia", owner, 50, 2.2);
         Province enermy_province = new Province("Belgica", owner, 50, 2.2);
@@ -324,12 +325,14 @@ public class UnitTest{
         assertEquals(accept2, false);
     }
 
+
     @Test
     public void testenagege(){
         Faction owner = new Faction("Roman");
         Faction enermy = new Faction("Gallic");
 
         Systemcontrol system = new Systemcontrol(owner);
+        system.set_enermy(enermy);
 
         Province my_province = new Province("Britannia", owner, 50, 2.2);
         Province enermy_province = new Province("Belgica", owner, 50, 2.2);
@@ -356,6 +359,24 @@ public class UnitTest{
         assertEquals(enermy_province.getFaction(), owner);
         
     }
+
+    @Test
+    public void test_save() throws ClassNotFoundException {
+        Faction owner = new Faction("Roman");;
+        Faction enermy = new Faction("Gallic");
+
+        Systemcontrol system = new Systemcontrol(owner);
+        system.set_enermy(enermy);
+
+        system.saveProgress();
+
+        owner.set_name("test_name");
+        
+        system.continueProgress();
+
+        assertEquals(owner.get_name(), "test_name");
+    }
+
 
 
 
