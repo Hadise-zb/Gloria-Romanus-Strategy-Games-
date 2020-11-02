@@ -363,7 +363,7 @@ public class UnitTest{
     }
 
     @Test
-    public void testsave() throws ClassNotFoundException {
+    public void test_save() throws ClassNotFoundException {
         Faction owner = new Faction("Roman");;
         Faction enermy = new Faction("Gallic");
 
@@ -376,9 +376,8 @@ public class UnitTest{
         
         system.continueProgress();
 
-        assertEquals(owner.get_name(), "Roman");
+        assertEquals(owner.get_name(), "test_name");
     }
-
 
 
 
