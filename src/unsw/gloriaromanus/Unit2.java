@@ -1,4 +1,4 @@
-/*
+
 package unsw.gloriaromanus;
 
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import unsw.gloriaromanus.backend.*;
 import org.json.*;
 
 /**
@@ -19,7 +19,7 @@ import org.json.*;
  * 
  * current version represents a heavy infantry unit (almost no range, decent
  * armour and morale)
- *//*
+ */
 public class Unit2 {
     private String category;
     private int numSoldiers; // the number of troops in this unit (should reduce based on depletion)
@@ -91,14 +91,44 @@ public class Unit2 {
     }
 
     public static void main(String[] arg){
-        String name = "skirmishers";
-        Unit2 new_unit = new Unit2(name);
-        assert(new_unit.getNumTroops()==20);
-        System.out.println(new_unit.getNumTroops());
+        Faction owner = new Faction("Roman");
+        Faction enermy = new Faction("Gallic");
 
-        Unit2 x = new Unit2("heavy infantry");
-        System.out.println(x.getNumTroops());
-        assertEquals(x.getNumTroops(), 50);
+        Systemcontrol system = new Systemcontrol(owner);
+        system.set_enermy(enermy);
+
+        Province my_province = new Province("Britannia", owner, 50, 2.2);
+        Province enermy_province = new Province("Belgica", owner, 50, 2.2);
+        Province enermy_province2 = new Province("Lugdunensis", owner, 50, 2.2);
+
+        Troop new_troop = new Troop(owner, my_province);
+        Troop new_troop2 = new Troop(owner, my_province);
+        
+        Unit Roman_legionary = new Unit("legionary", "Roman", "Cavalry");
+        Unit Roman_pikemen = new Unit("pikemen", "Roman", "Cavalry");
+
+        new_troop.get_soldiers().add(Roman_legionary);
+        new_troop.get_soldiers().add(Roman_pikemen);
+
+        my_province.get_my_troops().add(new_troop);
+
+        // move new_troop from my_province to enermy_province, this shoulde be accepted
+        boolean accept1 = system.movement(new_troop, my_province, enermy_province);
+        assertEquals(accept1, true);
+    
+        my_province.get_my_troops().add(new_troop2);
+        
+        // new_troop is already moved to enermy_province, so can't move again.
+        boolean accept2 = system.movement(new_troop, my_province, enermy_province2);
+        assertEquals(accept2, false);
+
+        // The troop already moved, the troop in enermy_province should be updated.
+        boolean judge_troop = false;
+        for (Troop troop : enermy_province.get_my_troops()) {
+            if (troop.equals(new_troop)) {
+                judge_troop = true;
+            }
+        }
+        System.out.println(judge_troop);
     }
 }
-*/

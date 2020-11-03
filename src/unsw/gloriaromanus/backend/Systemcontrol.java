@@ -62,8 +62,20 @@ public class Systemcontrol implements TurnSubject{
         String destination = end.get_name();
         DPQ shortest_path = new DPQ();
         int movement_point_need = shortest_path.movement(start_province, destination, enermyFaction);
-
+        //System.out.println(movement_point_need);
         int minimum_movement_point = Integer.MAX_VALUE;
+        
+        //judge whether the troop is in the start province
+        boolean find = false;
+        for (Troop t : start.get_my_troops()){
+            if (t.equals(troop)) {
+                find = true;
+            }
+        }
+        if (find == false) {
+            return false;
+        }
+
         for (Unit unit : troop.get_soldiers()) {
             if (unit.get_movementpoint() < minimum_movement_point) {
                 minimum_movement_point = unit.get_movementpoint();
@@ -87,14 +99,26 @@ public class Systemcontrol implements TurnSubject{
         return accept;
     }
 
-    public void engage(String enermy_faction, String destination) {
-        
-        for (Province province : enermyFaction.getProvinces()) {
-            if (province.get_name().equals(destination)) {
-                province.battle(myFaction, enermyFaction);
-                break;
+    public String engage(String myprovince, String enermyprovince) {
+        Province my = new Province("", myFaction, 1, 1.1);
+        Province enermy = new Province("", enermyFaction, 1, 1.1);
+        for (Province my_p : myFaction.getProvinces()){
+            if (my_p.get_name().equals(myprovince)) {
+                my = my_p;
             }
         }
+        for (Province enermy_p : enermyFaction.getProvinces()){
+            if (enermy_p.get_name().equals(enermyprovince)) {
+                enermy = enermy_p;
+            }
+        }
+        
+        for (int i = 0; i < my.get_my_troops().size(); i++) {
+            movement(my.get_my_troops().get(i), my, enermy);
+        }
+
+        String result = enermy.battle(myFaction, enermyFaction);
+        return result;
     }
 
 
