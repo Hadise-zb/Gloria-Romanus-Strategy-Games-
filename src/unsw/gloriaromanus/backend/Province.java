@@ -299,9 +299,9 @@ public class Province {
         this.ablility_add();
         this.enermy_ablility_add();
 
-
+        
         while (!this.my_units.isEmpty() || !this.enermy_units.isEmpty()) {
-    
+            
             Random rand = new Random();
             ArrayList<Unit> m_units = this.my_units;
             int randomIndex = rand.nextInt(m_units.size());
@@ -404,8 +404,8 @@ public class Province {
             //System.out.println("my"+ my_left_soldiers);
             BigDecimal bd1 = new BigDecimal(my_left_soldiers).setScale(0, RoundingMode.HALF_UP);
             double num1 = bd1.doubleValue();
-            //System.out.println("my"+ num1);
-            if (num1 == 0) {
+            System.out.println("my"+ num1);
+            if (num1 <= 0.0) {
                 my_units.remove(my_randomUnit);
             } else {
                 my_randomUnit.setNumSoldiers(my_left_soldiers);;
@@ -415,8 +415,8 @@ public class Province {
             //System.out.println("en"+ enermy_left_soldiers);
             BigDecimal bd2 = new BigDecimal(enermy_left_soldiers).setScale(0, RoundingMode.HALF_UP);
             double num2 = bd2.doubleValue();
-            //System.out.println("my"+ num2);
-            if (num2 == 0) {
+            System.out.println("en"+ num2);
+            if (num2 <= 0.0) {
                 enermy_units.remove(enermy_randomUnit);
             } else {
                 my_randomUnit.setNumSoldiers(enermy_left_soldiers);
@@ -430,6 +430,7 @@ public class Province {
                 return win;
             } else if (this.my_units.isEmpty()) {
                 win = "lose";
+                System.out.println("en");
                 return win;
             } else if (this.enermy_units.isEmpty()) {
                 win = "win";
