@@ -405,7 +405,7 @@ public class Province {
             BigDecimal bd1 = new BigDecimal(my_left_soldiers).setScale(0, RoundingMode.HALF_UP);
             double num1 = bd1.doubleValue();
             //System.out.println("my"+ num1);
-            if (num1 == 0) {
+            if (num1 <= 0.0) {
                 my_units.remove(my_randomUnit);
             } else {
                 my_randomUnit.setNumSoldiers(my_left_soldiers);;
@@ -416,7 +416,7 @@ public class Province {
             BigDecimal bd2 = new BigDecimal(enermy_left_soldiers).setScale(0, RoundingMode.HALF_UP);
             double num2 = bd2.doubleValue();
             //System.out.println("my"+ num2);
-            if (num2 == 0) {
+            if (num2 <= 0.0) {
                 enermy_units.remove(enermy_randomUnit);
             } else {
                 my_randomUnit.setNumSoldiers(enermy_left_soldiers);

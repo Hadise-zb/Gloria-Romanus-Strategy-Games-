@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 //import java.util.Iterator;
 
 public class DPQ { 
@@ -100,10 +101,8 @@ public class DPQ {
             }
         
             for (int i = 0; i <= V; i++) 
-                dist[i] = Integer.MAX_VALUE; 
-
-            
-        
+                dist[i] = -1; 
+       
             dist[src] = 0; 
             passed[src] = 0;
             int k = 0;
@@ -134,9 +133,10 @@ public class DPQ {
         } catch (JSONException | IOException e) {
             ((Throwable) e).printStackTrace();
         }
-        return Integer.MAX_VALUE;
+        return 1;
     }
 
-   
+    
+    
 
 } 
