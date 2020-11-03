@@ -3,21 +3,24 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.params.ParameterizedTest;
+//import org.junit.jupiter.params.provider.ValueSource;
+//import org.junit.jupiter.api.Test;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import unsw.gloriaromanus.*;
 import unsw.gloriaromanus.backend.*;
+//import org.json.*;
+//import java.nio.file.Files;
+//import java.nio.file.Paths;
 import unsw.gloriaromanus.backend.Systemcontrol;
+//import unsw.gloriaromanus.backend.Systemcontrol;
 import java.lang.Math;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 
 public class UnitTest{
-
-    @Test
-    public void blahTest(){
-        assertEquals("a", "a");
-    }
-
        
     @Test
     public void blahTest2(){
@@ -316,15 +319,36 @@ public class UnitTest{
 
         Troop new_troop = new Troop(owner, my_province);
         Troop new_troop2 = new Troop(owner, my_province);
+        
+        Unit Roman_legionary = new Unit("legionary", "Roman", "Cavalry");
+        Unit Roman_pikemen = new Unit("pikemen", "Roman", "Cavalry");
+
+        new_troop.get_soldiers().add(Roman_legionary);
+        new_troop.get_soldiers().add(Roman_pikemen);
+
         my_province.get_my_troops().add(new_troop);
 
-        boolean accept = system.movement(new_troop, my_province, enermy_province);
-        assertEquals(accept, false);
+        // move new_troop from my_province to enermy_province, this shoulde be accepted
+        boolean accept1 = system.movement(new_troop, my_province, enermy_province);
+        assertEquals(accept1, true);
+    
         my_province.get_my_troops().add(new_troop2);
+        
+        // new_troop is already moved to enermy_province, so can't move again.
         boolean accept2 = system.movement(new_troop, my_province, enermy_province2);
         assertEquals(accept2, false);
-    }
 
+        // The troop already moved, the troop in enermy_province should be updated.
+        boolean judge_troop = false;
+        for (Troop troop : enermy_province.get_my_troops()) {
+            if (troop.equals(new_troop)) {
+                judge_troop = true;
+            }
+        }
+        assertEquals(judge_troop, true);
+
+        
+    }
 
     @Test
     public void testenagege(){
@@ -335,28 +359,31 @@ public class UnitTest{
         system.set_enermy(enermy);
 
         Province my_province = new Province("Britannia", owner, 50, 2.2);
-        Province enermy_province = new Province("Belgica", owner, 50, 2.2);
+        Province enermy_province = new Province("Belgica", enermy, 50, 2.2);
         
         Unit horse_archer = new Unit("horse archer", "Roman", "Cavalry");
         
         Unit melee_infantry = new Unit("melee infantry", "Gallic", "Cavalry");
         
-        // set my soldiers 30 and enermy 10, I will win the battle
-        horse_archer.setNumSoldiers(30);
+        // set my soldiers 30 and enermy 10
+        horse_archer.setNumSoldiers(1);
         melee_infantry.setNumSoldiers(10);
 
         Troop new_troop = new Troop(owner, my_province);
         Troop enermy_troop = new Troop(enermy, enermy_province);
         
-        new_troop.get_soldiers().add(horse_archer);
-        enermy_troop.get_soldiers().add(melee_infantry);
+        new_troop.get_soldiers().add(melee_infantry);
+        enermy_troop.get_soldiers().add(horse_archer);
 
-        enermy_province.get_my_troops().add(new_troop);
+        my_province.get_my_troops().add(new_troop);
         enermy_province.get_enermy_troops().add(enermy_troop);
 
-        system.engage(enermy.get_name(), enermy_province.get_name());
-        // win this battle and the faction change to me
-        assertEquals(enermy_province.getFaction(), owner);
+        owner.getProvinces().add(my_province);
+        enermy.getProvinces().add(enermy_province);
+        String result = system.engage(my_province.get_name(), enermy_province.get_name());
+        // lose this battle and the faction will not change
+        assertEquals(result, "lose");
+        assertEquals(enermy_province.getFaction(), enermy);
         
     }
 
@@ -379,7 +406,4 @@ public class UnitTest{
 
 
 
-
-
 }
-
