@@ -39,6 +39,19 @@
         </VBox>
     </HBox>
     <Button text="Invade" onAction="#clickedInvadeButton"/>
+
+    <HBox>
+        <VBox>
+            <Label text="Your province"/>
+            <TextField fx:id="invading_province" text="" editable="false"/>
+        </VBox>
+        <VBox>
+            <Label text="Enemy province"/>
+            <TextField fx:id="opponent_province" text="" editable="false"/>
+        </VBox>
+    </HBox>
+    <Button text="Move" onAction="#clickedInvadeButton"/>
+    
     <VBox>
         <Label text="Output from interactions"/>
         <TextArea fx:id="output_terminal" text="" editable="false"/>
