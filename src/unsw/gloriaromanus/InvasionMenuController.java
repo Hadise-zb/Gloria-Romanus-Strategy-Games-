@@ -15,6 +15,8 @@ public class InvasionMenuController extends MenuController{
     private TextField opponent_province;
     @FXML
     private TextArea output_terminal;
+    @FXML
+    private TextField my_troop;
 
     // https://stackoverflow.com/a/30171444
     @FXML
@@ -39,6 +41,7 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void clickedmoveButton(ActionEvent e) throws IOException {
-        getParent().clickedmoveButton(e);
+        appendToTerminal(my_troop.getText());
+        getParent().clickedmoveButton(e, my_troop.getText());
     }
 }

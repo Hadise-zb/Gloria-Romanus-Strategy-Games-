@@ -1,5 +1,7 @@
 package unsw.gloriaromanus;
 
+import unsw.gloriaromanus.backend.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -116,35 +118,11 @@ public class GloriaRomanusController{
 
   }
   
-  public void clickedmoveButton(ActionEvent e) throws IOException {
+  public void clickedmoveButton(ActionEvent e, String my_troop) throws IOException {
     if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
       String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
-      if (confirmIfProvincesConnected(humanProvince, enemyProvince)){
-        // TODO = have better battle resolution than 50% chance of winning
-        Random r = new Random();
-        int choice = r.nextInt(2);
-        if (choice == 0){
-          // human won. Transfer 40% of troops of human over. No casualties by human, but enemy loses all troops
-          int numTroopsToTransfer = provinceToNumberTroopsMap.get(humanProvince)*2/5;
-          provinceToNumberTroopsMap.put(enemyProvince, numTroopsToTransfer);
-          provinceToNumberTroopsMap.put(humanProvince, provinceToNumberTroopsMap.get(humanProvince)-numTroopsToTransfer);
-          provinceToOwningFactionMap.put(enemyProvince, humanFaction);
-          printMessageToTerminal("Won battle!");
-        }
-        else{
-          // enemy won. Human loses 60% of soldiers in the province
-          int numTroopsLost = provinceToNumberTroopsMap.get(humanProvince)*3/5;
-          provinceToNumberTroopsMap.put(humanProvince, provinceToNumberTroopsMap.get(humanProvince)-numTroopsLost);
-          printMessageToTerminal("Lost battle!");
-        }
-        resetSelections();  // reset selections in UI
-        addAllPointGraphics(); // reset graphics
-      }
-      else{
-        printMessageToTerminal("Provinces not adjacent, cannot invade!");
-      }
-
+      //movement(my_troop, humanProvince, enemyProvince);
     }
   }
   
@@ -248,6 +226,7 @@ public class GloriaRomanusController{
             // you can also pass in a javafx Image to create a PictureMarkerSymbol (different to BufferedImage)
             s = new PictureMarkerSymbol("images/legionary.png");
             break;
+        
           // TODO = handle all faction names, and find a better structure...
         }
         t.setHaloColor(0xFFFFFFFF);
