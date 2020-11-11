@@ -97,9 +97,9 @@ public class Unit2 {
         Systemcontrol system = new Systemcontrol(owner);
         system.set_enermy(enermy);
 
-        Province my_province = new Province("Britannia", owner, 50, 2.2);
+        Province my_province = new Province("Lugdunensis", owner, 50, 2.2);
         Province enermy_province = new Province("Belgica", owner, 50, 2.2);
-        Province enermy_province2 = new Province("Lugdunensis", owner, 50, 2.2);
+        //Province enermy_province2 = new Province("Belgica", owner, 50, 2.2);
 
         Troop new_troop = new Troop(owner, my_province);
         Troop new_troop2 = new Troop(owner, my_province);
@@ -119,8 +119,8 @@ public class Unit2 {
         my_province.get_my_troops().add(new_troop2);
         
         // new_troop is already moved to enermy_province, so can't move again.
-        boolean accept2 = system.movement(new_troop, my_province, enermy_province2);
-        assertEquals(accept2, false);
+        //boolean accept2 = system.movement(new_troop, my_province, enermy_province2);
+        //assertEquals(accept2, false);
 
         // The troop already moved, the troop in enermy_province should be updated.
         boolean judge_troop = false;

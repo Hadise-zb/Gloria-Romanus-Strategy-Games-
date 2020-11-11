@@ -61,7 +61,8 @@ public class Systemcontrol implements TurnSubject{
         String start_province = start.get_name();
         String destination = end.get_name();
         DPQ shortest_path = new DPQ();
-        int movement_point_need = shortest_path.movement(start_province, destination, enermyFaction);
+        int movement_point_need = 1;
+        //int movement_point_need = shortest_path.movement(start_province, destination, enermyFaction);
         //System.out.println(movement_point_need);
         int minimum_movement_point = Integer.MAX_VALUE;
         

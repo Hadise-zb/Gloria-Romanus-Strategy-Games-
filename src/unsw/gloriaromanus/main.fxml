@@ -4,7 +4,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import com.esri.arcgisruntime.mapping.view.MapView?>
+<!--<?import com.esri.arcgisruntime.mapping.view.MapView?>-->
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
