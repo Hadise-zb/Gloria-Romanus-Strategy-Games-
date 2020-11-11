@@ -1,14 +1,12 @@
 package unsw.gloriaromanus.backend;
 
-//import java.io.*; 
+
 import java.util.ArrayList;
-//import java.io.IOException;
-//import java.nio.file.Files;
-//import java.nio.file.Paths;
-//import org.junit.jupiter.api.Test;
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import unsw.gloriaromanus.*;
-//import org.json.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import unsw.gloriaromanus.*;
+import org.json.*;
 
 /**
  * Represents a basic unit of soldiers
@@ -38,11 +36,11 @@ public class Unit {
     private int movementpoints;
     private String unit_name;
     private ArrayList<Ability> abilities;
-    private Boolean armed;
+    private boolean armed;
     private Troop troop;
     private String name;
-    private Double defence;
-    private Double shield;
+    private double defence;
+    private double shield;
     private int engagments;
     private String province;
     private int cost;
@@ -51,7 +49,7 @@ public class Unit {
     private int trainingTurns;
 
     // maybe used in each soldier.
-    private Double blood_volume;
+    private double blood_volume;
 
 
 
@@ -170,30 +168,6 @@ public class Unit {
         } else if (category.equals("Artillery")) {
             this.movementpoints = 4;
         }
-
-        /*
-        try {
-            JSONObject new_unit = new JSONObject(
-                    Files.readString(Paths.get("src/unsw/gloriaromanus/Unit_values.json")));
-            
-            JSONObject chosen_unit = new_unit.getJSONObject(name);
-            //this.category = chosen_unit.getString("category");
-            this.numSoldiers = chosen_unit.getInt("numTroops");
-            this.armour = 1;
-            //this.armour = chosen_unit.getInt("armour");
-            this.attack = chosen_unit.getInt("attack");
-            this.defenseSkill = chosen_unit.getInt("defenseSkill");
-            this.morale = chosen_unit.getInt("morale");
-            this.movementpoints = chosen_unit.getInt("movementpoints");
-            this.range = chosen_unit.getInt("range");
-            this.shieldDefense = chosen_unit.getInt("shieldDefense");
-            this.helmet = 0;
-            this.charge = 0;
-            this.shield = 0.0;
-
-        } catch (JSONException | IOException e) {
-            e.printStackTrace();
-        }*/
     }
 
     public int get_movementpoint() {
@@ -344,17 +318,7 @@ public class Unit {
                 ability.ability_add(this);
             }
         } 
-        /*
-        else if (this.name.equals("druid")) {
-            Ability ability = new Ability();
-            ability.set_name("Druidic fervour");
-            bonus = ability.ability_add(this);
-        } */
-        
         return bonus;
-        //ArrayList<Ability> abilities = soldier.get_abilities();
-        //abilities.add(this);
-        //soldier.set_abilities(abilities);
     }
    
     public void decreaseMorale(){
