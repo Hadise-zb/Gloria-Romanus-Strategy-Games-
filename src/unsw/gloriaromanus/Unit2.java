@@ -132,7 +132,3 @@ public class Unit2 {
         System.out.println(judge_troop);
     }
 }
-<<<<<<< HEAD
-=======
-*/
->>>>>>> origin/YZ_new
