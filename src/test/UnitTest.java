@@ -3,24 +3,21 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.params.ParameterizedTest;
-//import org.junit.jupiter.params.provider.ValueSource;
-//import org.junit.jupiter.api.Test;
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import unsw.gloriaromanus.*;
 import unsw.gloriaromanus.backend.*;
-//import org.json.*;
-//import java.nio.file.Files;
-//import java.nio.file.Paths;
 import unsw.gloriaromanus.backend.Systemcontrol;
-//import unsw.gloriaromanus.backend.Systemcontrol;
 import java.lang.Math;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 
 public class UnitTest{
+
+    @Test
+    public void blahTest(){
+        assertEquals("a", "a");
+    }
+
        
     @Test
     public void blahTest2(){

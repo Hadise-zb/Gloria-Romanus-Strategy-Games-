@@ -4,10 +4,9 @@ import java.util.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-//import org.junit.jupiter.api.Test;
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import unsw.gloriaromanus.testfile;
-//import org.json.*;
+
+import unsw.gloriaromanus.*;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
