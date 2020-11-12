@@ -32,6 +32,7 @@
         <VBox>
             <Label text="Your province" />
             <TextField fx:id="invading_province" editable="false" text="" />
+         <TextField />
         </VBox>
         <VBox>
             <Label text="Enemy province" />
@@ -40,7 +41,6 @@
     </HBox>
     <Button onAction="#clickedInvadeButton" text="Invade" />
     <Button onAction="#clickedmoveButton" text="Move" />
-   <Button mnemonicParsing="false" onAction="#clickedrecuitbutton" text="Recuit" textFill="#410707" />
 
     <HBox>
         <VBox />
