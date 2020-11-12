@@ -1,27 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Background?>
 <?import javafx.scene.layout.BackgroundFill?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.geometry.Insets?>
 
-<VBox StackPane.alignment="TOP_LEFT" spacing="10" maxWidth="250" styleClass="panel-region" fx:controller="unsw.gloriaromanus.BasicMenuController" xmlns:fx="http://javafx.com/fxml" stylesheets="/unsw/gloriaromanus/style.css">
+<VBox maxWidth="446.0" prefHeight="270.0" prefWidth="446.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="unsw.gloriaromanus.BasicMenuController">
     <padding>
-        <Insets topRightBottomLeft="10"/>
+        <Insets topRightBottomLeft="10" />
     </padding>
     <background>
         <Background>
             <fills>
                 <BackgroundFill>
                     <fill>
-                        <Color opacity="0.3"/>
+                        <Color opacity="0.3" />
                     </fill>
                 </BackgroundFill>
             </fills>
         </Background>
     </background>
-    <Button text="Switch Menus" onAction="#clickedSwitchMenu"/>
+   <HBox prefHeight="54.0" prefWidth="426.0">
+      <children>
+         <Label prefHeight="38.0" prefWidth="425.0" text="                                         Menu for recuiting" textFill="#bd2a2a" />
+      </children>
+   </HBox>
+   <Label prefHeight="18.0" prefWidth="308.0" text="Recuit                    Unit" />
+   <HBox prefHeight="100.0" prefWidth="200.0">
+      <children>
+         <Button mnemonicParsing="false" onAction="#clickedrecuitbutton" text="Recuit" textFill="#570a0a" />
+         <ChoiceBox fx:id="unit_choice" prefWidth="150.0" />
+      </children>
+   </HBox>
+   <HBox prefHeight="27.0" prefWidth="426.0">
+      <children>
+          <Button onAction="#clickedSwitchMenu" prefHeight="26.0" prefWidth="192.0" text="Switch Menus" />
+      </children>
+   </HBox>
 </VBox>
