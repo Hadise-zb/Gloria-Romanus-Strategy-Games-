@@ -57,5 +57,4 @@
         <TextArea fx:id="output_terminal" editable="false" text="" />
     </VBox>
     <Button onAction="#clickedSwitchMenu" text="Switch Menus" />
-   <Button mnemonicParsing="false" text="endTurn" />
 </VBox>
