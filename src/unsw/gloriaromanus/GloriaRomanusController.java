@@ -59,6 +59,8 @@ import org.json.JSONObject;
 
 import javafx.util.Pair;
 
+import javafx.scene.control.ChoiceBox;
+
 public class GloriaRomanusController{
 
   @FXML
@@ -66,6 +68,9 @@ public class GloriaRomanusController{
 
   @FXML
   private StackPane stackPaneMain;
+
+  @FXML
+  private ChoiceBox <String> troop_choice;
 
   // could use ControllerFactory?
   private ArrayList<Pair<MenuController, VBox>> controllerParentPairs;
@@ -118,6 +123,18 @@ public class GloriaRomanusController{
 
   }
   
+  /*
+  public void clickedrecuitbutton(ActionEvent e) throws IOException {
+    List<String> new_list = new ArrayList<String>();
+    String a = "A";
+    String b = "B";
+    String c = "C";
+    new_list.add(a);
+    new_list.add(b);
+    new_list.add(c);
+    troop_choice.getItems().addAll(new_list);
+  }
+  */
   public void clickedmoveButton(ActionEvent e, String my_troop) throws IOException {
     if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
       String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");

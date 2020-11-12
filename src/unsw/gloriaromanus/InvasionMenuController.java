@@ -7,6 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ChoiceBox;
+
+import java.util.List;
+import java.util.ArrayList;
 
 public class InvasionMenuController extends MenuController{
     @FXML
@@ -16,7 +20,7 @@ public class InvasionMenuController extends MenuController{
     @FXML
     private TextArea output_terminal;
     @FXML
-    private TextField my_troop;
+    private ChoiceBox <String> troop_choice;
 
     // https://stackoverflow.com/a/30171444
     @FXML
@@ -41,7 +45,19 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void clickedmoveButton(ActionEvent e) throws IOException {
-        appendToTerminal(my_troop.getText());
-        getParent().clickedmoveButton(e, my_troop.getText());
+        String my_troop = troop_choice.getValue();
+        getParent().clickedmoveButton(e, my_troop);
+    }
+
+    @FXML
+    public void clickedrecuitbutton(ActionEvent e) throws IOException {
+        List<String> new_list = new ArrayList<String>();
+        String a = "A";
+        String b = "B";
+        String c = "C";
+        new_list.add(a);
+        new_list.add(b);
+        new_list.add(c);
+        troop_choice.getItems().addAll(new_list);
     }
 }
