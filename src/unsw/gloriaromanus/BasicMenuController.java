@@ -21,8 +21,25 @@ public class BasicMenuController extends MenuController{
     private ChoiceBox <String> troop_choice;
 
     @FXML
+    private ChoiceBox <String> unit_choice;
+
+    @FXML
     public void clickedInvadeButton(ActionEvent e) throws IOException {
         getParent().clickedInvadeButton(e);
+    }
+
+    @FXML
+    public void initialize() {
+        List<String> new_list = new ArrayList<String>();
+        new_list.add("melee cavalry");
+        new_list.add("pikemen");
+        new_list.add("hoplite");
+        new_list.add("javelin skirmisher");
+        new_list.add("elephant");
+        new_list.add("horse archer");
+        new_list.add("druid");
+        new_list.add("melee infantry");
+        unit_choice.getItems().addAll(new_list);
     }
 
     @FXML
