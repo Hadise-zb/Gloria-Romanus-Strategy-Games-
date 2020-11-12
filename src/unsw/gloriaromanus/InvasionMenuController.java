@@ -60,4 +60,9 @@ public class InvasionMenuController extends MenuController{
         new_list.add(c);
         troop_choice.getItems().addAll(new_list);
     }
+
+    @FXML
+    public void clickedendTurnbutton(ActionEvent e) throws IOException{
+        
+    }
 }
