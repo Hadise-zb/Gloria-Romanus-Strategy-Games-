@@ -254,6 +254,12 @@ public class GloriaRomanusController{
         Point curPoint = new Point(coor.getLongitude(), coor.getLatitude(), SpatialReferences.getWgs84());
         PictureMarkerSymbol s = null;
         PictureMarkerSymbol s2 = null;
+        PictureMarkerSymbol s3 = null;
+        PictureMarkerSymbol s4 = null;
+        PictureMarkerSymbol s5 = null;
+        PictureMarkerSymbol s6 = null;
+        PictureMarkerSymbol s7 = null;
+        PictureMarkerSymbol s8 = null;
         String province = (String) f.getProperty("name");
         String faction = provinceToOwningFactionMap.get(province);
 
@@ -272,14 +278,44 @@ public class GloriaRomanusController{
             s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
             s2 = new PictureMarkerSymbol("images/legionary.png");
             s2.setOffsetX(30);
-            s2.setOffsetY(30);
+            s3 = new PictureMarkerSymbol("images/legionary.png");
+            s3.setOffsetX(-30);
+            s4 = new PictureMarkerSymbol("images/legionary.png");
+            s4.setOffsetY(30);
+            s5 = new PictureMarkerSymbol("images/legionary.png");
+            s5.setOffsetY(-30);
+            s6 = new PictureMarkerSymbol("images/legionary.png");
+            s6.setOffsetX(30);
+            s6.setOffsetY(30);
+            s7 = new PictureMarkerSymbol("images/legionary.png");
+            s7.setOffsetX(-30);
+            s7.setOffsetY(-30);
+            s8 = new PictureMarkerSymbol("images/legionary.png");
+            s8.setOffsetX(30);
+            s8.setOffsetY(-30);
+            
+            
             break;
           case "Rome":
             // you can also pass in a javafx Image to create a PictureMarkerSymbol (different to BufferedImage)
             s = new PictureMarkerSymbol("images/legionary.png");
             s2 = new PictureMarkerSymbol("images/legionary.png");
             s2.setOffsetX(30);
-            s2.setOffsetY(30);
+            s3 = new PictureMarkerSymbol("images/legionary.png");
+            s3.setOffsetX(-30);
+            s4 = new PictureMarkerSymbol("images/legionary.png");
+            s4.setOffsetY(30);
+            s5 = new PictureMarkerSymbol("images/legionary.png");
+            s5.setOffsetY(-30);
+            s6 = new PictureMarkerSymbol("images/legionary.png");
+            s6.setOffsetX(30);
+            s6.setOffsetY(30);
+            s7 = new PictureMarkerSymbol("images/legionary.png");
+            s7.setOffsetX(-30);
+            s7.setOffsetY(-30);
+            s8 = new PictureMarkerSymbol("images/legionary.png");
+            s8.setOffsetX(30);
+            s8.setOffsetY(-30);
             break;
         
           // TODO = handle all faction names, and find a better structure...
@@ -288,9 +324,21 @@ public class GloriaRomanusController{
         t.setHaloWidth(2);
         Graphic gPic = new Graphic(curPoint, s);
         Graphic gPic2 = new Graphic(curPoint, s2);
+        Graphic gPic3 = new Graphic(curPoint, s3);
+        Graphic gPic4 = new Graphic(curPoint, s4);
+        Graphic gPic5 = new Graphic(curPoint, s5);
+        Graphic gPic6 = new Graphic(curPoint, s6);
+        Graphic gPic7 = new Graphic(curPoint, s7);
+        Graphic gPic8 = new Graphic(curPoint, s8);
         Graphic gText = new Graphic(curPoint, t);
         graphicsOverlay.getGraphics().add(gPic);
         graphicsOverlay.getGraphics().add(gPic2);
+        graphicsOverlay.getGraphics().add(gPic3);
+        graphicsOverlay.getGraphics().add(gPic4);
+        graphicsOverlay.getGraphics().add(gPic5);
+        graphicsOverlay.getGraphics().add(gPic6);
+        graphicsOverlay.getGraphics().add(gPic7);
+        graphicsOverlay.getGraphics().add(gPic8);
         graphicsOverlay.getGraphics().add(gText);
       } else {
         System.out.println("Non-point geo json object in file");
