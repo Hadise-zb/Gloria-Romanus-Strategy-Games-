@@ -105,6 +105,11 @@ public class InvasionMenuController extends MenuController{
         
     }
 
+    @FXML
+    public void clickedTurnButton(ActionEvent e) throws IOException{
+        // TOdo
+    }
+
     public void unit_add(String province) {
         System.out.println(province);
 
