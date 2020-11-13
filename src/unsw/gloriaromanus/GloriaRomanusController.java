@@ -85,6 +85,7 @@ public class GloriaRomanusController{
 
   private Feature currentlySelectedHumanProvince;
   private Feature currentlySelectedEnemyProvince;
+  private Feature currentlySelectedNeibourProvince;
 
   private Feature from_human_province;
   private Feature next_human_province;
@@ -186,7 +187,15 @@ public class GloriaRomanusController{
   //   }
   // }
 
-  pub
+  public void clickedmoveButton(ActionEvent e) throws IOException{
+      String currentProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+      String desProvince = (String)currentlySelectedNeibourProvince.getAttributes().get("name");
+      int numTroopsToTransfer = provinceToNumberTroopsMap.get(currentProvince);
+      int numDesTroop = provinceToNumberTroopsMap.get(desProvince);
+      provinceToNumberTroopsMap.put(desProvince, numTroopsToTransfer + numDesTroop);
+      provinceToNumberTroopsMap.put(currentProvince, 0);
+      addAllPointGraphics();
+  }
 
   public void clickedTurnButton(ActionEvent e) throws IOException{
       // TODO

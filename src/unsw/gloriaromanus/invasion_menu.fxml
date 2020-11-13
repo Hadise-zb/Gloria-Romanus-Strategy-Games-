@@ -32,17 +32,26 @@
         <VBox>
             <Label text="Your province" />
             <TextField fx:id="invading_province" editable="false" text="" />
-         <TextField fx:id="currenthumanprovince" />
         </VBox>
         <VBox>
             <Label text="Enemy province" />
             <TextField fx:id="opponent_province" editable="false" text="" />
-         <TextField fx:id="nexthumanprovince" />
         </VBox>
     </HBox>
     <Button onAction="#clickedInvadeButton" text="Invade" />
+
+    <HBox>
+        <VBox>
+            <Label text="Current province" />
+            <TextField fx:id="currenthumanprovince" editable="false" text="" />
+        </VBox>
+        <VBox>
+            <Label text="Destination province" />
+            <TextField fx:id="nexthumanprovince" editable="false" text="" />
+        </VBox>
+    </HBox>
     <Button onAction="#clickedmoveButton" text="Move" />
-    <Button onAction="#clickedTurnButton" text="End Turn" />
+    
 
     <HBox>
         <VBox />
@@ -70,4 +79,5 @@
         <TextArea fx:id="output_terminal" editable="false" text="" />
     </VBox>
     <Button onAction="#clickedSwitchMenu" text="Switch Menus" />
+    <Button onAction="#clickedTurnButton" text="End Turn" />
 </VBox>
