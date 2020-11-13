@@ -58,6 +58,7 @@ public class BasicMenuController extends MenuController{
         new_list.add(a);
         new_list.add(b);
         new_list.add(c);
+        
         troop_choice.getItems().addAll(new_list);
     }
 }

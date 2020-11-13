@@ -32,11 +32,12 @@
         <VBox>
             <Label text="Your province" />
             <TextField fx:id="invading_province" editable="false" text="" />
-         <TextField />
+         <TextField fx:id="currenthumanprovince" />
         </VBox>
         <VBox>
             <Label text="Enemy province" />
             <TextField fx:id="opponent_province" editable="false" text="" />
+         <TextField fx:id="nexthumanprovince" />
         </VBox>
     </HBox>
     <Button onAction="#clickedInvadeButton" text="Invade" />
@@ -51,6 +52,17 @@
          <ChoiceBox fx:id="troop_choice" prefWidth="150.0" />
       </children>
    </VBox>
+   <HBox prefHeight="14.0" prefWidth="230.0">
+      <children>
+         <Label prefHeight="47.0" prefWidth="230.0" text="Recuit                    Unit" />
+      </children>
+   </HBox>
+   <HBox prefHeight="49.0" prefWidth="230.0">
+      <children>
+         <Button mnemonicParsing="false" onAction="#clickedrecuitbutton" text="Recuit" textFill="#570a0a" />
+         <ChoiceBox fx:id="unit_choice" prefWidth="150.0" />
+      </children>
+   </HBox>
     
     <VBox>
         <Label text="Output from interactions" />

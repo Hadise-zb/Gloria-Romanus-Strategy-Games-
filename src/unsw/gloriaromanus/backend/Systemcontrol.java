@@ -12,6 +12,12 @@ import java.io.ObjectOutputStream;
 //import java.io.FileNotFoundException;
 
 //import org.junit.jupiter.api.Test;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import unsw.gloriaromanus.*;
 
 public class Systemcontrol implements TurnSubject{
@@ -42,6 +48,34 @@ public class Systemcontrol implements TurnSubject{
     public Systemcontrol(Faction f){
         this.turn = 0;
         this.myFaction = f;
+
+        if (f.get_name().equals("Rome")) {
+            this.enermyFaction = new Faction("Gaul");
+        }
+
+        try {
+            JSONObject matrix = new JSONObject(
+                Files.readString(Paths.get("src/unsw/gloriaromanus/initial_province_ownership.json")));
+            for (String key : matrix.keySet()) {
+                JSONArray pro = matrix.getJSONArray(key);
+                if (myFaction.get_name().equals(key)) {
+                    for (int j = 0; j < pro.length (); j++) {
+
+                        Province human_province = new Province(pro.getString (j), myFaction, 0, 3.0);
+                        myFaction.getProvinces().add(human_province);
+                    }
+                } else {
+                    for (int j = 0; j < pro.length (); j++) {
+
+                        Province enermy_province = new Province(pro.getString (j), myFaction, 0, 3.0);
+                        enermyFaction.getProvinces().add(enermy_province);
+                    }
+                    
+                }
+            }
+        } catch (JSONException | IOException e) {
+            ((Throwable) e).printStackTrace();
+        }   
     }
 
     public void endTurn(){

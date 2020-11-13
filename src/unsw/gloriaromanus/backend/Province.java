@@ -34,6 +34,9 @@ public class Province {
         return owner;
     }
 
+    public ArrayList<Unit> get_units() {
+        return this.my_units;
+    }
 
     public boolean trainingSlot_available(){
         if (trainingSlots.size()<2) return true;
