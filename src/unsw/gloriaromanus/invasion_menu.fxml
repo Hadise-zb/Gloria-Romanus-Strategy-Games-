@@ -42,6 +42,7 @@
     </HBox>
     <Button onAction="#clickedInvadeButton" text="Invade" />
     <Button onAction="#clickedmoveButton" text="Move" />
+    <Button onAction="#clickedTurnButton" text="End Turn" />
 
     <HBox>
         <VBox />

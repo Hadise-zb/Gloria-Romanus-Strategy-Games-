@@ -61,4 +61,9 @@ public class BasicMenuController extends MenuController{
         
         troop_choice.getItems().addAll(new_list);
     }
+
+    @FXML
+    public void clickedTurnButton(ActionEvent e) throws IOException{
+        getParent().clickedTurnButton(e);    
+    }
 }

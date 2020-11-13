@@ -173,6 +173,10 @@ public class GloriaRomanusController{
       //movement(my_troop, humanProvince, enemyProvince);
     }
   }
+
+  public void clickedTurnButton(ActionEvent e) throws IOException{
+      // TODO
+  }
   
   public void clickedInvadeButton(ActionEvent e) throws IOException {
     if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
