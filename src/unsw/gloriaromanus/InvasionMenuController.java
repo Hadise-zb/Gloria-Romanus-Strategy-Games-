@@ -90,7 +90,7 @@ public class InvasionMenuController extends MenuController{
     public void clickedrecuitbutton(ActionEvent e) throws IOException {
         //Systemcontrol system = getParent().get_system();
         String human_unit = unit_choice.getValue();
-        getParent().recuit_unit(human_unit);;
+        getParent().recuit_unit(e);;
 
         /*
         List<String> new_list = new ArrayList<String>();
