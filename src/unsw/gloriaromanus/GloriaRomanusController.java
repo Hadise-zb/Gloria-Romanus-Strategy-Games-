@@ -59,7 +59,7 @@ import org.json.JSONObject;
 
 import javafx.util.Pair;
 
-import javafx.scene.control.ChoiceBox;
+//import javafx.scene.control.ChoiceBox;
 
 public class GloriaRomanusController{
 
@@ -69,8 +69,8 @@ public class GloriaRomanusController{
   @FXML
   private StackPane stackPaneMain;
 
-  @FXML
-  private ChoiceBox <String> troop_choice;
+  //@FXML
+  //private ChoiceBox <String> troop_choice;
 
   // could use ControllerFactory?
   private ArrayList<Pair<MenuController, VBox>> controllerParentPairs;
@@ -86,11 +86,22 @@ public class GloriaRomanusController{
   private Feature currentlySelectedHumanProvince;
   private Feature currentlySelectedEnemyProvince;
 
+  private Feature from_human_province;
+  private Feature next_human_province;
+
+  private Feature from_enermy_province;
+  private Feature next_enermy_province;
+
   private FeatureLayer featureLayer_provinces;
+
+  private Faction human_faction;
+  private Faction enermy_faction;
+  private Systemcontrol system;
 
   @FXML
   private void initialize() throws JsonParseException, JsonMappingException, IOException, InterruptedException {
     // TODO = you should rely on an object oriented design to determine ownership
+    
     provinceToOwningFactionMap = getProvinceToOwningFactionMap();
 
     provinceToNumberTroopsMap = new HashMap<String, Integer>();
@@ -102,6 +113,14 @@ public class GloriaRomanusController{
     // TODO = load this from a configuration file you create (user should be able to
     // select in loading screen)
     humanFaction = "Rome";
+
+    // my fix here
+    Faction my_faction = new Faction("Rome");
+    this.human_faction = my_faction;
+
+    Systemcontrol new_system = new Systemcontrol(human_faction);
+    this.system = new_system;
+    //
 
     currentlySelectedHumanProvince = null;
     currentlySelectedEnemyProvince = null;
@@ -135,6 +154,18 @@ public class GloriaRomanusController{
     troop_choice.getItems().addAll(new_list);
   }
   */
+  public void recuit_unit(String new_unit) {
+    //TODO, fix below code
+    Unit unit = new Unit(new_unit, humanFaction, "Artillery");
+    String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+    System.out.println(humanProvince);
+    for (Province p : system.get_myfaction().getProvinces()) {
+      if (p.get_name().equals(humanProvince)) {          
+          p.get_units().add(unit);
+      }
+    }
+  }
+
   public void clickedmoveButton(ActionEvent e, String my_troop) throws IOException {
     if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
       String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
@@ -312,11 +343,34 @@ public class GloriaRomanusController{
                 String province = (String)f.getAttributes().get("name");
 
                 if (provinceToOwningFactionMap.get(province).equals(humanFaction)){
+                  // my fix here
+          
+                  ((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_remove();
+                  ((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_add(province);
+
+                  boolean judge = false;
                   // province owned by human
                   if (currentlySelectedHumanProvince != null){
+                    //my fix
+                    judge = true;
+                    next_human_province = f;
+                    if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+                      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumannextProvince(province);
+                    }
+                    
                     featureLayer.unselectFeature(currentlySelectedHumanProvince);
+                    //my fix
+                    //featureLayer.unselectFeature(next_human_province);
                   }
                   currentlySelectedHumanProvince = f;
+                  //my fix
+                  if (judge == false) {
+                    from_human_province = f;
+                    if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+                      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumancurrentProvince(province);
+                    }
+                  }
+
                   if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
                     ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setInvadingProvince(province);
                   }
@@ -324,9 +378,14 @@ public class GloriaRomanusController{
                 }
                 else{
                   if (currentlySelectedEnemyProvince != null){
+                    //my fix
+                    next_enermy_province = f;
+
                     featureLayer.unselectFeature(currentlySelectedEnemyProvince);
                   }
                   currentlySelectedEnemyProvince = f;
+                  //my fix
+                  from_enermy_province = f;
                   if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
                     ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setOpponentProvince(province);
                   }
@@ -334,8 +393,8 @@ public class GloriaRomanusController{
 
                 featureLayer.selectFeature(f);                
               }
-
               
+
             }
           } catch (InterruptedException | ExecutionException ex) {
             // ... must deal with checked exceptions thrown from the async identify
@@ -399,6 +458,11 @@ public class GloriaRomanusController{
       ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setInvadingProvince("");
       ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setOpponentProvince("");
     }
+    //my fix
+    if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumannextProvince("");
+      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumancurrentProvince("");
+    }
   }
 
   private void printMessageToTerminal(String message){
@@ -422,5 +486,9 @@ public class GloriaRomanusController{
     stackPaneMain.getChildren().remove(controllerParentPairs.get(0).getValue());
     Collections.reverse(controllerParentPairs);
     stackPaneMain.getChildren().add(controllerParentPairs.get(0).getValue());
+  }
+
+  public Systemcontrol get_system() {
+    return this.system;
   }
 }
