@@ -85,7 +85,6 @@ public class GloriaRomanusController{
 
   private Feature currentlySelectedHumanProvince;
   private Feature currentlySelectedEnemyProvince;
-  private Feature currentlySelectedNeibourProvince;
 
   private Feature from_human_province;
   private Feature next_human_province;
@@ -155,50 +154,24 @@ public class GloriaRomanusController{
     troop_choice.getItems().addAll(new_list);
   }
   */
-
-  /// Original code
-  // public void recuit_unit(String new_unit) {
-  //   //TODO, fix below code
-  //   Unit unit = new Unit(new_unit, humanFaction, "Artillery");
-  //   String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-  //   System.out.println(humanProvince);
-  //   for (Province p : system.get_myfaction().getProvinces()) {
-  //     if (p.get_name().equals(humanProvince)) {          
-  //         p.get_units().add(unit);
-  //     }
-  //   }
-  // }
-
-  public void recuit_unit(ActionEvent e) throws IOException {
+  public void recuit_unit(String new_unit) {
+    //TODO, fix below code
+    Unit unit = new Unit(new_unit, humanFaction, "Artillery");
     String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-    int numTroopsToTransfer = provinceToNumberTroopsMap.get(humanProvince) +1;
-    provinceToNumberTroopsMap.put(humanProvince, numTroopsToTransfer);
-
-    addAllPointGraphics(); // reset graphics
-
+    System.out.println(humanProvince);
+    for (Province p : system.get_myfaction().getProvinces()) {
+      if (p.get_name().equals(humanProvince)) {          
+          p.get_units().add(unit);
+      }
+    }
   }
 
-  /// Original code
-  // public void clickedmoveButton(ActionEvent e, String my_troop) throws IOException {
-  //   if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
-  //     String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-  //     String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
-  //     //movement(my_troop, humanProvince, enemyProvince);
-  //   }
-  // }
-
-  public void clickedmoveButton(ActionEvent e) throws IOException{
-      String currentProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-      String desProvince = (String)currentlySelectedNeibourProvince.getAttributes().get("name");
-      int numTroopsToTransfer = provinceToNumberTroopsMap.get(currentProvince);
-      int numDesTroop = provinceToNumberTroopsMap.get(desProvince);
-      provinceToNumberTroopsMap.put(desProvince, numTroopsToTransfer + numDesTroop);
-      provinceToNumberTroopsMap.put(currentProvince, 0);
-      addAllPointGraphics();
-  }
-
-  public void clickedTurnButton(ActionEvent e) throws IOException{
-      // TODO
+  public void clickedmoveButton(ActionEvent e, String my_troop) throws IOException {
+    if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
+      String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+      String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      //movement(my_troop, humanProvince, enemyProvince);
+    }
   }
   
   public void clickedInvadeButton(ActionEvent e) throws IOException {
@@ -280,6 +253,7 @@ public class GloriaRomanusController{
         LngLatAlt coor = p.getCoordinates();
         Point curPoint = new Point(coor.getLongitude(), coor.getLatitude(), SpatialReferences.getWgs84());
         PictureMarkerSymbol s = null;
+        PictureMarkerSymbol s2 = null;
         String province = (String) f.getProperty("name");
         String faction = provinceToOwningFactionMap.get(province);
 
@@ -296,10 +270,16 @@ public class GloriaRomanusController{
 
             // you can pass in a filename to create a PictureMarkerSymbol...
             s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
+            s2 = new PictureMarkerSymbol("images/legionary.png");
+            s2.setOffsetX(30);
+            s2.setOffsetY(30);
             break;
           case "Rome":
             // you can also pass in a javafx Image to create a PictureMarkerSymbol (different to BufferedImage)
             s = new PictureMarkerSymbol("images/legionary.png");
+            s2 = new PictureMarkerSymbol("images/legionary.png");
+            s2.setOffsetX(30);
+            s2.setOffsetY(30);
             break;
         
           // TODO = handle all faction names, and find a better structure...
@@ -307,8 +287,10 @@ public class GloriaRomanusController{
         t.setHaloColor(0xFFFFFFFF);
         t.setHaloWidth(2);
         Graphic gPic = new Graphic(curPoint, s);
+        Graphic gPic2 = new Graphic(curPoint, s2);
         Graphic gText = new Graphic(curPoint, t);
         graphicsOverlay.getGraphics().add(gPic);
+        graphicsOverlay.getGraphics().add(gPic2);
         graphicsOverlay.getGraphics().add(gText);
       } else {
         System.out.println("Non-point geo json object in file");
@@ -374,6 +356,8 @@ public class GloriaRomanusController{
           
                   ((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_remove();
                   ((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_add(province);
+
+
 
                   boolean judge = false;
                   // province owned by human
