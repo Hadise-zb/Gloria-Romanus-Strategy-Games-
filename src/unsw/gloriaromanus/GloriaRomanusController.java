@@ -154,25 +154,39 @@ public class GloriaRomanusController{
     troop_choice.getItems().addAll(new_list);
   }
   */
-  public void recuit_unit(String new_unit) {
-    //TODO, fix below code
-    Unit unit = new Unit(new_unit, humanFaction, "Artillery");
+
+  /// Original code
+  // public void recuit_unit(String new_unit) {
+  //   //TODO, fix below code
+  //   Unit unit = new Unit(new_unit, humanFaction, "Artillery");
+  //   String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+  //   System.out.println(humanProvince);
+  //   for (Province p : system.get_myfaction().getProvinces()) {
+  //     if (p.get_name().equals(humanProvince)) {          
+  //         p.get_units().add(unit);
+  //     }
+  //   }
+  // }
+
+  public void recuit_unit(ActionEvent e) throws IOException {
     String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-    System.out.println(humanProvince);
-    for (Province p : system.get_myfaction().getProvinces()) {
-      if (p.get_name().equals(humanProvince)) {          
-          p.get_units().add(unit);
-      }
-    }
+    int numTroopsToTransfer = provinceToNumberTroopsMap.get(humanProvince) +1;
+    provinceToNumberTroopsMap.put(humanProvince, numTroopsToTransfer);
+
+    addAllPointGraphics(); // reset graphics
+
   }
 
-  public void clickedmoveButton(ActionEvent e, String my_troop) throws IOException {
-    if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
-      String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-      String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
-      //movement(my_troop, humanProvince, enemyProvince);
-    }
-  }
+  /// Original code
+  // public void clickedmoveButton(ActionEvent e, String my_troop) throws IOException {
+  //   if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
+  //     String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+  //     String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+  //     //movement(my_troop, humanProvince, enemyProvince);
+  //   }
+  // }
+
+  pub
 
   public void clickedTurnButton(ActionEvent e) throws IOException{
       // TODO
