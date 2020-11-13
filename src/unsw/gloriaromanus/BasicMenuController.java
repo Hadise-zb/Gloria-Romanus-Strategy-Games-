@@ -45,7 +45,7 @@ public class BasicMenuController extends MenuController{
     @FXML
     public void clickedmoveButton(ActionEvent e) throws IOException {
         String my_troop = troop_choice.getValue();
-        getParent().clickedmoveButton(e);
+        getParent().clickedmoveButton(e, my_troop);
     }
 
     @FXML
@@ -60,10 +60,5 @@ public class BasicMenuController extends MenuController{
         new_list.add(c);
         
         troop_choice.getItems().addAll(new_list);
-    }
-
-    @FXML
-    public void clickedTurnButton(ActionEvent e) throws IOException{
-        getParent().clickedTurnButton(e);    
     }
 }

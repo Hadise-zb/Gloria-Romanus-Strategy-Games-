@@ -82,7 +82,7 @@ public class InvasionMenuController extends MenuController{
     public void clickedmoveButton(ActionEvent e) throws IOException {
         
         String my_troop = troop_choice.getValue();
-        getParent().clickedmoveButton(e);
+        getParent().clickedmoveButton(e, my_troop);
         
     }
 
@@ -90,7 +90,7 @@ public class InvasionMenuController extends MenuController{
     public void clickedrecuitbutton(ActionEvent e) throws IOException {
         //Systemcontrol system = getParent().get_system();
         String human_unit = unit_choice.getValue();
-        getParent().recuit_unit(e);;
+        getParent().recuit_unit(human_unit);;
 
         /*
         List<String> new_list = new ArrayList<String>();
@@ -105,11 +105,6 @@ public class InvasionMenuController extends MenuController{
         
     }
 
-    @FXML
-    public void clickedTurnButton(ActionEvent e) throws IOException{
-        // TOdo
-    }
-
     public void unit_add(String province) {
         System.out.println(province);
 
@@ -117,7 +112,6 @@ public class InvasionMenuController extends MenuController{
         Systemcontrol system = getParent().get_system();
         for (Province p : system.get_myfaction().getProvinces()) {
             if (p.get_name().equals(province)) {
-                System.out.println("ha");
                 for (Unit u : p.get_units()) {
                     System.out.println(u.get_name());
                     new_list.add(u.get_name());

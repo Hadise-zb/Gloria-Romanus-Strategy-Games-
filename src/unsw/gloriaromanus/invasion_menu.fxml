@@ -42,16 +42,15 @@
 
     <HBox>
         <VBox>
-            <Label text="Current province" />
-            <TextField fx:id="currenthumanprovince" editable="false" text="" />
+            <Label text="Starting province" />
+            <TextField fx:id="currenthumanprovince" />
         </VBox>
         <VBox>
             <Label text="Destination province" />
-            <TextField fx:id="nexthumanprovince" editable="false" text="" />
+            <TextField fx:id="nexthumanprovince" />
         </VBox>
     </HBox>
     <Button onAction="#clickedmoveButton" text="Move" />
-    
 
     <HBox>
         <VBox />
@@ -79,5 +78,4 @@
         <TextArea fx:id="output_terminal" editable="false" text="" />
     </VBox>
     <Button onAction="#clickedSwitchMenu" text="Switch Menus" />
-    <Button onAction="#clickedTurnButton" text="End Turn" />
 </VBox>
