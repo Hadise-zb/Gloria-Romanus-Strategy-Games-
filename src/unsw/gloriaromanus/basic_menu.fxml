@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<VBox maxWidth="446.0" prefHeight="270.0" prefWidth="446.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="unsw.gloriaromanus.BasicMenuController">
+<VBox maxWidth="446.0" prefHeight="270.0" prefWidth="446.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.BasicMenuController">
     <padding>
         <Insets topRightBottomLeft="10" />
     </padding>
@@ -26,16 +26,19 @@
             </fills>
         </Background>
     </background>
-   <HBox prefHeight="54.0" prefWidth="426.0">
+   <HBox prefHeight="51.0" prefWidth="426.0">
       <children>
-         <Label prefHeight="38.0" prefWidth="425.0" text="                                         Menu for recuiting" textFill="#bd2a2a" />
+         <Label graphicTextGap="10.0" prefHeight="50.0" prefWidth="426.0" text="                                                 Start menu" textAlignment="JUSTIFY" textFill="#bd2a2a" />
       </children>
    </HBox>
-   <Label prefHeight="18.0" prefWidth="308.0" text="Recuit                    Unit" />
-   <HBox prefHeight="100.0" prefWidth="200.0">
+   <Label prefHeight="18.0" prefWidth="431.0" text="Player 1                                               Player 2" />
+   <HBox prefHeight="100.0" prefWidth="445.0">
       <children>
-         <Button mnemonicParsing="false" onAction="#clickedrecuitbutton" text="Recuit" textFill="#570a0a" />
-         <ChoiceBox fx:id="unit_choice" prefWidth="150.0" />
+         <ChoiceBox fx:id="choose_player1" prefHeight="26.0" prefWidth="124.0" />
+         <Button mnemonicParsing="false" onAction="#confirmplayer1" text="Confirm" textFill="#160101" />
+         <VBox prefHeight="100.0" prefWidth="26.0" />
+         <ChoiceBox fx:id="choose_player2" prefHeight="26.0" prefWidth="130.0" />
+         <Button mnemonicParsing="false" onAction="#confirmplayer2" text="Confirm" />
       </children>
    </HBox>
    <HBox prefHeight="27.0" prefWidth="426.0">

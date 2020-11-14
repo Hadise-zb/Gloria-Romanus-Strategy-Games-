@@ -54,17 +54,24 @@ public class Systemcontrol implements TurnSubject{
         //    this.enermyFaction = new Faction("Gaul");
         //}
         this.enermyFaction = enermy_faction;
-
+        
+        //
+        this.attach(myFaction);
+        this.attach(enermyFaction);
+        //
         try {
             JSONObject matrix = new JSONObject(
                 Files.readString(Paths.get("src/unsw/gloriaromanus/initial_province_ownership.json")));
             for (String key : matrix.keySet()) {
                 JSONArray pro = matrix.getJSONArray(key);
+                
+
                 if (myFaction.get_name().equals(key)) {
                     for (int j = 0; j < pro.length (); j++) {
 
                         Province human_province = new Province(pro.getString (j), myFaction, 0, 3.0);
                         myFaction.getProvinces().add(human_province);
+                        
                     }
                 } else {
                     for (int j = 0; j < pro.length (); j++) {

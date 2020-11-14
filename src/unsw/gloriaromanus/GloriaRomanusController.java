@@ -119,6 +119,10 @@ public class GloriaRomanusController{
     enermyFaction = "Gaul";
 
     // my fix here
+    //String humansfaction = ((BasicMenuController)controllerParentPairs.get(0).getKey()).get_human_unit();
+    //String enermysfaction = ((BasicMenuController)controllerParentPairs.get(0).getKey()).get_human_unit();
+    
+    // my fix here
     Faction my_faction = new Faction("Rome");
     this.human_faction = my_faction;
 
@@ -132,7 +136,7 @@ public class GloriaRomanusController{
     currentlySelectedHumanProvince = null;
     currentlySelectedEnemyProvince = null;
 
-    String []menus = {"invasion_menu.fxml", "basic_menu.fxml"};
+    String []menus = {"basic_menu.fxml", "invasion_menu.fxml"};
     controllerParentPairs = new ArrayList<Pair<MenuController, VBox>>();
     for (String fxmlName: menus){
       System.out.println(fxmlName);
@@ -146,7 +150,6 @@ public class GloriaRomanusController{
     stackPaneMain.getChildren().add(controllerParentPairs.get(0).getValue());
 
     initializeProvinceLayers();
-
   }
   
   /*
@@ -335,7 +338,9 @@ public class GloriaRomanusController{
         //} else {
         //  new_faction = system.get_enermyfaction();
         //}
-
+        //System.out.println(system == null);
+        //System.out.println(system.get_myfaction() == null);
+        //System.out.println(system.get_myfaction().getProvinces() == null);
         for (Province pro : system.get_myfaction().getProvinces()) {
           if (pro.get_name().equals(province)) {
             //System.out.println("yes");
@@ -439,8 +444,8 @@ public class GloriaRomanusController{
             // then you could convert it to JavaFX image https://stackoverflow.com/a/30970114
 
             // you can pass in a filename to create a PictureMarkerSymbol...
-            //s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
-            s = new PictureMarkerSymbol("images/Celtic_Druid.png");
+            s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
+            //s = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Flags/CelticFlag.png");
             break;
           case "Rome":
             // you can also pass in a javafx Image to create a PictureMarkerSymbol (different to BufferedImage)
@@ -448,6 +453,9 @@ public class GloriaRomanusController{
             break;
         
           // TODO = handle all faction names, and find a better structure...
+          case "Carthaginian":
+            s = new PictureMarkerSymbol("images/legionary.png");
+            break;
         }
         t.setHaloColor(0xFFFFFFFF);
         t.setHaloWidth(2);
@@ -765,5 +773,9 @@ public class GloriaRomanusController{
       ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumannextProvince("");
       ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumancurrentProvince("");
     }
+  }
+
+  public void EndTurn() {
+    system.endTurn();
   }
 }
