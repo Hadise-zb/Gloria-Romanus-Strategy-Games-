@@ -222,12 +222,19 @@ public class GloriaRomanusController{
   public void clickedInvadeButton(ActionEvent e) throws IOException {
     //System.out.println(currentlySelectedHumanProvince == null);
     //System.out.println(currentlySelectedEnemyProvince == null);
+    String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
     
     if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
       String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
       
       //my fix here
+      if (whose_turn.equals("enermy")) {
+        String temp = enemyProvince;
+        enemyProvince = humanProvince;
+        humanProvince = temp;
+      } 
+      
       System.out.println(humanProvince + "  " + enemyProvince);
       //
       if (confirmIfProvincesConnected(humanProvince, enemyProvince)){
@@ -236,11 +243,19 @@ public class GloriaRomanusController{
         int choice = r.nextInt(2);
         if (choice == 0){
           // human won. Transfer 40% of troops of human over. No casualties by human, but enemy loses all troops
-          int numTroopsToTransfer = provinceToNumberTroopsMap.get(humanProvince)*2/5;
-          provinceToNumberTroopsMap.put(enemyProvince, numTroopsToTransfer);
-          provinceToNumberTroopsMap.put(humanProvince, provinceToNumberTroopsMap.get(humanProvince)-numTroopsToTransfer);
-          provinceToOwningFactionMap.put(enemyProvince, humanFaction);
-          printMessageToTerminal("Won battle!");
+          if (whose_turn.equals("human")) {
+            int numTroopsToTransfer = provinceToNumberTroopsMap.get(humanProvince)*2/5;
+            provinceToNumberTroopsMap.put(enemyProvince, numTroopsToTransfer);
+            provinceToNumberTroopsMap.put(humanProvince, provinceToNumberTroopsMap.get(humanProvince)-numTroopsToTransfer);
+            provinceToOwningFactionMap.put(enemyProvince, humanFaction);
+            printMessageToTerminal("Won battle!");
+          } else {
+            int numTroopsToTransfer = provinceToNumberTroopsMap.get(humanProvince)*2/5;
+            provinceToNumberTroopsMap.put(enemyProvince, numTroopsToTransfer);
+            provinceToNumberTroopsMap.put(humanProvince, provinceToNumberTroopsMap.get(humanProvince)-numTroopsToTransfer);
+            provinceToOwningFactionMap.put(enemyProvince, enermyFaction);
+            printMessageToTerminal("Won battle!");
+          }
         }
         else{
           // enemy won. Human loses 60% of soldiers in the province
@@ -435,6 +450,12 @@ public class GloriaRomanusController{
         }
         t.setHaloColor(0xFFFFFFFF);
         t.setHaloWidth(2);
+
+        //
+        //System.out.println(curPoint == null);
+        //System.out.println(s == null);
+        //
+
         Graphic gPic = new Graphic(curPoint, s);
         Graphic gText = new Graphic(curPoint, t);
         graphicsOverlay.getGraphics().add(gPic);
