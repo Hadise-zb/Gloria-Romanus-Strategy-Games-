@@ -116,13 +116,13 @@ public class GloriaRomanusController{
     // TODO = load this from a configuration file you create (user should be able to
     // select in loading screen)
     humanFaction = "Rome";
-    enermyFaction = "Gual";
+    enermyFaction = "Gaul";
 
     // my fix here
     Faction my_faction = new Faction("Rome");
     this.human_faction = my_faction;
 
-    Faction enermy_faction = new Faction("Gual");
+    Faction enermy_faction = new Faction("Gaul");
     this.enermy_faction = enermy_faction;
 
     Systemcontrol new_system = new Systemcontrol(human_faction, enermy_faction);
@@ -429,6 +429,7 @@ public class GloriaRomanusController{
           }
         }
         //
+        //System.out.println(faction);
         //
         switch (faction) {
           case "Gaul":
@@ -438,8 +439,8 @@ public class GloriaRomanusController{
             // then you could convert it to JavaFX image https://stackoverflow.com/a/30970114
 
             // you can pass in a filename to create a PictureMarkerSymbol...
-            s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
-    
+            //s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
+            s = new PictureMarkerSymbol("images/Celtic_Druid.png");
             break;
           case "Rome":
             // you can also pass in a javafx Image to create a PictureMarkerSymbol (different to BufferedImage)
