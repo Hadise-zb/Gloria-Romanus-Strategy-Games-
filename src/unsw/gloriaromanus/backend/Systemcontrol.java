@@ -87,6 +87,10 @@ public class Systemcontrol implements TurnSubject{
         this.enermyFaction = enermy;
     }
 
+    public Faction getEnermyFaction(){
+        return this.enermyFaction;
+    }
+
     public Faction get_myfaction() {
         return this.myFaction;
     }
