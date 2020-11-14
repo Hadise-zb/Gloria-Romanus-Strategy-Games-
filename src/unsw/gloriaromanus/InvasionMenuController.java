@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+//import javafx.scene.control.
 
 import java.util.List;
 import java.util.ArrayList;
@@ -21,6 +23,11 @@ public class InvasionMenuController extends MenuController{
     private TextField opponent_province;
     @FXML
     private TextArea output_terminal;
+
+    //my fix here
+    @FXML
+    private Label player;
+
     @FXML
     private ChoiceBox <String> troop_choice;
 
@@ -31,6 +38,8 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     private ChoiceBox <String> unit_choice;
+
+    private String whose_turn = "human";
 
     // https://stackoverflow.com/a/30171444
     @FXML
@@ -68,6 +77,7 @@ public class InvasionMenuController extends MenuController{
         new_list.add("druid");
         new_list.add("melee infantry");
         unit_choice.getItems().addAll(new_list);
+        //Label player = new Label("");
 
         //Systemcontrol new_system = new Systemcontrol();
     }
@@ -90,8 +100,9 @@ public class InvasionMenuController extends MenuController{
     public void clickedrecuitbutton(ActionEvent e) throws IOException {
         //Systemcontrol system = getParent().get_system();
         String human_unit = unit_choice.getValue();
-        getParent().recuit_unit(human_unit);;
-
+        String province = getParent().recuit_unit(human_unit);
+        unit_remove();
+        unit_add(province);
         /*
         List<String> new_list = new ArrayList<String>();
         String a = "A";
@@ -104,21 +115,50 @@ public class InvasionMenuController extends MenuController{
         */
         
     }
+    
+    @FXML
+    public void clickEndturn(ActionEvent e) throws IOException {
+        //Systemcontrol system = getParent().get_system();
+        //getParent().
+        if (this.whose_turn.equals("human")) {
+            //player.setFont(new Font("Arial", 24));
+            player.setText("player2");
+            this.whose_turn = "enermy";
+            System.out.println(player.getText());
+        } else {
+            this.whose_turn = "human";
+            player.setText("player1");
+            System.out.println(player.getText());
+        }
+
+        currenthumanprovince.setText("");
+        nexthumanprovince.setText("");
+        invading_province.setText("");
+        opponent_province.setText("");
+        output_terminal.clear();
+        troop_choice.getItems().clear();
+
+        getParent().clear_feature();
+    }
 
     public void unit_add(String province) {
-        System.out.println(province);
-
+        //System.out.println(province);
+        System.out.println(troop_choice.getValue());
         List<String> new_list = new ArrayList<String>();
         Systemcontrol system = getParent().get_system();
         for (Province p : system.get_myfaction().getProvinces()) {
             if (p.get_name().equals(province)) {
-                System.out.println("ha");
+                //System.out.println("ha");
                 for (Unit u : p.get_units()) {
                     System.out.println(u.get_name());
                     new_list.add(u.get_name());
                 }
+                break;
             }
         }
+        //for (String u : new_list) {
+        System.out.println(new_list);
+        //}
         troop_choice.getItems().addAll(new_list);
         /*
         List<String> new_list = new ArrayList<String>();
@@ -131,9 +171,31 @@ public class InvasionMenuController extends MenuController{
         troop_choice.getItems().addAll(new_list);
         */
     }
+    
+    public void unit_add_enermy(String province) {
+        System.out.println(province);
+
+        List<String> new_list = new ArrayList<String>();
+        Systemcontrol system = getParent().get_system();
+        for (Province p : system.get_enermyfaction().getProvinces()) {
+            if (p.get_name().equals(province)) {
+                System.out.println("ha");
+                for (Unit u : p.get_units()) {
+                    System.out.println(u.get_name());
+                    new_list.add(u.get_name());
+                }
+                break;
+            }
+        }
+        troop_choice.getItems().addAll(new_list);
+    }
 
     public void unit_remove() {
         troop_choice.getItems().clear();    
+    }
+
+    public String judge_turn() {
+        return this.whose_turn;
     }
     
 }

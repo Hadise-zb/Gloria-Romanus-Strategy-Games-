@@ -82,6 +82,7 @@ public class GloriaRomanusController{
   private Map<String, Integer> provinceToNumberTroopsMap;
 
   private String humanFaction;
+  private String enermyFaction;
 
   private Feature currentlySelectedHumanProvince;
   private Feature currentlySelectedEnemyProvince;
@@ -113,12 +114,16 @@ public class GloriaRomanusController{
     // TODO = load this from a configuration file you create (user should be able to
     // select in loading screen)
     humanFaction = "Rome";
+    enermyFaction = "Gual";
 
     // my fix here
     Faction my_faction = new Faction("Rome");
     this.human_faction = my_faction;
 
-    Systemcontrol new_system = new Systemcontrol(human_faction);
+    Faction enermy_faction = new Faction("Gual");
+    this.enermy_faction = enermy_faction;
+
+    Systemcontrol new_system = new Systemcontrol(human_faction, enermy_faction);
     this.system = new_system;
     //
 
@@ -154,15 +159,32 @@ public class GloriaRomanusController{
     troop_choice.getItems().addAll(new_list);
   }
   */
-  public void recuit_unit(String new_unit) {
+  public String recuit_unit(String new_unit) throws JsonParseException, JsonMappingException, IOException {
     //TODO, fix below code
-    Unit unit = new Unit(new_unit, humanFaction, "Artillery");
-    String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-    System.out.println(humanProvince);
-    for (Province p : system.get_myfaction().getProvinces()) {
-      if (p.get_name().equals(humanProvince)) {          
-          p.get_units().add(unit);
+    String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
+    if (whose_turn.equals("human")) {
+      Unit unit = new Unit(new_unit, humanFaction, "Artillery");
+      String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+      //System.out.println(humanProvince);
+      for (Province p : system.get_myfaction().getProvinces()) {
+        if (p.get_name().equals(humanProvince)) {          
+            p.get_units().add(unit);
+            break;
+        }
       }
+      addAllPointGraphics();
+      return humanProvince;
+    } else {
+      Unit unit = new Unit(new_unit, enermyFaction, "Artillery");
+      String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      for (Province p : system.get_enermyfaction().getProvinces()) {
+        if (p.get_name().equals(enemyProvince)) {          
+            p.get_units().add(unit);
+            break;
+        }
+      }
+      addAllPointGraphics();
+      return enemyProvince;
     }
   }
 
@@ -260,6 +282,109 @@ public class GloriaRomanusController{
             faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
             HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
 
+        //my fix here 
+        //String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
+        //Faction new_faction = null;
+        //if (whose_turn.equals("human")) {
+        //  new_faction = system.get_myfaction();
+        //} else {
+        //  new_faction = system.get_enermyfaction();
+        //}
+
+        for (Province pro : system.get_myfaction().getProvinces()) {
+          if (pro.get_name().equals(province)) {
+            //System.out.println("yes");
+            for (Unit u : pro.get_units()) {
+              if (u.get_name().equals("pikemen")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Pikeman/Pikeman_NB.png");
+                s3.setOffsetX(-100);
+                Graphic gPic3 = new Graphic(curPoint, s3);
+                graphicsOverlay.getGraphics().add(gPic3);
+              } else if (u.get_name().equals("elephant")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
+                s3.setOffsetX(-100);
+                Graphic gPic3 = new Graphic(curPoint, s3);
+                graphicsOverlay.getGraphics().add(gPic3); 
+              } else if (u.get_name().equals("hoplite")){
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Hoplite/Hoplite_NB.png");
+                s3.setOffsetY(100);
+                Graphic gPic4 = new Graphic(curPoint, s3);
+                graphicsOverlay.getGraphics().add(gPic4);
+              } else if (u.get_name().equals("elephant")){
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
+                s3.setOffsetY(-100);
+                Graphic gPic5 = new Graphic(curPoint, s3);
+                graphicsOverlay.getGraphics().add(gPic5);
+              } else if (u.get_name().equals("horse archer")){
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Archer/Horse_Archer_NB.png");
+                s3.setOffsetX(100);
+                s3.setOffsetY(100);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("melee infantry")){
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Heavy_Cavalry/Horse_Heavy_Cavalry_NB.png");
+                s3.setOffsetX(-100);
+                s3.setOffsetY(-100);
+                Graphic gPic7 = new Graphic(curPoint, s3);
+                graphicsOverlay.getGraphics().add(gPic7);
+              }
+            } 
+          }
+        }
+
+        for (Province prov : system.get_enermyfaction().getProvinces()) {
+          if (prov.get_name().equals(province)) {
+            for (Unit u : prov.get_units()) {
+              if (u.get_name().equals("pikemen")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Pikeman/Pikeman_NB.png");
+                s3.setOffsetX(-100);
+                Graphic gPic3 = new Graphic(curPoint, s3);
+                graphicsOverlay.getGraphics().add(gPic3);
+              } else if (u.get_name().equals("elephant")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
+                s3.setOffsetX(-100);
+                Graphic gPic3 = new Graphic(curPoint, s3);
+                graphicsOverlay.getGraphics().add(gPic3); 
+              } else if (u.get_name().equals("hoplite")){
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Hoplite/Hoplite_NB.png");
+                s3.setOffsetY(100);
+                Graphic gPic4 = new Graphic(curPoint, s3);
+                graphicsOverlay.getGraphics().add(gPic4);
+              } else if (u.get_name().equals("elephant")){
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
+                s3.setOffsetY(-100);
+                Graphic gPic5 = new Graphic(curPoint, s3);
+                graphicsOverlay.getGraphics().add(gPic5);
+              } else if (u.get_name().equals("horse archer")){
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Archer/Horse_Archer_NB.png");
+                s3.setOffsetX(100);
+                s3.setOffsetY(100);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("melee infantry")){
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Heavy_Cavalry/Horse_Heavy_Cavalry_NB.png");
+                s3.setOffsetX(-100);
+                s3.setOffsetY(-100);
+                Graphic gPic7 = new Graphic(curPoint, s3);
+                graphicsOverlay.getGraphics().add(gPic7);
+              }
+            }
+          }
+        }
+        //
+        //
         switch (faction) {
           case "Gaul":
             // note can instantiate a PictureMarkerSymbol using the JavaFX Image class - so could
@@ -269,6 +394,7 @@ public class GloriaRomanusController{
 
             // you can pass in a filename to create a PictureMarkerSymbol...
             s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
+    
             break;
           case "Rome":
             // you can also pass in a javafx Image to create a PictureMarkerSymbol (different to BufferedImage)
@@ -342,55 +468,123 @@ public class GloriaRomanusController{
                 Feature f = features.get(0);
                 String province = (String)f.getAttributes().get("name");
 
-                if (provinceToOwningFactionMap.get(province).equals(humanFaction)){
-                  // my fix here
-          
-                  ((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_remove();
-                  ((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_add(province);
-
-                  boolean judge = false;
-                  // province owned by human
-                  if (currentlySelectedHumanProvince != null){
-                    //my fix
-                    judge = true;
-                    next_human_province = f;
-                    if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
-                      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumannextProvince(province);
-                    }
+                //my fix here
+                //if now is human turn
+                String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
+                if (whose_turn.equals("human")) {
+                  if (provinceToOwningFactionMap.get(province).equals(humanFaction)){
                     
-                    featureLayer.unselectFeature(currentlySelectedHumanProvince);
+                    // my fix here    
+                    ((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_remove();
+                    ((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_add(province);
+
+                    boolean judge = false;
+                    // province owned by human
+                    if (currentlySelectedHumanProvince != null){
+                      //my fix
+                      judge = true;
+                      next_human_province = f;
+                      if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+                        ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumannextProvince(province);
+                      }
+                      
+                      featureLayer.unselectFeature(currentlySelectedHumanProvince);
+                      //my fix
+                      //featureLayer.unselectFeature(next_human_province);
+                    }
+                    currentlySelectedHumanProvince = f;
                     //my fix
-                    //featureLayer.unselectFeature(next_human_province);
-                  }
-                  currentlySelectedHumanProvince = f;
-                  //my fix
-                  if (judge == false) {
-                    from_human_province = f;
+                    if (judge == false) {
+                      from_human_province = f;
+                      if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+                        ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumancurrentProvince(province);
+                      }
+                    }
+
                     if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
-                      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumancurrentProvince(province);
+                      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setInvadingProvince(province);
+                    }
+
+                  }
+                  else{
+                    
+                    //my fix here
+                    //boolean judge = false;
+                    //((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_remove();
+                    //((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_add_enermy(province);
+
+                    if (currentlySelectedEnemyProvince != null){
+                      //my fix
+                      //judge = true;
+                      next_enermy_province = f;
+                      //
+
+                      featureLayer.unselectFeature(currentlySelectedEnemyProvince);
+                    }
+                    currentlySelectedEnemyProvince = f;
+                    //my fix
+                    from_enermy_province = f;
+                    if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+                      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setOpponentProvince(province);
                     }
                   }
+                } else {
+                  if (!provinceToOwningFactionMap.get(province).equals(humanFaction)){
+                    
+                    // my fix here    
+                    ((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_remove();
+                    ((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_add_enermy(province);
 
-                  if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
-                    ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setInvadingProvince(province);
-                  }
-
-                }
-                else{
-                  if (currentlySelectedEnemyProvince != null){
+                    boolean judge = false;
+                    // province owned by human
+                    if (currentlySelectedEnemyProvince != null){
+                      //my fix
+                      judge = true;
+                      next_enermy_province = f;
+                      if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+                        ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumannextProvince(province);
+                      }
+                      
+                      featureLayer.unselectFeature(currentlySelectedEnemyProvince);
+                      //my fix
+                      //featureLayer.unselectFeature(next_human_province);
+                    }
+                    currentlySelectedEnemyProvince = f;
                     //my fix
-                    next_enermy_province = f;
+                    if (judge == false) {
+                      from_enermy_province = f;
+                      if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+                        ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumancurrentProvince(province);
+                      }
+                    }
 
-                    featureLayer.unselectFeature(currentlySelectedEnemyProvince);
-                  }
-                  currentlySelectedEnemyProvince = f;
-                  //my fix
-                  from_enermy_province = f;
-                  if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
-                    ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setOpponentProvince(province);
+                    if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+                      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setInvadingProvince(province);
+                    }
+
+                  } else {
+                    
+                    //my fix here
+                    //boolean judge = false;
+                    //((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_remove();
+                    //((InvasionMenuController)controllerParentPairs.get(0).getKey()).unit_add_enermy(province);
+
+                    if (currentlySelectedEnemyProvince != null){
+                      //my fix
+                      //judge = true;
+                      next_enermy_province = f;
+                      //
+
+                      featureLayer.unselectFeature(currentlySelectedEnemyProvince);
+                    }
+                    currentlySelectedEnemyProvince = f;
+                    //my fix
+                    from_enermy_province = f;
+                    if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+                      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setOpponentProvince(province);
+                    }
                   }
                 }
-
                 featureLayer.selectFeature(f);                
               }
               
@@ -490,5 +684,24 @@ public class GloriaRomanusController{
 
   public Systemcontrol get_system() {
     return this.system;
+  }
+
+  public void clear_feature() {
+    //FeatureLayer featureLayer = (FeatureLayer) identifyLayerResult.getLayerContent();
+    //featureLayer.unselectFeature(currentlySelectedHumanProvince);
+    //featureLayer.unselectFeature(currentlySelectedEnemyProvince);
+   
+    featureLayer_provinces.unselectFeatures(Arrays.asList(currentlySelectedEnemyProvince, currentlySelectedHumanProvince));
+    currentlySelectedEnemyProvince = null;
+    currentlySelectedHumanProvince = null;
+    if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setInvadingProvince("");
+      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setOpponentProvince("");
+    }
+    //my fix
+    if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
+      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumannextProvince("");
+      ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumancurrentProvince("");
+    }
   }
 }

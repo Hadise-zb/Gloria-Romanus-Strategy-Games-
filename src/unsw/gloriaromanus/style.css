@@ -1,5 +1,5 @@
 .panel-region .label {
-    -fx-text-fill: white;
+    -fx-text-fill: Yellow;
   }
   
   .label {
@@ -25,3 +25,4 @@
   .color-picker .color-picker-label {
      -fx-text-fill: black;
   }
+
