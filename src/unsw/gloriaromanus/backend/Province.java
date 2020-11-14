@@ -497,16 +497,5 @@ public class Province {
         }
         
         return num;
-<<<<<<< HEAD
-      }
-
-    public static void main(String[] args){
-
-    }
-
-    
-}
-=======
     }    
 }
->>>>>>> origin/ZH_m2

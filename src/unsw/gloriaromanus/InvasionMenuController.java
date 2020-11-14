@@ -23,6 +23,8 @@ public class InvasionMenuController extends MenuController{
     private TextField opponent_province;
     @FXML
     private TextArea output_terminal;
+    @FXML
+    private TextField current_turn;
 
     //my fix here
     @FXML
@@ -63,6 +65,10 @@ public class InvasionMenuController extends MenuController{
 
     public void appendToTerminal(String message) {
         output_terminal.appendText(message + "\n");
+    }
+
+    public void setTurn(int n){
+        current_turn.setText(String.valueOf(n));
     }
 
     @FXML

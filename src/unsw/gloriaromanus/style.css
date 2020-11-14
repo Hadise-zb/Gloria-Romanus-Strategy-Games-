@@ -1,9 +1,5 @@
 .panel-region .label {
-<<<<<<< HEAD
-    -fx-text-fill: Brown;
-=======
-    -fx-text-fill: Yellow;
->>>>>>> origin/ZH_m2
+    -fx-text-fill: rgb(184, 158, 10);
   }
   
   .label {
