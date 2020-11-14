@@ -99,6 +99,8 @@ public class GloriaRomanusController{
   private Faction enermy_faction;
   private Systemcontrol system;
 
+  private String moved_unit = "";
+
   @FXML
   private void initialize() throws JsonParseException, JsonMappingException, IOException, InterruptedException {
     // TODO = you should rely on an object oriented design to determine ownership
@@ -114,13 +116,17 @@ public class GloriaRomanusController{
     // TODO = load this from a configuration file you create (user should be able to
     // select in loading screen)
     humanFaction = "Rome";
-    enermyFaction = "Gual";
+    enermyFaction = "Gaul";
 
+    // my fix here
+    //String humansfaction = ((BasicMenuController)controllerParentPairs.get(0).getKey()).get_human_unit();
+    //String enermysfaction = ((BasicMenuController)controllerParentPairs.get(0).getKey()).get_human_unit();
+    
     // my fix here
     Faction my_faction = new Faction("Rome");
     this.human_faction = my_faction;
 
-    Faction enermy_faction = new Faction("Gual");
+    Faction enermy_faction = new Faction("Gaul");
     this.enermy_faction = enermy_faction;
 
     Systemcontrol new_system = new Systemcontrol(human_faction, enermy_faction);
@@ -130,7 +136,7 @@ public class GloriaRomanusController{
     currentlySelectedHumanProvince = null;
     currentlySelectedEnemyProvince = null;
 
-    String []menus = {"invasion_menu.fxml", "basic_menu.fxml"};
+    String []menus = {"basic_menu.fxml", "invasion_menu.fxml"};
     controllerParentPairs = new ArrayList<Pair<MenuController, VBox>>();
     for (String fxmlName: menus){
       System.out.println(fxmlName);
@@ -144,7 +150,6 @@ public class GloriaRomanusController{
     stackPaneMain.getChildren().add(controllerParentPairs.get(0).getValue());
 
     initializeProvinceLayers();
-
   }
   
   /*
@@ -176,7 +181,7 @@ public class GloriaRomanusController{
       return humanProvince;
     } else {
       Unit unit = new Unit(new_unit, enermyFaction, "Artillery");
-      String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      String enemyProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       for (Province p : system.get_enermyfaction().getProvinces()) {
         if (p.get_name().equals(enemyProvince)) {          
             p.get_units().add(unit);
@@ -188,29 +193,72 @@ public class GloriaRomanusController{
     }
   }
 
-  public void clickedmoveButton(ActionEvent e, String my_troop) throws IOException {
-    if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
-      String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-      String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
-      //movement(my_troop, humanProvince, enemyProvince);
+  public void set_moved_unit(String unit) {
+    this.moved_unit = unit;
+  }
+
+  public void clickedmoveButton(ActionEvent e) throws IOException {
+    //if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
+    //  String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+    //  String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+    //movement(my_troop, humanProvince, enemyProvince);
+    //}
+    //my fix here 
+    String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
+    Boolean accept = false;
+    if (whose_turn.equals("human")) {
+      String fromhumanProvince = (String)from_human_province.getAttributes().get("name");
+      String nexthumanProvince = (String)next_human_province.getAttributes().get("name");
+      accept = system.human_move(moved_unit, fromhumanProvince, nexthumanProvince);
+    } else {
+      String fromenermyProvince = (String)from_enermy_province.getAttributes().get("name");
+      String nextenermyProvince = (String)next_enermy_province.getAttributes().get("name");
+      accept = system.human_move(moved_unit, fromenermyProvince, nextenermyProvince);
+    }
+    if (accept == false) {
+      printMessageToTerminal("Move request can't be accepted!");
+    } else {
+      addAllPointGraphics();
     }
   }
   
   public void clickedInvadeButton(ActionEvent e) throws IOException {
+    //System.out.println(currentlySelectedHumanProvince == null);
+    //System.out.println(currentlySelectedEnemyProvince == null);
+    String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
+    
     if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
       String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      
+      //my fix here
+      if (whose_turn.equals("enermy")) {
+        String temp = enemyProvince;
+        enemyProvince = humanProvince;
+        humanProvince = temp;
+      } 
+      
+      System.out.println(humanProvince + "  " + enemyProvince);
+      //
       if (confirmIfProvincesConnected(humanProvince, enemyProvince)){
         // TODO = have better battle resolution than 50% chance of winning
         Random r = new Random();
         int choice = r.nextInt(2);
         if (choice == 0){
           // human won. Transfer 40% of troops of human over. No casualties by human, but enemy loses all troops
-          int numTroopsToTransfer = provinceToNumberTroopsMap.get(humanProvince)*2/5;
-          provinceToNumberTroopsMap.put(enemyProvince, numTroopsToTransfer);
-          provinceToNumberTroopsMap.put(humanProvince, provinceToNumberTroopsMap.get(humanProvince)-numTroopsToTransfer);
-          provinceToOwningFactionMap.put(enemyProvince, humanFaction);
-          printMessageToTerminal("Won battle!");
+          if (whose_turn.equals("human")) {
+            int numTroopsToTransfer = provinceToNumberTroopsMap.get(humanProvince)*2/5;
+            provinceToNumberTroopsMap.put(enemyProvince, numTroopsToTransfer);
+            provinceToNumberTroopsMap.put(humanProvince, provinceToNumberTroopsMap.get(humanProvince)-numTroopsToTransfer);
+            provinceToOwningFactionMap.put(enemyProvince, humanFaction);
+            printMessageToTerminal("Won battle!");
+          } else {
+            int numTroopsToTransfer = provinceToNumberTroopsMap.get(humanProvince)*2/5;
+            provinceToNumberTroopsMap.put(enemyProvince, numTroopsToTransfer);
+            provinceToNumberTroopsMap.put(humanProvince, provinceToNumberTroopsMap.get(humanProvince)-numTroopsToTransfer);
+            provinceToOwningFactionMap.put(enemyProvince, enermyFaction);
+            printMessageToTerminal("Won battle!");
+          }
         }
         else{
           // enemy won. Human loses 60% of soldiers in the province
@@ -257,10 +305,9 @@ public class GloriaRomanusController{
         System.out.println("load failure");
       }
     });
+
     addAllPointGraphics();
   }
-
-
 
   private void addAllPointGraphics() throws JsonParseException, JsonMappingException, IOException {
     mapView.getGraphicsOverlays().clear();
@@ -275,8 +322,14 @@ public class GloriaRomanusController{
         org.geojson.Point p = (org.geojson.Point) f.getGeometry();
         LngLatAlt coor = p.getCoordinates();
         Point curPoint = new Point(coor.getLongitude(), coor.getLatitude(), SpatialReferences.getWgs84());
+        PictureMarkerSymbol s = null;
         String province = (String) f.getProperty("name");
         String faction = provinceToOwningFactionMap.get(province);
+        //Original code
+        //TextSymbol t = new TextSymbol(10,
+        //    faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
+        //    HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
+
 
         //my fix here 
         //String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
@@ -286,7 +339,9 @@ public class GloriaRomanusController{
         //} else {
         //  new_faction = system.get_enermyfaction();
         //}
-
+        //System.out.println(system == null);
+        //System.out.println(system.get_myfaction() == null);
+        //System.out.println(system.get_myfaction().getProvinces() == null);
         for (Province pro : system.get_myfaction().getProvinces()) {
           if (pro.get_name().equals(province)) {
             //System.out.println("yes");
@@ -296,56 +351,53 @@ public class GloriaRomanusController{
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Pikeman/Pikeman_NB.png");
                 s3.setOffsetX(-100);
                 Graphic gPic3 = new Graphic(curPoint, s3);
-                
+
                 TextSymbol text = new TextSymbol(10,
             faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
+                text.setOffsetX(-100);
+                text.setOffsetY(+50);
     
                 Graphic gText = new Graphic(curPoint, text);
                 
                 graphicsOverlay.getGraphics().add(gText);
-                graphicsOverlay.getGraphics().add(gPic3);
+                //graphicsOverlay.getGraphics().add(gPic3);
 
+
+                graphicsOverlay.getGraphics().add(gPic3);
               } else if (u.get_name().equals("elephant")) {
                 PictureMarkerSymbol s3 = null;
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
-                s3.setOffsetX(100);
+                s3.setOffsetX(-100);
                 Graphic gPic3 = new Graphic(curPoint, s3);
-                graphicsOverlay.getGraphics().add(gPic3);
-
-                TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
-            text.setHaloColor(0xFFFFFFFF);
-                text.setHaloWidth(2);
-                Graphic gText = new Graphic(curPoint, text);
-                graphicsOverlay.getGraphics().add(gText);
-
+                graphicsOverlay.getGraphics().add(gPic3); 
               } else if (u.get_name().equals("hoplite")){
                 PictureMarkerSymbol s3 = null;
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Hoplite/Hoplite_NB.png");
                 s3.setOffsetY(100);
                 Graphic gPic4 = new Graphic(curPoint, s3);
-                graphicsOverlay.getGraphics().add(gPic4);
-                
+
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + u.getNumSoldiers(), 0xFFFF0000,
-            HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                //text.setOffsetX(-100);
+                text.setOffsetY(+170);
+    
                 Graphic gText = new Graphic(curPoint, text);
+                
                 graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic4);
               } else if (u.get_name().equals("elephant")){
                 PictureMarkerSymbol s3 = null;
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
                 s3.setOffsetY(-100);
                 Graphic gPic5 = new Graphic(curPoint, s3);
                 graphicsOverlay.getGraphics().add(gPic5);
-                TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + u.getNumSoldiers(), 0xFFFF0000,
-            HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
-                Graphic gText = new Graphic(curPoint, text);
-                graphicsOverlay.getGraphics().add(gText);
               } else if (u.get_name().equals("horse archer")){
                 PictureMarkerSymbol s3 = null;
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Archer/Horse_Archer_NB.png");
@@ -353,11 +405,6 @@ public class GloriaRomanusController{
                 s3.setOffsetY(100);
                 Graphic gPic6 = new Graphic(curPoint, s3);
                 graphicsOverlay.getGraphics().add(gPic6);
-                TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + u.getNumSoldiers(), 0xFFFF0000,
-            HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
-                Graphic gText = new Graphic(curPoint, text);
-                graphicsOverlay.getGraphics().add(gText);
               } else if (u.get_name().equals("melee infantry")){
                 PictureMarkerSymbol s3 = null;
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Heavy_Cavalry/Horse_Heavy_Cavalry_NB.png");
@@ -365,11 +412,6 @@ public class GloriaRomanusController{
                 s3.setOffsetY(-100);
                 Graphic gPic7 = new Graphic(curPoint, s3);
                 graphicsOverlay.getGraphics().add(gPic7);
-                TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + u.getNumSoldiers(), 0xFFFF0000,
-            HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
-                Graphic gText = new Graphic(curPoint, text);
-                graphicsOverlay.getGraphics().add(gText);
               }
             } 
           }
@@ -384,48 +426,24 @@ public class GloriaRomanusController{
                 s3.setOffsetX(-100);
                 Graphic gPic3 = new Graphic(curPoint, s3);
                 graphicsOverlay.getGraphics().add(gPic3);
-                TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + u.getNumSoldiers(), 0xFFFF0000,
-            HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
-                
-                text.setHaloColor(0xFFFFFFFF);
-                text.setHaloWidth(2);
-
-                Graphic gText = new Graphic(curPoint, text);
-                graphicsOverlay.getGraphics().add(gText);
               } else if (u.get_name().equals("elephant")) {
                 PictureMarkerSymbol s3 = null;
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
                 s3.setOffsetX(-100);
                 Graphic gPic3 = new Graphic(curPoint, s3);
-                graphicsOverlay.getGraphics().add(gPic3);
-                TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + u.getNumSoldiers(), 0xFFFF0000,
-            HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
-                Graphic gText = new Graphic(curPoint, text);
-                graphicsOverlay.getGraphics().add(gText); 
+                graphicsOverlay.getGraphics().add(gPic3); 
               } else if (u.get_name().equals("hoplite")){
                 PictureMarkerSymbol s3 = null;
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Hoplite/Hoplite_NB.png");
                 s3.setOffsetY(100);
                 Graphic gPic4 = new Graphic(curPoint, s3);
                 graphicsOverlay.getGraphics().add(gPic4);
-                TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + u.getNumSoldiers(), 0xFFFF0000,
-            HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
-                Graphic gText = new Graphic(curPoint, text);
-                graphicsOverlay.getGraphics().add(gText);
               } else if (u.get_name().equals("elephant")){
                 PictureMarkerSymbol s3 = null;
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
                 s3.setOffsetY(-100);
                 Graphic gPic5 = new Graphic(curPoint, s3);
                 graphicsOverlay.getGraphics().add(gPic5);
-                TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + u.getNumSoldiers(), 0xFFFF0000,
-            HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
-                Graphic gText = new Graphic(curPoint, text);
-                graphicsOverlay.getGraphics().add(gText);
               } else if (u.get_name().equals("horse archer")){
                 PictureMarkerSymbol s3 = null;
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Archer/Horse_Archer_NB.png");
@@ -440,41 +458,72 @@ public class GloriaRomanusController{
                 s3.setOffsetY(-100);
                 Graphic gPic7 = new Graphic(curPoint, s3);
                 graphicsOverlay.getGraphics().add(gPic7);
-                TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + u.getNumSoldiers(), 0xFFFF0000,
-            HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
-                Graphic gText = new Graphic(curPoint, text);
-                graphicsOverlay.getGraphics().add(gText);
               }
             }
           }
         }
         //
+        //System.out.println(faction);
         //
-        // switch (faction) {
-        //   case "Gaul":
-        //     // note can instantiate a PictureMarkerSymbol using the JavaFX Image class - so could
-        //     // construct it with custom-produced BufferedImages stored in Ram
-        //     // http://jens-na.github.io/2013/11/06/java-how-to-concat-buffered-images/
-        //     // then you could convert it to JavaFX image https://stackoverflow.com/a/30970114
+        switch (faction) {
+          case "Gaul":
+            // note can instantiate a PictureMarkerSymbol using the JavaFX Image class - so could
+            // construct it with custom-produced BufferedImages stored in Ram
+            // http://jens-na.github.io/2013/11/06/java-how-to-concat-buffered-images/
+            // then you could convert it to JavaFX image https://stackoverflow.com/a/30970114
 
-        //     // you can pass in a filename to create a PictureMarkerSymbol...
-        //     s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
-    
-        //     break;
-        //   case "Rome":
-        //     // you can also pass in a javafx Image to create a PictureMarkerSymbol (different to BufferedImage)
-        //     s = new PictureMarkerSymbol("images/legionary.png");
-        //     break;
+            // you can pass in a filename to create a PictureMarkerSymbol...
+            TextSymbol t = new TextSymbol(10,
+              faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
+              HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
+
+            s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
+            //s = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Flags/CelticFlag.png");
+
+            t.setHaloColor(0xFFFFFFFF);
+            t.setHaloWidth(2);
+
+            Graphic gPic = new Graphic(curPoint, s);
+            Graphic gText = new Graphic(curPoint, t);
+            graphicsOverlay.getGraphics().add(gPic);
+            graphicsOverlay.getGraphics().add(gText);
+            break;
+          case "Rome":
+            // you can also pass in a javafx Image to create a PictureMarkerSymbol (different to BufferedImage)
+            t = new TextSymbol(10,
+              faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
+              HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
+
+            s = new PictureMarkerSymbol("images/legionary.png");
+
+            t.setHaloColor(0xFFFFFFFF);
+            t.setHaloWidth(2);
+
+            gPic = new Graphic(curPoint, s);
+            gText = new Graphic(curPoint, t);
+            graphicsOverlay.getGraphics().add(gPic);
+            graphicsOverlay.getGraphics().add(gText);
+
+            break;
         
-        //   // TODO = handle all faction names, and find a better structure...
-        // }
-        // t.setHaloColor(0xFFFFFFFF);
-        // t.setHaloWidth(2);
-        // Graphic gPic = new Graphic(curPoint, s);
-        // Graphic gText = new Graphic(curPoint, t);
-        // graphicsOverlay.getGraphics().add(gPic);
-        // graphicsOverlay.getGraphics().add(gText);
+          // TODO = handle all faction names, and find a better structure...
+          case "Carthaginian":
+            s = new PictureMarkerSymbol("images/legionary.png");
+            break;
+        }
+        //original code
+        //t.setHaloColor(0xFFFFFFFF);
+        //t.setHaloWidth(2);
+
+        //
+        //System.out.println(curPoint == null);
+        //System.out.println(s == null);
+        //
+
+        //Graphic gPic = new Graphic(curPoint, s);
+        //Graphic gText = new Graphic(curPoint, t);
+        //graphicsOverlay.getGraphics().add(gPic);
+        //graphicsOverlay.getGraphics().add(gText);
       } else {
         System.out.println("Non-point geo json object in file");
       }
@@ -536,6 +585,8 @@ public class GloriaRomanusController{
 
                 //my fix here
                 //if now is human turn
+                //((InvasionMenuController)controllerParentPairs.get(0).getKey()).set_moving_unit();
+
                 String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
                 if (whose_turn.equals("human")) {
                   if (provinceToOwningFactionMap.get(province).equals(humanFaction)){
@@ -603,7 +654,7 @@ public class GloriaRomanusController{
 
                     boolean judge = false;
                     // province owned by human
-                    if (currentlySelectedEnemyProvince != null){
+                    if (currentlySelectedHumanProvince != null){
                       //my fix
                       judge = true;
                       next_enermy_province = f;
@@ -611,7 +662,7 @@ public class GloriaRomanusController{
                         ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumannextProvince(province);
                       }
                       
-                      featureLayer.unselectFeature(currentlySelectedEnemyProvince);
+                      featureLayer.unselectFeature(currentlySelectedHumanProvince);
                       //my fix
                       //featureLayer.unselectFeature(next_human_province);
                     }
@@ -650,6 +701,9 @@ public class GloriaRomanusController{
                       ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setOpponentProvince(province);
                     }
                   }
+                  Feature temp = currentlySelectedEnemyProvince;
+                  currentlySelectedEnemyProvince = currentlySelectedHumanProvince;
+                  currentlySelectedHumanProvince = temp;
                 }
                 featureLayer.selectFeature(f);                
               }
@@ -756,8 +810,13 @@ public class GloriaRomanusController{
     //FeatureLayer featureLayer = (FeatureLayer) identifyLayerResult.getLayerContent();
     //featureLayer.unselectFeature(currentlySelectedHumanProvince);
     //featureLayer.unselectFeature(currentlySelectedEnemyProvince);
-   
-    featureLayer_provinces.unselectFeatures(Arrays.asList(currentlySelectedEnemyProvince, currentlySelectedHumanProvince));
+    if (currentlySelectedEnemyProvince != null) {
+      featureLayer_provinces.unselectFeatures(Arrays.asList(currentlySelectedEnemyProvince));
+    }
+    if (currentlySelectedHumanProvince != null) {
+      featureLayer_provinces.unselectFeatures(Arrays.asList(currentlySelectedHumanProvince));
+    }
+    //featureLayer_provinces.unselectFeatures(Arrays.asList(currentlySelectedEnemyProvince, currentlySelectedHumanProvince));
     currentlySelectedEnemyProvince = null;
     currentlySelectedHumanProvince = null;
     if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){
@@ -769,5 +828,9 @@ public class GloriaRomanusController{
       ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumannextProvince("");
       ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumancurrentProvince("");
     }
+  }
+
+  public void EndTurn() {
+    system.endTurn();
   }
 }

@@ -497,6 +497,7 @@ public class Province {
         }
         
         return num;
+<<<<<<< HEAD
       }
 
     public static void main(String[] args){
@@ -505,3 +506,7 @@ public class Province {
 
     
 }
+=======
+    }    
+}
+>>>>>>> origin/ZH_m2

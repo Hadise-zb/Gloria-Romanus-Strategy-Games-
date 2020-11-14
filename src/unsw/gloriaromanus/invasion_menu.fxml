@@ -39,6 +39,7 @@
             <TextField fx:id="opponent_province" editable="false" text="" />
         </VBox>
     </HBox>
+<<<<<<< HEAD
     <Button onAction="#clickedInvadeButton" text="Invade" />
 
     <HBox>
@@ -52,6 +53,24 @@
         </VBox>
     </HBox>
     <Button onAction="#clickedmoveButton" text="Move" />
+=======
+   <VBox prefHeight="73.0" prefWidth="230.0">
+      <children>
+         <HBox prefHeight="62.0" prefWidth="230.0">
+            <children>
+                <Button onAction="#clickedInvadeButton" text="Invade" />
+               <HBox prefHeight="65.0" prefWidth="60.0" />
+                <Button onAction="#clickedmoveButton" prefHeight="26.0" prefWidth="51.0" text="Move" />
+            </children>
+         </HBox>
+         <HBox prefHeight="42.0" prefWidth="230.0">
+            <children>
+               <Button mnemonicParsing="false" onAction="#clikedclearfeature" text="Clear" />
+            </children>
+         </HBox>
+      </children>
+   </VBox>
+>>>>>>> origin/ZH_m2
 
     <HBox>
         <VBox />
@@ -60,6 +79,7 @@
       <children>
          <Label text="Troops" />
          <ChoiceBox fx:id="troop_choice" prefWidth="150.0" />
+         <Button mnemonicParsing="false" onAction="#clickedmakesure" text="make_sure" />
       </children>
    </VBox>
    <HBox prefHeight="14.0" prefWidth="230.0">
