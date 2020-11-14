@@ -154,16 +154,16 @@ public class GloriaRomanusController{
     troop_choice.getItems().addAll(new_list);
   }
   */
-  public void recuit_unit(String new_unit) {
+  public void recuit_unit(String new_unit) throws JsonParseException, JsonMappingException, IOException {
     //TODO, fix below code
     Unit unit = new Unit(new_unit, humanFaction, "Artillery");
     String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-    System.out.println(humanProvince);
     for (Province p : system.get_myfaction().getProvinces()) {
       if (p.get_name().equals(humanProvince)) {          
           p.get_units().add(unit);
       }
     }
+    addAllPointGraphics();
   }
 
   public void clickedmoveButton(ActionEvent e, String my_troop) throws IOException {
@@ -275,72 +275,134 @@ public class GloriaRomanusController{
             // then you could convert it to JavaFX image https://stackoverflow.com/a/30970114
 
             // you can pass in a filename to create a PictureMarkerSymbol...
+
             s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
             s2 = new PictureMarkerSymbol("images/legionary.png");
-            s2.setOffsetX(30);
-            s3 = new PictureMarkerSymbol("images/legionary.png");
-            s3.setOffsetX(-30);
-            s4 = new PictureMarkerSymbol("images/legionary.png");
-            s4.setOffsetY(30);
-            s5 = new PictureMarkerSymbol("images/legionary.png");
-            s5.setOffsetY(-30);
-            s6 = new PictureMarkerSymbol("images/legionary.png");
-            s6.setOffsetX(30);
-            s6.setOffsetY(30);
-            s7 = new PictureMarkerSymbol("images/legionary.png");
-            s7.setOffsetX(-30);
-            s7.setOffsetY(-30);
+            s2.setOffsetX(100);
+            s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Pikeman/Pikeman_NB.png");
+            s3.setOffsetX(-100);
+            s4 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Hoplite/Hoplite_NB.png");
+            s4.setOffsetY(100);
+            s5 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
+            s5.setOffsetY(-100);
+            s6 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Archer/Horse_Archer_NB.png");
+            s6.setOffsetX(100);
+            s6.setOffsetY(100);
+
+            s7 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Heavy_Cavalry/Horse_Heavy_Cavalry_NB.png");
+            s7.setOffsetX(-100);
+            s7.setOffsetY(-100);
             s8 = new PictureMarkerSymbol("images/legionary.png");
-            s8.setOffsetX(30);
-            s8.setOffsetY(-30);
+            s8.setOffsetX(100);
+            s8.setOffsetY(-100);
+
+            for (Province m : system.get_myfaction().getProvinces()) {
+              // if (p.get_name().equals(humanProvince)) {          
+              //     p.get_units().add(unit);
+              //
+              for (Unit n: m.get_units(){
+                if (n.get_name().equals("druid")){
+                  s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
+                  Graphic gPic = new Graphic(curPoint, s);
+                  graphicsOverlay.getGraphics().add(gPic);
+                }
+                if (n.get_name().equals("legionary")){
+                  s2 = new PictureMarkerSymbol("images/legionary.png");
+                  s2.setOffsetX(100);
+                  Graphic gPic2 = new Graphic(curPoint, s2);
+                  graphicsOverlay.getGraphics().add(gPic2);
+                }
+
+                if (n.get_name().equals("pikemen")){
+                  s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Pikeman/Pikeman_NB.png");
+                  s3.setOffsetX(-100);
+                  Graphic gPic3 = new Graphic(curPoint, s3);
+                  graphicsOverlay.getGraphics().add(gPic3);
+                }
+                
+                if (n.get_name().equals("hoplite")){
+                  s4 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Hoplite/Hoplite_NB.png");
+                  s4.setOffsetY(100);
+                  Graphic gPic4 = new Graphic(curPoint, s4);
+                  graphicsOverlay.getGraphics().add(gPic4);
+                }
+
+                if (n.get_name().equals("elephant")){
+                  s5 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
+                  s5.setOffsetY(-100);
+                  Graphic gPic5 = new Graphic(curPoint, s5);
+                  graphicsOverlay.getGraphics().add(gPic5);
+                }
+
+                if (n.get_name().equals("horse archer")){
+                  s6 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Archer/Horse_Archer_NB.png");
+                  s6.setOffsetX(100);
+                  s6.setOffsetY(100);
+                  Graphic gPic6 = new Graphic(curPoint, s6);
+                  graphicsOverlay.getGraphics().add(gPic6);
+                }
+
+                if (n.get_name().equals("melee infantry")){
+                  s7 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Heavy_Cavalry/Horse_Heavy_Cavalry_NB.png");
+                  s7.setOffsetX(-100);
+                  s7.setOffsetY(-100);
+                  Graphic gPic7 = new Graphic(curPoint, s7);
+                  graphicsOverlay.getGraphics().add(gPic7);
+                }
+
+                
+                
+              }
+             }
+            }
             
             
             break;
           case "Rome":
             // you can also pass in a javafx Image to create a PictureMarkerSymbol (different to BufferedImage)
-            s = new PictureMarkerSymbol("images/legionary.png");
-            s2 = new PictureMarkerSymbol("images/legionary.png");
-            s2.setOffsetX(30);
-            s3 = new PictureMarkerSymbol("images/legionary.png");
-            s3.setOffsetX(-30);
-            s4 = new PictureMarkerSymbol("images/legionary.png");
-            s4.setOffsetY(30);
-            s5 = new PictureMarkerSymbol("images/legionary.png");
-            s5.setOffsetY(-30);
-            s6 = new PictureMarkerSymbol("images/legionary.png");
-            s6.setOffsetX(30);
-            s6.setOffsetY(30);
-            s7 = new PictureMarkerSymbol("images/legionary.png");
-            s7.setOffsetX(-30);
-            s7.setOffsetY(-30);
-            s8 = new PictureMarkerSymbol("images/legionary.png");
-            s8.setOffsetX(30);
-            s8.setOffsetY(-30);
+            // s = new PictureMarkerSymbol("images/legionary.png");
+            // s2 = new PictureMarkerSymbol("images/legionary.png");
+            // s2.setOffsetX(30);
+            // s3 = new PictureMarkerSymbol("images/legionary.png");
+            // s3.setOffsetX(-30);
+            // s4 = new PictureMarkerSymbol("images/legionary.png");
+            // s4.setOffsetY(30);
+            // s5 = new PictureMarkerSymbol("images/legionary.png");
+            // s5.setOffsetY(-30);
+            // s6 = new PictureMarkerSymbol("images/legionary.png");
+            // s6.setOffsetX(30);
+            // s6.setOffsetY(30);
+            // s7 = new PictureMarkerSymbol("images/legionary.png");
+            // s7.setOffsetX(-30);
+            // s7.setOffsetY(-30);
+            // s8 = new PictureMarkerSymbol("images/legionary.png");
+            // s8.setOffsetX(30);
+            // s8.setOffsetY(-30);
             break;
         
           // TODO = handle all faction names, and find a better structure...
         }
         t.setHaloColor(0xFFFFFFFF);
         t.setHaloWidth(2);
-        Graphic gPic = new Graphic(curPoint, s);
-        Graphic gPic2 = new Graphic(curPoint, s2);
-        Graphic gPic3 = new Graphic(curPoint, s3);
-        Graphic gPic4 = new Graphic(curPoint, s4);
-        Graphic gPic5 = new Graphic(curPoint, s5);
-        Graphic gPic6 = new Graphic(curPoint, s6);
-        Graphic gPic7 = new Graphic(curPoint, s7);
-        Graphic gPic8 = new Graphic(curPoint, s8);
-        Graphic gText = new Graphic(curPoint, t);
-        graphicsOverlay.getGraphics().add(gPic);
-        graphicsOverlay.getGraphics().add(gPic2);
-        graphicsOverlay.getGraphics().add(gPic3);
-        graphicsOverlay.getGraphics().add(gPic4);
-        graphicsOverlay.getGraphics().add(gPic5);
-        graphicsOverlay.getGraphics().add(gPic6);
-        graphicsOverlay.getGraphics().add(gPic7);
-        graphicsOverlay.getGraphics().add(gPic8);
-        graphicsOverlay.getGraphics().add(gText);
-      } else {
+      //   Graphic gPic = new Graphic(curPoint, s);
+      //   Graphic gPic2 = new Graphic(curPoint, s2);
+      //   Graphic gPic3 = new Graphic(curPoint, s3);
+      //   Graphic gPic4 = new Graphic(curPoint, s4);
+      //   Graphic gPic5 = new Graphic(curPoint, s5);
+      //   Graphic gPic6 = new Graphic(curPoint, s6);
+      //   Graphic gPic7 = new Graphic(curPoint, s7);
+      //   Graphic gPic8 = new Graphic(curPoint, s8);
+      //   Graphic gText = new Graphic(curPoint, t);
+      //   graphicsOverlay.getGraphics().add(gPic);
+      //   graphicsOverlay.getGraphics().add(gPic2);
+      //   graphicsOverlay.getGraphics().add(gPic3);
+      //   graphicsOverlay.getGraphics().add(gPic4);
+      //   graphicsOverlay.getGraphics().add(gPic5);
+      //   graphicsOverlay.getGraphics().add(gPic6);
+      //   graphicsOverlay.getGraphics().add(gPic7);
+      //   graphicsOverlay.getGraphics().add(gPic8);
+      //   graphicsOverlay.getGraphics().add(gText);
+      // } else {
         System.out.println("Non-point geo json object in file");
       }
 
