@@ -99,6 +99,8 @@ public class GloriaRomanusController{
   private Faction enermy_faction;
   private Systemcontrol system;
 
+  private String moved_unit = "";
+
   @FXML
   private void initialize() throws JsonParseException, JsonMappingException, IOException, InterruptedException {
     // TODO = you should rely on an object oriented design to determine ownership
@@ -188,18 +190,46 @@ public class GloriaRomanusController{
     }
   }
 
-  public void clickedmoveButton(ActionEvent e, String my_troop) throws IOException {
-    if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
-      String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-      String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
-      //movement(my_troop, humanProvince, enemyProvince);
+  public void set_moved_unit(String unit) {
+    this.moved_unit = unit;
+  }
+
+  public void clickedmoveButton(ActionEvent e) throws IOException {
+    //if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
+    //  String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+    //  String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+    //movement(my_troop, humanProvince, enemyProvince);
+    //}
+    //my fix here 
+    String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
+    Boolean accept = false;
+    if (whose_turn.equals("human")) {
+      String fromhumanProvince = (String)from_human_province.getAttributes().get("name");
+      String nexthumanProvince = (String)next_human_province.getAttributes().get("name");
+      accept = system.human_move(moved_unit, fromhumanProvince, nexthumanProvince);
+    } else {
+      String fromenermyProvince = (String)from_enermy_province.getAttributes().get("name");
+      String nextenermyProvince = (String)next_enermy_province.getAttributes().get("name");
+      accept = system.human_move(moved_unit, fromenermyProvince, nextenermyProvince);
+    }
+    if (accept == false) {
+      printMessageToTerminal("Move request can't be accepted!");
+    } else {
+      addAllPointGraphics();
     }
   }
   
   public void clickedInvadeButton(ActionEvent e) throws IOException {
+    //System.out.println(currentlySelectedHumanProvince == null);
+    //System.out.println(currentlySelectedEnemyProvince == null);
+    
     if (currentlySelectedHumanProvince != null && currentlySelectedEnemyProvince != null){
       String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      
+      //my fix here
+      System.out.println(humanProvince + "  " + enemyProvince);
+      //
       if (confirmIfProvincesConnected(humanProvince, enemyProvince)){
         // TODO = have better battle resolution than 50% chance of winning
         Random r = new Random();
@@ -470,6 +500,8 @@ public class GloriaRomanusController{
 
                 //my fix here
                 //if now is human turn
+                //((InvasionMenuController)controllerParentPairs.get(0).getKey()).set_moving_unit();
+
                 String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
                 if (whose_turn.equals("human")) {
                   if (provinceToOwningFactionMap.get(province).equals(humanFaction)){
@@ -537,7 +569,7 @@ public class GloriaRomanusController{
 
                     boolean judge = false;
                     // province owned by human
-                    if (currentlySelectedEnemyProvince != null){
+                    if (currentlySelectedHumanProvince != null){
                       //my fix
                       judge = true;
                       next_enermy_province = f;
@@ -545,7 +577,7 @@ public class GloriaRomanusController{
                         ((InvasionMenuController)controllerParentPairs.get(0).getKey()).sethumannextProvince(province);
                       }
                       
-                      featureLayer.unselectFeature(currentlySelectedEnemyProvince);
+                      featureLayer.unselectFeature(currentlySelectedHumanProvince);
                       //my fix
                       //featureLayer.unselectFeature(next_human_province);
                     }
@@ -584,6 +616,9 @@ public class GloriaRomanusController{
                       ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setOpponentProvince(province);
                     }
                   }
+                  Feature temp = currentlySelectedEnemyProvince;
+                  currentlySelectedEnemyProvince = currentlySelectedHumanProvince;
+                  currentlySelectedHumanProvince = temp;
                 }
                 featureLayer.selectFeature(f);                
               }
@@ -690,8 +725,13 @@ public class GloriaRomanusController{
     //FeatureLayer featureLayer = (FeatureLayer) identifyLayerResult.getLayerContent();
     //featureLayer.unselectFeature(currentlySelectedHumanProvince);
     //featureLayer.unselectFeature(currentlySelectedEnemyProvince);
-   
-    featureLayer_provinces.unselectFeatures(Arrays.asList(currentlySelectedEnemyProvince, currentlySelectedHumanProvince));
+    if (currentlySelectedEnemyProvince != null) {
+      featureLayer_provinces.unselectFeatures(Arrays.asList(currentlySelectedEnemyProvince));
+    }
+    if (currentlySelectedHumanProvince != null) {
+      featureLayer_provinces.unselectFeatures(Arrays.asList(currentlySelectedHumanProvince));
+    }
+    //featureLayer_provinces.unselectFeatures(Arrays.asList(currentlySelectedEnemyProvince, currentlySelectedHumanProvince));
     currentlySelectedEnemyProvince = null;
     currentlySelectedHumanProvince = null;
     if (controllerParentPairs.get(0).getKey() instanceof InvasionMenuController){

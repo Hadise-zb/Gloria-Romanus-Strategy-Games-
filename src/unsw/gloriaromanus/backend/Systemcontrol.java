@@ -97,6 +97,73 @@ public class Systemcontrol implements TurnSubject{
         return this.enermyFaction;
     }
 
+    public boolean human_move(String unit, String start, String end) {
+        boolean accept = true;
+        if (start.equals(end)) {
+            accept = false;
+            return accept;
+        }
+        Unit unit_moved = null;
+        for (Province p : myFaction.getProvinces()) {
+            if (p.get_name().equals(start)) {
+                if (!p.get_units().isEmpty()) {
+                    for (Unit u : p.get_units()) {
+                        if (u.get_name().equals(unit)) {
+                            unit_moved = u;
+                        }
+                    }
+                    p.get_units().remove(unit_moved);
+                }
+                break;          
+            }
+        }
+
+        if (unit_moved == null) {
+            return false;
+        } else {
+            for (Province p : myFaction.getProvinces()) {
+                if (p.get_name().equals(end)) { 
+                    p.get_units().add(unit_moved);         
+                }
+            }
+        }
+        return accept;
+    }
+
+    public boolean enermy_move(String unit, String start, String end) {
+        boolean accept = true;
+        if (start.equals(end)) {
+            accept = false;
+            return accept;
+        }
+        Unit unit_moved = null;
+        for (Province p : enermyFaction.getProvinces()) {
+            if (p.get_name().equals(start)) {
+                if (!p.get_units().isEmpty()) {
+                    for (Unit u : p.get_units()) {
+                        if (u.get_name().equals(unit)) {
+                            unit_moved = u;
+                        }
+                    }
+                    p.get_units().remove(unit_moved);
+                }
+                break;          
+            }
+        }
+
+        if (unit_moved == null) {
+            return false;
+        } else {
+            for (Province p : enermyFaction.getProvinces()) {
+                if (p.get_name().equals(end)) {   
+                    p.get_units().add(unit_moved);         
+                }
+            }
+        }
+        return accept;
+    }
+
+
     public boolean movement(Troop troop, Province start, Province end) {
         boolean accept = true;
         String start_province = start.get_name();
