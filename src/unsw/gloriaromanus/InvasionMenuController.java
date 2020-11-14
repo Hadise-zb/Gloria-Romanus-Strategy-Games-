@@ -90,10 +90,22 @@ public class InvasionMenuController extends MenuController{
     
     @FXML
     public void clickedmoveButton(ActionEvent e) throws IOException {
+        getParent().clickedmoveButton(e);
         
-        String my_troop = troop_choice.getValue();
-        getParent().clickedmoveButton(e, my_troop);
-        
+        currenthumanprovince.setText("");
+        nexthumanprovince.setText("");
+        invading_province.setText("");
+        opponent_province.setText("");
+        output_terminal.clear();
+        troop_choice.getItems().clear();
+
+        getParent().clear_feature();
+    }
+
+    @FXML
+    public void clickedmakesure() {
+        String my_unit = troop_choice.getValue();
+        getParent().set_moved_unit(my_unit);
     }
 
     @FXML
@@ -131,6 +143,23 @@ public class InvasionMenuController extends MenuController{
             System.out.println(player.getText());
         }
 
+        //
+        getParent().EndTurn();
+        //
+        getParent().clear_feature();
+
+        currenthumanprovince.setText("");
+        nexthumanprovince.setText("");
+        invading_province.setText("");
+        opponent_province.setText("");
+        output_terminal.clear();
+        troop_choice.getItems().clear();
+        //getParent().clear_feature();
+     
+    }
+
+    @FXML
+    public void clikedclearfeature() {
         currenthumanprovince.setText("");
         nexthumanprovince.setText("");
         invading_province.setText("");
