@@ -306,7 +306,7 @@ public class GloriaRomanusController{
                 }
 
                 if (n.get_name().equals("elephant")){
-                  s5 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
+                  s5 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant/Alone/Elephant_Alone_NB.png");
                   s5.setOffsetY(-100);
                   Graphic gPic5 = new Graphic(curPoint, s5);
                   graphicsOverlay.getGraphics().add(gPic5);
