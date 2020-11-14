@@ -45,13 +45,15 @@ public class Systemcontrol implements TurnSubject{
     }
 
     
-    public Systemcontrol(Faction f){
+    public Systemcontrol(Faction human_faction, Faction enermy_faction){
         this.turn = 0;
-        this.myFaction = f;
+        this.myFaction = human_faction;
+        this.enermyFaction = enermy_faction;
 
-        if (f.get_name().equals("Rome")) {
-            this.enermyFaction = new Faction("Gaul");
-        }
+        //if (f.get_name().equals("Rome")) {
+        //    this.enermyFaction = new Faction("Gaul");
+        //}
+        this.enermyFaction = enermy_faction;
 
         try {
             JSONObject matrix = new JSONObject(
@@ -93,6 +95,10 @@ public class Systemcontrol implements TurnSubject{
 
     public Faction get_myfaction() {
         return this.myFaction;
+    }
+
+    public Faction get_enermyfaction() {
+        return this.enermyFaction;
     }
 
     public boolean movement(Troop troop, Province start, Province end) {
@@ -256,6 +262,22 @@ public class Systemcontrol implements TurnSubject{
 
     public int getTurn(){
         return this.turn;
+    }
+
+    public static void main(String[] args){
+        /*
+        Faction my_faction = new Faction("AUSTRALIA");
+        Systemcontrol testSystem = new Systemcontrol(my_faction);
+        Province p = new Province("NSW", my_faction, 0, 0.1);
+        testSystem.attach(my_faction);
+        my_faction.addProvince(p);
+
+        Unit new_unit = new Unit("legionary", "AUSTRALIA", "Cavalry");
+        my_faction.requestTraining(p, new_unit, 5, testSystem.getTurn());
+        
+        //testSystem.endTurn();
+        System.out.println(p.getUnit());
+        */
     }
 
 

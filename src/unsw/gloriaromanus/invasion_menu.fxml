@@ -28,6 +28,7 @@
             </fills>
         </Background>
     </background>
+   <Label fx:id="player" prefHeight="18.0" prefWidth="251.0" text="                           Player1" />
     <HBox>
         <VBox>
             <Label text="Your province" />
@@ -78,4 +79,5 @@
         <TextArea fx:id="output_terminal" editable="false" text="" />
     </VBox>
     <Button onAction="#clickedSwitchMenu" text="Switch Menus" />
+   <Button mnemonicParsing="false" onAction="#clickEndturn" text="End turn" />
 </VBox>
