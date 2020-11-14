@@ -143,6 +143,9 @@ public class InvasionMenuController extends MenuController{
             System.out.println(player.getText());
         }
 
+        //
+        getParent().EndTurn();
+        //
         getParent().clear_feature();
 
         currenthumanprovince.setText("");
@@ -152,7 +155,7 @@ public class InvasionMenuController extends MenuController{
         output_terminal.clear();
         troop_choice.getItems().clear();
         //getParent().clear_feature();
-        
+     
     }
 
     @FXML

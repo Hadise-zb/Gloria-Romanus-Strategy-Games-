@@ -18,47 +18,51 @@ public class BasicMenuController extends MenuController{
     private URL location; // has to be called location
 
     @FXML
-    private ChoiceBox <String> troop_choice;
+    private ChoiceBox <String> choose_player1;
 
     @FXML
-    private ChoiceBox <String> unit_choice;
+    private ChoiceBox <String> choose_player2;
+
+    private String human_faction;
+
+    private String enermy_faction;
 
     @FXML
     public void clickedInvadeButton(ActionEvent e) throws IOException {
         getParent().clickedInvadeButton(e);
     }
 
+
     @FXML
     public void initialize() {
         List<String> new_list = new ArrayList<String>();
-        new_list.add("melee cavalry");
-        new_list.add("pikemen");
-        new_list.add("hoplite");
-        new_list.add("javelin skirmisher");
-        new_list.add("elephant");
-        new_list.add("horse archer");
-        new_list.add("druid");
-        new_list.add("melee infantry");
-        unit_choice.getItems().addAll(new_list);
+        new_list.add("Roman");
+        new_list.add("Carthaginian");
+        new_list.add("Gaul");
+        new_list.add("Celtic Briton");
+        new_list.add("Spanish");
+        new_list.add("Numidian");
+        new_list.add("Egyptian");
+        new_list.add("Pontus");
+        choose_player1.getItems().addAll(new_list);
+        choose_player2.getItems().addAll(new_list);
     }
 
     @FXML
-    public void clickedmoveButton(ActionEvent e) throws IOException {
-        String my_troop = troop_choice.getValue();
-        getParent().clickedmoveButton(e);
+    public void confirmplayer1() {
+        this.human_faction = choose_player1.getValue();
     }
 
     @FXML
-    public void clickedrecuitbutton(ActionEvent e) throws IOException {
-        //getParent().clickedrecuitbutton(e);
-        List<String> new_list = new ArrayList<String>();
-        String a = "A";
-        String b = "B";
-        String c = "C";
-        new_list.add(a);
-        new_list.add(b);
-        new_list.add(c);
-        
-        troop_choice.getItems().addAll(new_list);
+    public void confirmplayer2() {
+        this.enermy_faction = choose_player2.getValue();
+    }
+
+    public String get_human_unit() {
+        return this.human_faction;
+    }
+
+    public String get_enermy_unit() {
+        return this.enermy_faction;
     }
 }
