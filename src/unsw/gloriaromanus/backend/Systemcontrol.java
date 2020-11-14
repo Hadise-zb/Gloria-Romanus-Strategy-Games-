@@ -117,6 +117,7 @@ public class Systemcontrol implements TurnSubject{
                     for (Unit u : p.get_units()) {
                         if (u.get_name().equals(unit)) {
                             unit_moved = u;
+                            break;
                         }
                     }
                     p.get_units().remove(unit_moved);
@@ -130,7 +131,8 @@ public class Systemcontrol implements TurnSubject{
         } else {
             for (Province p : myFaction.getProvinces()) {
                 if (p.get_name().equals(end)) { 
-                    p.get_units().add(unit_moved);         
+                    p.get_units().add(unit_moved);
+                    break;         
                 }
             }
         }
@@ -150,6 +152,7 @@ public class Systemcontrol implements TurnSubject{
                     for (Unit u : p.get_units()) {
                         if (u.get_name().equals(unit)) {
                             unit_moved = u;
+                            break;
                         }
                     }
                     p.get_units().remove(unit_moved);
@@ -163,7 +166,8 @@ public class Systemcontrol implements TurnSubject{
         } else {
             for (Province p : enermyFaction.getProvinces()) {
                 if (p.get_name().equals(end)) {   
-                    p.get_units().add(unit_moved);         
+                    p.get_units().add(unit_moved);
+                    break;         
                 }
             }
         }

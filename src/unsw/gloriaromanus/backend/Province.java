@@ -486,5 +486,16 @@ public class Province {
         }
     }
 
-    
+    public int numofUnit(Unit unit){
+        int num = 0;
+        System.out.println("lalala "+my_units);
+        for (Unit u : my_units){
+          if (u.get_name().equals(unit.get_name())){
+            num = num + 1;
+            System.out.println("Now num is "+num);
+          }
+        }
+        
+        return num;
+    }    
 }

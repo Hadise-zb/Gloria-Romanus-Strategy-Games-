@@ -181,7 +181,7 @@ public class GloriaRomanusController{
       return humanProvince;
     } else {
       Unit unit = new Unit(new_unit, enermyFaction, "Artillery");
-      String enemyProvince = (String)currentlySelectedEnemyProvince.getAttributes().get("name");
+      String enemyProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       for (Province p : system.get_enermyfaction().getProvinces()) {
         if (p.get_name().equals(enemyProvince)) {          
             p.get_units().add(unit);
@@ -325,10 +325,11 @@ public class GloriaRomanusController{
         PictureMarkerSymbol s = null;
         String province = (String) f.getProperty("name");
         String faction = provinceToOwningFactionMap.get(province);
+        //Original code
+        //TextSymbol t = new TextSymbol(10,
+        //    faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
+        //    HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
 
-        TextSymbol t = new TextSymbol(10,
-            faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
-            HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
 
         //my fix here 
         //String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
@@ -350,6 +351,21 @@ public class GloriaRomanusController{
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Pikeman/Pikeman_NB.png");
                 s3.setOffsetX(-100);
                 Graphic gPic3 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(-100);
+                text.setOffsetY(+50);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+                //graphicsOverlay.getGraphics().add(gPic3);
+
+
                 graphicsOverlay.getGraphics().add(gPic3);
               } else if (u.get_name().equals("elephant")) {
                 PictureMarkerSymbol s3 = null;
@@ -362,6 +378,19 @@ public class GloriaRomanusController{
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Hoplite/Hoplite_NB.png");
                 s3.setOffsetY(100);
                 Graphic gPic4 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                //text.setOffsetX(-100);
+                text.setOffsetY(+170);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
                 graphicsOverlay.getGraphics().add(gPic4);
               } else if (u.get_name().equals("elephant")){
                 PictureMarkerSymbol s3 = null;
@@ -444,12 +473,37 @@ public class GloriaRomanusController{
             // then you could convert it to JavaFX image https://stackoverflow.com/a/30970114
 
             // you can pass in a filename to create a PictureMarkerSymbol...
+            TextSymbol t = new TextSymbol(10,
+              faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
+              HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
+
             s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
             //s = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Flags/CelticFlag.png");
+
+            t.setHaloColor(0xFFFFFFFF);
+            t.setHaloWidth(2);
+
+            Graphic gPic = new Graphic(curPoint, s);
+            Graphic gText = new Graphic(curPoint, t);
+            graphicsOverlay.getGraphics().add(gPic);
+            graphicsOverlay.getGraphics().add(gText);
             break;
           case "Rome":
             // you can also pass in a javafx Image to create a PictureMarkerSymbol (different to BufferedImage)
+            t = new TextSymbol(10,
+              faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
+              HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
+
             s = new PictureMarkerSymbol("images/legionary.png");
+
+            t.setHaloColor(0xFFFFFFFF);
+            t.setHaloWidth(2);
+
+            gPic = new Graphic(curPoint, s);
+            gText = new Graphic(curPoint, t);
+            graphicsOverlay.getGraphics().add(gPic);
+            graphicsOverlay.getGraphics().add(gText);
+
             break;
         
           // TODO = handle all faction names, and find a better structure...
@@ -457,18 +511,19 @@ public class GloriaRomanusController{
             s = new PictureMarkerSymbol("images/legionary.png");
             break;
         }
-        t.setHaloColor(0xFFFFFFFF);
-        t.setHaloWidth(2);
+        //original code
+        //t.setHaloColor(0xFFFFFFFF);
+        //t.setHaloWidth(2);
 
         //
         //System.out.println(curPoint == null);
         //System.out.println(s == null);
         //
 
-        Graphic gPic = new Graphic(curPoint, s);
-        Graphic gText = new Graphic(curPoint, t);
-        graphicsOverlay.getGraphics().add(gPic);
-        graphicsOverlay.getGraphics().add(gText);
+        //Graphic gPic = new Graphic(curPoint, s);
+        //Graphic gText = new Graphic(curPoint, t);
+        //graphicsOverlay.getGraphics().add(gPic);
+        //graphicsOverlay.getGraphics().add(gText);
       } else {
         System.out.println("Non-point geo json object in file");
       }
