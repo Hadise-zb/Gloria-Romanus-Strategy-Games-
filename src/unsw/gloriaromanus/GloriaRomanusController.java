@@ -832,5 +832,8 @@ public class GloriaRomanusController{
 
   public void EndTurn() {
     system.endTurn();
+    System.out.println(system.getTurn());
+    ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setTurn(system.getTurn());
+
   }
 }
