@@ -205,9 +205,9 @@ public class GloriaRomanusController{
       else{
         printMessageToTerminal("Provinces not adjacent, cannot invade!");
       }
-
     }
   }
+
 
   /**
    * run this initially to update province owner, change feature in each
@@ -241,6 +241,10 @@ public class GloriaRomanusController{
 
     addAllPointGraphics();
   }
+              // note can instantiate a PictureMarkerSymbol using the JavaFX Image class - so could
+            // construct it with custom-produced BufferedImages stored in Ram
+            // http://jens-na.github.io/2013/11/06/java-how-to-concat-buffered-images/
+            // then you could convert it to JavaFX image https://stackoverflow.com/a/30970114
 
   private void addAllPointGraphics() throws JsonParseException, JsonMappingException, IOException {
     mapView.getGraphicsOverlays().clear();
@@ -272,16 +276,8 @@ public class GloriaRomanusController{
 
         switch (faction) {
           case "Gaul":
-            // note can instantiate a PictureMarkerSymbol using the JavaFX Image class - so could
-            // construct it with custom-produced BufferedImages stored in Ram
-            // http://jens-na.github.io/2013/11/06/java-how-to-concat-buffered-images/
-            // then you could convert it to JavaFX image https://stackoverflow.com/a/30970114
-
-            
             for (Province m : system.getEnermyFaction().getProvinces()) {
-              // if (p.get_name().equals(humanProvince)) {          
-              //     p.get_units().add(unit);
-              //
+              System.out.println(m.get_units());
               for (Unit n: m.get_units()){
                 if (n.get_name().equals("druid")){
                   s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));

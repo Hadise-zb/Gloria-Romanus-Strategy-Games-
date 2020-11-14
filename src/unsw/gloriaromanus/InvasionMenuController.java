@@ -106,14 +106,15 @@ public class InvasionMenuController extends MenuController{
     }
 
     public void unit_add(String province) {
-        System.out.println(province);
+        //System.out.println(province);
 
         List<String> new_list = new ArrayList<String>();
         Systemcontrol system = getParent().get_system();
         for (Province p : system.get_myfaction().getProvinces()) {
+            System.out.println(p.get_units());
             if (p.get_name().equals(province)) {
                 for (Unit u : p.get_units()) {
-                    System.out.println(u.get_name());
+                    
                     new_list.add(u.get_name());
                 }
             }
