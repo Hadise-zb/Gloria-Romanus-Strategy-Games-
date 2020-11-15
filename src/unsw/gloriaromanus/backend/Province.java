@@ -65,6 +65,7 @@ public class Province {
         this.numTown = 0;
         this.engaged = false;
         owner.getProvinces().add(this);
+        this.numTown = 1;
     }
 
     public void adjustTaxRate(double rate){

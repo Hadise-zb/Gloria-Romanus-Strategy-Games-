@@ -69,14 +69,14 @@ public class Systemcontrol implements TurnSubject{
                 if (myFaction.get_name().equals(key)) {
                     for (int j = 0; j < pro.length (); j++) {
 
-                        Province human_province = new Province(pro.getString (j), myFaction, 0, 3.0);
+                        Province human_province = new Province(pro.getString (j), myFaction, 0, 0.15);
                         myFaction.getProvinces().add(human_province);
                         
                     }
                 } else {
                     for (int j = 0; j < pro.length (); j++) {
 
-                        Province enermy_province = new Province(pro.getString (j), myFaction, 0, 3.0);
+                        Province enermy_province = new Province(pro.getString (j), myFaction, 0, 0.15);
                         enermyFaction.getProvinces().add(enermy_province);
                     }
                     
