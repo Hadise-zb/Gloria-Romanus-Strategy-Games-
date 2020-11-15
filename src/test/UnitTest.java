@@ -26,7 +26,7 @@ public class UnitTest{
     public void blahTest2(){
         Unit u = new Unit("heavy infantry", "AUSTRALIA", "Cavalry");
         //System.out.println(u.getNumTroops());
-        assertEquals(u.getNumSoldiers(), 0);
+        assertEquals(u.getNumSoldiers(), 10);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class UnitTest{
         au.addProvince(p);
         p.addTown();
         p.addTown();
-        assertEquals(p.getNumTown(), 2);
+        assertEquals(p.getNumTown(), 3);
 
         p.solicitTownWealth();
         assertEquals(p.getWealth(), 20);
@@ -71,7 +71,8 @@ public class UnitTest{
 
         // Test for Low tax rate 10%
         Faction my_faction = new Faction("AUSTRALIA");
-        Systemcontrol testSystem = new Systemcontrol(my_faction);
+        Faction enermy_faction = new Faction("Rome");
+        Systemcontrol testSystem = new Systemcontrol(my_faction, enermy_faction);
         Province p = new Province("NSW", my_faction, 0, 0.1);
         testSystem.attach(my_faction);
         my_faction.addProvince(p);
@@ -83,7 +84,7 @@ public class UnitTest{
 
         testSystem.endTurn();
 
-        assertEquals(my_faction.getWealth(), 18);
+        assertEquals(my_faction.getWealth(), 87.966);
         assertEquals(my_faction.getTreasure(), 52);
 
         testSystem.endTurn();
@@ -166,7 +167,7 @@ public class UnitTest{
         province.enermy_ablility_add();
 
         //Roman can get morale plus 1, so it should be 6
-        assertEquals(Roman_legionary.get_morale(), 6);
+        assertEquals(Roman_legionary.get_morale(), 4);
         //pikemen can have double armour, so it should be 10
         assertEquals(Roman_pikemen.get_armour(), 10);
         //pikemen can have half speed, so it should be 1
@@ -183,7 +184,8 @@ public class UnitTest{
     @Test
     public void recruitTest(){
         Faction my_faction = new Faction("AUSTRALIA");
-        Systemcontrol testSystem = new Systemcontrol(my_faction);
+        Faction enermy_faction = new Faction("Rome");
+        Systemcontrol testSystem = new Systemcontrol(my_faction, enermy_faction);
         Province p = new Province("NSW", my_faction, 0, 0.1);
         testSystem.attach(my_faction);
         my_faction.addProvince(p);
@@ -278,7 +280,7 @@ public class UnitTest{
         province.enermy_ablility_add();
 
         //Roman can get morale plus 1, so it should be 6
-        assertEquals(Roman_legionary.get_morale(), 6.0);
+        assertEquals(Roman_legionary.get_morale(), 4.0);
         //pikemen can have double armour, so it should be 10
         assertEquals(Roman_pikemen.get_armour(), 10);
         //pikemen can have half speed, so it should be 1
@@ -310,7 +312,7 @@ public class UnitTest{
         Faction owner = new Faction("Roman");
         Faction enermy = new Faction("Gallic");
 
-        Systemcontrol system = new Systemcontrol(owner);
+        Systemcontrol system = new Systemcontrol(owner, enermy);
         system.set_enermy(enermy);
 
         Province my_province = new Province("Britannia", owner, 50, 2.2);
@@ -355,7 +357,7 @@ public class UnitTest{
         Faction owner = new Faction("Roman");
         Faction enermy = new Faction("Gallic");
 
-        Systemcontrol system = new Systemcontrol(owner);
+        Systemcontrol system = new Systemcontrol(owner, enermy);
         system.set_enermy(enermy);
 
         Province my_province = new Province("Britannia", owner, 50, 2.2);
@@ -392,7 +394,7 @@ public class UnitTest{
         Faction owner = new Faction("Roman");;
         Faction enermy = new Faction("Gallic");
 
-        Systemcontrol system = new Systemcontrol(owner);
+        Systemcontrol system = new Systemcontrol(owner, enermy);
         system.set_enermy(enermy);
 
         system.saveProgress();

@@ -69,6 +69,7 @@ public class Unit {
             this.trainingTurns = 1;
             this.charge = 2;
             this.shield = 10.0;
+            this.cost = 5;
         } else if (name.equals("horse archer")) {
             this.defence = 5.0;
             this.morale = 0;
@@ -79,6 +80,7 @@ public class Unit {
             this.trainingTurns = 4;
             this.charge = 2;
             this.shield = 0.0;
+            this.cost = 12;
         } else if (name.equals("Horse Heavy Cavalry")) {
             this.defence = 5.0;
             this.morale = 5.0;
@@ -89,6 +91,7 @@ public class Unit {
             this.trainingTurns = 3;
             this.charge = 5;
             this.shield = 10.0;
+            this.cost = 15;
         } else if (name.equals("pikemen")) {
             this.defence = 5.0;
             this.morale = 5.0;
@@ -99,6 +102,7 @@ public class Unit {
             this.trainingTurns = 1;
             this.charge = 2;
             this.shield = 10.0;
+            this.cost = 5;
         } else if (name.equals("druid")) {
             this.defence = 5.0;
             this.morale = 5.0;
@@ -109,6 +113,7 @@ public class Unit {
             this.trainingTurns = 3;
             this.charge = 2;
             this.shield = 10.0;
+            this.cost = 20;
         } else if (name.equals("Cannon")) {
             this.defence = 2.0;
             this.morale = 5.0;
@@ -119,6 +124,7 @@ public class Unit {
             this.trainingTurns = 2;
             this.charge = 2;
             this.shield = 10.0;
+            this.cost = 30;
         } else if (name.equals("CamelArcher")) {
             this.defence = 5.0;
             this.morale = 5.0;
@@ -129,6 +135,7 @@ public class Unit {
             this.trainingTurns = 1;
             this.charge = 2;
             this.shield = 10.0;
+            this.cost = 25;
         } else if (name.equals("Chariot")) {
             this.defence = 5.0;
             this.morale = 5.0;
@@ -139,6 +146,7 @@ public class Unit {
             this.trainingTurns = 2;
             this.charge = 2;
             this.shield = 10.0;
+            this.cost = 17;
         } else if (name.equals("druid")) {
             this.defence = 5.0;
             this.morale = 5.0;
@@ -149,6 +157,7 @@ public class Unit {
             this.trainingTurns = 1;
             this.charge = 2;
             this.shield = 10.0;
+            this.cost = 20;
         } else if (name.equals("Horse Lancer")) {
             this.defence = 5.0;
             this.morale = 5.0;
@@ -159,6 +168,7 @@ public class Unit {
             this.trainingTurns = 5;
             this.charge = 2;
             this.shield = 10.0;
+            this.cost = 60;
         } else if (name.equals("Slinger Man")) {
             this.defence = 5.0;
             this.morale = 5.0;
@@ -169,6 +179,7 @@ public class Unit {
             this.trainingTurns = 2;
             this.charge = 2;
             this.shield = 10.0;
+            this.cost = 45;
         } else if (name.equals("Spearman")) {
             this.defence = 5.0;
             this.morale = 5.0;
@@ -179,6 +190,7 @@ public class Unit {
             this.trainingTurns = 3;
             this.charge = 2;
             this.shield = 10.0;
+            this.cost = 80;
         } else if (name.equals("Swordsman")) {
             this.defence = 4.0;
             this.morale = 5.0;
@@ -189,6 +201,7 @@ public class Unit {
             this.trainingTurns = 3;
             this.charge = 2;
             this.shield = 10.0;
+            this.cost = 90;
         } else {
             this.defence = 4.0;
             this.morale = 3.0;
@@ -199,6 +212,7 @@ public class Unit {
             this.trainingTurns = 2;
             this.charge = 2;
             this.shield = 10.0;
+            this.cost = 5;
         }
         this.category = category;
         if (category.equals("Cavalry")) {
@@ -208,6 +222,10 @@ public class Unit {
         } else if (category.equals("Artillery")) {
             this.movementpoints = 4;
         }
+    }
+
+    public int get_cost() {
+        return this.cost;
     }
 
     public int get_movementpoint() {
