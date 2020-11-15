@@ -74,6 +74,9 @@ public class BasicMenuController extends MenuController {
     @FXML
     public void clickedstartgame() throws JsonParseException, JsonMappingException, IOException {
         getParent().start_game();
+
+        //PlayMusic music = new PlayMusic();
+        //music.musicplay2();
     }
 
     public String get_human_unit() {

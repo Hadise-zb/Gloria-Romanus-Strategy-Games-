@@ -104,6 +104,8 @@ public class GloriaRomanusController{
 
   private String moved_unit = "";
 
+  private PlayMusic music;
+
   @FXML
   private void initialize() throws JsonParseException, JsonMappingException, IOException, InterruptedException {
     // TODO = you should rely on an object oriented design to determine ownership
@@ -159,6 +161,10 @@ public class GloriaRomanusController{
     //this.Enermysfaction = ((BasicMenuController)controllerParentPairs.get(0).getKey()).get_human_unit();
     //addAllPointGraphics();
     //
+    String filepath = "/home/comp2511-student/comp2511/w11b-hello_java/Music_background/Fate Grand Order.wav";
+    PlayMusic musicObject = new PlayMusic();
+    musicObject.playMusic(filepath);
+    this.music = musicObject;
   }
 
   public void clickedComfirmButtom(Double taxrate){
@@ -183,6 +189,13 @@ public class GloriaRomanusController{
     this.Enermysfaction = ((BasicMenuController)controllerParentPairs.get(0).getKey()).get_enermy_unit();
     
     addAllPointGraphics();
+
+    //music change
+    this.music.music_stop();
+    String filepath = "/home/comp2511-student/comp2511/w11b-hello_java/Music_background/fate1.7.wav";
+    PlayMusic musicObject = new PlayMusic();
+    musicObject.playMusic(filepath);
+    this.music = musicObject;
   }
 
   /*
@@ -1356,8 +1369,19 @@ public class GloriaRomanusController{
 
 
     ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setTreasure(currentFaction.getTreasure());
-
+    
+    //check the winner;
+    check_victory();
   }
+
+  public void check_victory() {
+    String victory = system.Campaign_victory();
+    if (!victory.equals("No victory")) {
+      Congratulation congrate = new Congratulation();
+      congrate.show_victory(victory);
+    }
+  }
+
 
   public void click_save() {
     system.saveProgress();

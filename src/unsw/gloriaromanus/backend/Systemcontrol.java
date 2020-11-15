@@ -323,8 +323,25 @@ public class Systemcontrol implements TurnSubject{
         return enermy;
     }
     
-    public void campaignVictory(){
-        
+    public String Campaign_victory() {
+        //String victory = "human";
+        if (goalConquered() == true) {
+            return "Player 1";
+        } else if (goalTreasury() == true) {
+            return "Player 1";
+        } else if (goalWealth() == true) {
+            return "Player 1";
+        } else if (goalConquered_enermy() == true) {
+            return "Player 2";
+        } else if (goalTreasury_enermy() == true) {
+            return "Player 2";
+        } else if (goalWealth_enermy() == true) {
+            return "Player 2";
+        } else {
+            return "No victory";
+        }
+
+
     }
 
     // check if any faction been eliminated
@@ -339,7 +356,12 @@ public class Systemcontrol implements TurnSubject{
     }
 
     public boolean goalConquered(){
-        if (enermyFaction == null) return true;
+        if (enermyFaction.getProvinces().isEmpty()) return true;
+        else return false;
+    }
+
+    public boolean goalConquered_enermy(){
+        if (myFaction.getProvinces().isEmpty()) return true;
         else return false;
     }
 
@@ -348,8 +370,18 @@ public class Systemcontrol implements TurnSubject{
         else return false;
     }
 
+    public boolean goalTreasury_enermy(){
+        if (enermyFaction.getTreasure() >= 100000 ) return true;
+        else return false;
+    }
+
     public boolean goalWealth(){
         if (myFaction.getWealth() >= 400000) return true;
+        else return false;
+    }
+
+    public boolean goalWealth_enermy(){
+        if (enermyFaction.getWealth() >= 400000) return true;
         else return false;
     }
 
