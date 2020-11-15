@@ -59,7 +59,7 @@ public class Unit {
         this.unit_name = name;
         this.name = name;
 
-        if (name.equals("legionary")) {
+        if (name.equals("hoplite")) {
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
@@ -69,17 +69,17 @@ public class Unit {
             this.trainingTurns = 1;
             this.charge = 2;
             this.shield = 10.0;
-        } else if (name.equals("berserker")) {
+        } else if (name.equals("horse archer")) {
             this.defence = 5.0;
             this.morale = 0;
             this.attack = 10.0;
             this.speed = 2;
             this.armour = 0;
             this.numSoldiers = 0;
-            this.trainingTurns = 2;
+            this.trainingTurns = 4;
             this.charge = 2;
             this.shield = 0.0;
-        } else if (name.equals("melee cavalry")) {
+        } else if (name.equals("Horse Heavy Cavalry")) {
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 6.0;
@@ -96,10 +96,10 @@ public class Unit {
             this.speed = 2;
             this.armour = 5;
             this.numSoldiers = 0;
-            this.trainingTurns = 4;
+            this.trainingTurns = 1;
             this.charge = 2;
             this.shield = 10.0;
-        } else if (name.equals("hoplite")) {
+        } else if (name.equals("druid")) {
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
@@ -109,8 +109,8 @@ public class Unit {
             this.trainingTurns = 3;
             this.charge = 2;
             this.shield = 10.0;
-        } else if (name.equals("javelin skirmisher")) {
-            this.defence = 5.0;
+        } else if (name.equals("Cannon")) {
+            this.defence = 2.0;
             this.morale = 5.0;
             this.attack = 5.0;
             this.speed = 2;
@@ -119,7 +119,7 @@ public class Unit {
             this.trainingTurns = 2;
             this.charge = 2;
             this.shield = 10.0;
-        } else if (name.equals("elephant")) {
+        } else if (name.equals("CamelArcher")) {
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
@@ -129,14 +129,14 @@ public class Unit {
             this.trainingTurns = 1;
             this.charge = 2;
             this.shield = 10.0;
-        } else if (name.equals("horse archer")) {
+        } else if (name.equals("Chariot")) {
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
             this.speed = 2;
             this.armour = 5;
             this.numSoldiers = 0;
-            this.trainingTurns = 6;
+            this.trainingTurns = 2;
             this.charge = 2;
             this.shield = 10.0;
         } else if (name.equals("druid")) {
@@ -149,7 +149,7 @@ public class Unit {
             this.trainingTurns = 1;
             this.charge = 2;
             this.shield = 10.0;
-        } else if (name.equals("melee infantry")) {
+        } else if (name.equals("Horse Lancer")) {
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
@@ -159,14 +159,44 @@ public class Unit {
             this.trainingTurns = 5;
             this.charge = 2;
             this.shield = 10.0;
-        } else {
+        } else if (name.equals("Slinger Man")) {
             this.defence = 5.0;
             this.morale = 5.0;
             this.attack = 5.0;
             this.speed = 2;
             this.armour = 5;
             this.numSoldiers = 0;
-            this.trainingTurns = 5;
+            this.trainingTurns = 2;
+            this.charge = 2;
+            this.shield = 10.0;
+        } else if (name.equals("Spearman")) {
+            this.defence = 5.0;
+            this.morale = 5.0;
+            this.attack = 5.0;
+            this.speed = 2;
+            this.armour = 5;
+            this.numSoldiers = 0;
+            this.trainingTurns = 3;
+            this.charge = 2;
+            this.shield = 10.0;
+        } else if (name.equals("Swordsman")) {
+            this.defence = 4.0;
+            this.morale = 5.0;
+            this.attack = 10.0;
+            this.speed = 2;
+            this.armour = 5;
+            this.numSoldiers = 0;
+            this.trainingTurns = 3;
+            this.charge = 2;
+            this.shield = 10.0;
+        } else {
+            this.defence = 4.0;
+            this.morale = 3.0;
+            this.attack = 3.0;
+            this.speed = 2;
+            this.armour = 4;
+            this.numSoldiers = 0;
+            this.trainingTurns = 2;
             this.charge = 2;
             this.shield = 10.0;
         }
@@ -186,6 +216,10 @@ public class Unit {
 
     public int getTrainingTurn(){
         return this.trainingTurns;
+    }
+
+    public void setTrainingTurn(int new_turns){
+        this.trainingTurns = new_turns;
     }
 
     public int training_budget(int num){

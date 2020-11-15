@@ -96,6 +96,22 @@ public class Systemcontrol implements TurnSubject{
     public void endTurn(){
         turn += 1;
         notifyobservers();
+        //
+        //System.out.println("haha");
+        //
+        for (Province p : myFaction.getProvinces()) {
+            for (Unit u : p.get_units()) {
+                //System.out.println("//"+u.getTrainingTurn()+"//");
+                int new_training_time = u.getTrainingTurn() - 1;
+                u.setTrainingTurn(new_training_time);
+            }
+        }
+        for (Province p : enermyFaction.getProvinces()) {
+            for (Unit u : p.get_units()) {
+                int new_training_time = u.getTrainingTurn() - 1;
+                u.setTrainingTurn(new_training_time);
+            }
+        }
     }
 
     public void set_enermy(Faction enermy) {
@@ -110,10 +126,10 @@ public class Systemcontrol implements TurnSubject{
         return this.enermyFaction;
     }
 
-    public boolean human_move(String unit, String start, String end) {
-        boolean accept = true;
+    public String human_move(String unit, String start, String end) {
+        String accept = "Move request is accepted";
         if (start.equals(end)) {
-            accept = false;
+            accept = "Move request is rejected";
             return accept;
         }
         Unit unit_moved = null;
@@ -121,9 +137,15 @@ public class Systemcontrol implements TurnSubject{
             if (p.get_name().equals(start)) {
                 if (!p.get_units().isEmpty()) {
                     for (Unit u : p.get_units()) {
-                        if (u.get_name().equals(unit)) {
-                            unit_moved = u;
-                            break;
+                        if (u.get_name().equals(unit) ) {
+                            if (u.getTrainingTurn() <= 0) {
+                                unit_moved = u;
+                                break;
+                            } else if(u.getTrainingTurn() > 0) {
+                                System.out.println(u.getTrainingTurn());
+                                accept = "Unit is in training, move request is rejected";
+                                return accept;
+                            }
                         }
                     }
                     p.get_units().remove(unit_moved);
@@ -133,7 +155,7 @@ public class Systemcontrol implements TurnSubject{
         }
 
         if (unit_moved == null) {
-            return false;
+            return "This province doesn't have this unit, move request is rejected";
         } else {
             for (Province p : myFaction.getProvinces()) {
                 if (p.get_name().equals(end)) { 
@@ -145,10 +167,10 @@ public class Systemcontrol implements TurnSubject{
         return accept;
     }
 
-    public boolean enermy_move(String unit, String start, String end) {
-        boolean accept = true;
+    public String enermy_move(String unit, String start, String end) {
+        String accept = "Move request is accepted";
         if (start.equals(end)) {
-            accept = false;
+            accept = "Move request is rejected";
             return accept;
         }
         Unit unit_moved = null;
@@ -156,9 +178,14 @@ public class Systemcontrol implements TurnSubject{
             if (p.get_name().equals(start)) {
                 if (!p.get_units().isEmpty()) {
                     for (Unit u : p.get_units()) {
-                        if (u.get_name().equals(unit)) {
-                            unit_moved = u;
-                            break;
+                        if (u.get_name().equals(unit) ) {
+                            if (u.getTrainingTurn() <= 0) {
+                                unit_moved = u;
+                                break;
+                            } else if(u.getTrainingTurn() > 0) {
+                                accept = "Unit is in training, move request is rejected";
+                                return accept;
+                            }
                         }
                     }
                     p.get_units().remove(unit_moved);
@@ -168,7 +195,7 @@ public class Systemcontrol implements TurnSubject{
         }
 
         if (unit_moved == null) {
-            return false;
+            return "This province doesn't have this unit, move request is rejected";
         } else {
             for (Province p : enermyFaction.getProvinces()) {
                 if (p.get_name().equals(end)) {   

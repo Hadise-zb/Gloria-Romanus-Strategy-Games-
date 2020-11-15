@@ -222,7 +222,7 @@ public class GloriaRomanusController{
     //}
     //my fix here 
     String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
-    Boolean accept = false;
+    String accept = "Move request is accepted";
     if (whose_turn.equals("human")) {
       String fromhumanProvince = (String)from_human_province.getAttributes().get("name");
       String nexthumanProvince = (String)next_human_province.getAttributes().get("name");
@@ -232,11 +232,11 @@ public class GloriaRomanusController{
       String nextenermyProvince = (String)next_enermy_province.getAttributes().get("name");
       accept = system.human_move(moved_unit, fromenermyProvince, nextenermyProvince);
     }
-    if (accept == false) {
-      printMessageToTerminal("Move request can't be accepted!");
-    } else {
-      addAllPointGraphics();
-    }
+    
+    printMessageToTerminal(accept);
+    
+    addAllPointGraphics();
+    
   }
   
   public void clickedInvadeButton(ActionEvent e) throws IOException {
