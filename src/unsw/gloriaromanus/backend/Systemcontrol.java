@@ -27,6 +27,8 @@ public class Systemcontrol implements TurnSubject{
     private int turn;
     private ArrayList<TurnObserver> observers = new ArrayList<TurnObserver>();
     
+    private Save save_obj;
+
     @Override
     public void attach(TurnObserver o){
         observers.add(o);
@@ -58,6 +60,7 @@ public class Systemcontrol implements TurnSubject{
         //
         this.attach(myFaction);
         this.attach(enermyFaction);
+
         //
         try {
             JSONObject matrix = new JSONObject(
@@ -84,12 +87,31 @@ public class Systemcontrol implements TurnSubject{
             }
         } catch (JSONException | IOException e) {
             ((Throwable) e).printStackTrace();
-        }   
+        } 
+        //
+        this.save_obj = new Save(this);
+        //
     }
 
     public void endTurn(){
         turn += 1;
         notifyobservers();
+        //
+        //System.out.println("haha");
+        //
+        for (Province p : myFaction.getProvinces()) {
+            for (Unit u : p.get_units()) {
+                //System.out.println("//"+u.getTrainingTurn()+"//");
+                int new_training_time = u.getTrainingTurn() - 1;
+                u.setTrainingTurn(new_training_time);
+            }
+        }
+        for (Province p : enermyFaction.getProvinces()) {
+            for (Unit u : p.get_units()) {
+                int new_training_time = u.getTrainingTurn() - 1;
+                u.setTrainingTurn(new_training_time);
+            }
+        }
     }
 
     public void set_enermy(Faction enermy) {
@@ -108,10 +130,10 @@ public class Systemcontrol implements TurnSubject{
         return this.enermyFaction;
     }
 
-    public boolean human_move(String unit, String start, String end) {
-        boolean accept = true;
+    public String human_move(String unit, String start, String end) {
+        String accept = "Move request is accepted";
         if (start.equals(end)) {
-            accept = false;
+            accept = "Move request is rejected";
             return accept;
         }
         Unit unit_moved = null;
@@ -119,9 +141,15 @@ public class Systemcontrol implements TurnSubject{
             if (p.get_name().equals(start)) {
                 if (!p.get_units().isEmpty()) {
                     for (Unit u : p.get_units()) {
-                        if (u.get_name().equals(unit)) {
-                            unit_moved = u;
-                            break;
+                        if (u.get_name().equals(unit) ) {
+                            if (u.getTrainingTurn() <= 0) {
+                                unit_moved = u;
+                                break;
+                            } else if(u.getTrainingTurn() > 0) {
+                                System.out.println(u.getTrainingTurn());
+                                accept = "Unit is in training, move request is rejected";
+                                return accept;
+                            }
                         }
                     }
                     p.get_units().remove(unit_moved);
@@ -131,7 +159,7 @@ public class Systemcontrol implements TurnSubject{
         }
 
         if (unit_moved == null) {
-            return false;
+            return "This province doesn't have this unit, move request is rejected";
         } else {
             for (Province p : myFaction.getProvinces()) {
                 if (p.get_name().equals(end)) { 
@@ -143,10 +171,10 @@ public class Systemcontrol implements TurnSubject{
         return accept;
     }
 
-    public boolean enermy_move(String unit, String start, String end) {
-        boolean accept = true;
+    public String enermy_move(String unit, String start, String end) {
+        String accept = "Move request is accepted";
         if (start.equals(end)) {
-            accept = false;
+            accept = "Move request is rejected";
             return accept;
         }
         Unit unit_moved = null;
@@ -154,9 +182,14 @@ public class Systemcontrol implements TurnSubject{
             if (p.get_name().equals(start)) {
                 if (!p.get_units().isEmpty()) {
                     for (Unit u : p.get_units()) {
-                        if (u.get_name().equals(unit)) {
-                            unit_moved = u;
-                            break;
+                        if (u.get_name().equals(unit) ) {
+                            if (u.getTrainingTurn() <= 0) {
+                                unit_moved = u;
+                                break;
+                            } else if(u.getTrainingTurn() > 0) {
+                                accept = "Unit is in training, move request is rejected";
+                                return accept;
+                            }
                         }
                     }
                     p.get_units().remove(unit_moved);
@@ -166,7 +199,7 @@ public class Systemcontrol implements TurnSubject{
         }
 
         if (unit_moved == null) {
-            return false;
+            return "This province doesn't have this unit, move request is rejected";
         } else {
             for (Province p : enermyFaction.getProvinces()) {
                 if (p.get_name().equals(end)) {   
@@ -250,12 +283,7 @@ public class Systemcontrol implements TurnSubject{
 
     public void saveProgress(){
         try {
-            my_writetofile(myFaction);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            enermy_writetofile(enermyFaction);
+            my_writetofile(this.save_obj);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -263,36 +291,35 @@ public class Systemcontrol implements TurnSubject{
 
     public void continueProgress() {
         try {
-            this.myFaction = my_readfile();
-        } catch (ClassNotFoundException | IOException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            this.enermyFaction = enermy_readfile();
+            this.save_obj = my_readfile();
         } catch (ClassNotFoundException | IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static void my_writetofile(Faction f) throws IOException {
+    public static void my_writetofile(Save f) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("values/myFaction.bin"));
         objectOutputStream.writeObject(f);
+        //objectOutputStream.close();
     }
 
-    public static Faction my_readfile() throws IOException, ClassNotFoundException {
+    public static Save my_readfile() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("values/myFaction.bin"));
-        Faction my = (Faction) objectInputStream.readObject();
+        Save my = (Save) objectInputStream.readObject();
+        //objectInputStream.close();
         return my;
     }
 
     public static void enermy_writetofile(Faction f) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("values/enermyFaction.bin"));
         objectOutputStream.writeObject(f);
+        objectOutputStream.close();
     }
 
     public static Faction enermy_readfile() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("values/enermyFaction.bin"));
         Faction enermy = (Faction) objectInputStream.readObject();
+        objectInputStream.close();
         return enermy;
     }
     
@@ -357,6 +384,7 @@ public class Systemcontrol implements TurnSubject{
         System.out.println(p.getUnit());
         */
     }
+    
 
 
 }

@@ -9,19 +9,23 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ChoiceBox;
 
 import java.util.List;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import java.util.ArrayList;
 
-public class BasicMenuController extends MenuController{
+public class BasicMenuController extends MenuController {
 
     // https://stackoverflow.com/a/30171444
     @FXML
     private URL location; // has to be called location
 
     @FXML
-    private ChoiceBox <String> choose_player1;
+    private ChoiceBox<String> choose_player1;
 
     @FXML
-    private ChoiceBox <String> choose_player2;
+    private ChoiceBox<String> choose_player2;
 
     private String human_faction;
 
@@ -31,7 +35,6 @@ public class BasicMenuController extends MenuController{
     public void clickedInvadeButton(ActionEvent e) throws IOException {
         getParent().clickedInvadeButton(e);
     }
-
 
     @FXML
     public void initialize() {
@@ -56,6 +59,21 @@ public class BasicMenuController extends MenuController{
     @FXML
     public void confirmplayer2() {
         this.enermy_faction = choose_player2.getValue();
+    }
+
+    @FXML
+    public void clickedsave() {
+        getParent().click_save();
+    }
+
+    @FXML
+    public void clickedload() {
+        getParent().click_load();
+    }
+
+    @FXML
+    public void clickedstartgame() throws JsonParseException, JsonMappingException, IOException {
+        getParent().start_game();
     }
 
     public String get_human_unit() {

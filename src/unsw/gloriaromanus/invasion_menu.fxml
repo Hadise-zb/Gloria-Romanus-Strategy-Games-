@@ -57,13 +57,17 @@
     <HBox>
         <VBox />
     </HBox>
-   <VBox prefHeight="74.0" prefWidth="214.0">
+   <VBox prefHeight="15.0" prefWidth="230.0">
       <children>
          <Label text="Troops" />
-         <ChoiceBox fx:id="troop_choice" prefWidth="150.0" />
-         <Button mnemonicParsing="false" onAction="#clickedmakesure" text="make_sure" />
       </children>
    </VBox>
+   <HBox prefHeight="29.0" prefWidth="230.0">
+      <children>
+         <ChoiceBox fx:id="troop_choice" prefWidth="150.0" />
+         <Button mnemonicParsing="false" onAction="#clickedmakesure" text="Confirm" />
+      </children>
+   </HBox>
 
 
     <Button onAction="#clickedmoveButton" text="Move" />
@@ -110,15 +114,19 @@
         <TextArea fx:id="output_terminal" editable="false" text="" />
     </VBox>
     <Button onAction="#clickedSwitchMenu" text="Switch Menus" />
+   <HBox prefHeight="15.0" prefWidth="230.0">
+      <children>
+            <Label text="Current Turn" />
+      </children>
+   </HBox>
 
     <HBox>
         <VBox>
-            <Label text="Current Turn" />
             <TextField fx:id="current_turn" editable="false" text="" />
         </VBox>
+   
+         <Button mnemonicParsing="false" onAction="#clickEndturn" text="End turn" />
     </HBox>
-
-   <Button mnemonicParsing="false" onAction="#clickEndturn" text="End turn" />
 
     <HBox>
         <VBox>
