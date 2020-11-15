@@ -25,6 +25,8 @@ public class InvasionMenuController extends MenuController{
     private TextArea output_terminal;
     @FXML
     private TextField current_turn;
+    @FXML
+    private TextField faction_treasure;
 
     //my fix here
     @FXML
@@ -69,6 +71,10 @@ public class InvasionMenuController extends MenuController{
 
     public void setTurn(int n){
         current_turn.setText(String.valueOf(n));
+    }
+
+    public void setTreasure(double n){
+        faction_treasure.setText(String.valueOf(n));
     }
 
     @FXML
@@ -121,17 +127,11 @@ public class InvasionMenuController extends MenuController{
         String province = getParent().recuit_unit(human_unit);
         unit_remove();
         unit_add(province);
-        /*
-        List<String> new_list = new ArrayList<String>();
-        String a = "A";
-        String b = "B";
-        String c = "C";
-        new_list.add(a);
-        new_list.add(b);
-        new_list.add(c);
-        troop_choice.getItems().addAll(new_list);
-        */
-        
+    }
+
+    @FXML
+    public void clickedComfirmButton(ActionEvent e) throws IOException{
+       
     }
     
     @FXML

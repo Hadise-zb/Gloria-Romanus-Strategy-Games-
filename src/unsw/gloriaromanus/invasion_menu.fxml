@@ -29,34 +29,30 @@
         </Background>
     </background>
    <Label fx:id="player" prefHeight="18.0" prefWidth="251.0" text="                           Player1" />
+
+
     <HBox>
         <VBox>
             <Label text="Your province" />
             <TextField fx:id="invading_province" editable="false" text="" />
-         <TextField fx:id="currenthumanprovince" />
         </VBox>
         <VBox>
             <Label text="Enemy province" />
             <TextField fx:id="opponent_province" editable="false" text="" />
-         <TextField fx:id="nexthumanprovince" />
         </VBox>
     </HBox>
-   <VBox prefHeight="73.0" prefWidth="230.0">
-      <children>
-         <HBox prefHeight="62.0" prefWidth="230.0">
-            <children>
-                <Button onAction="#clickedInvadeButton" text="Invade" />
-               <HBox prefHeight="65.0" prefWidth="60.0" />
-                <Button onAction="#clickedmoveButton" prefHeight="26.0" prefWidth="51.0" text="Move" />
-            </children>
-         </HBox>
-         <HBox prefHeight="42.0" prefWidth="230.0">
-            <children>
-               <Button mnemonicParsing="false" onAction="#clikedclearfeature" text="Clear" />
-            </children>
-         </HBox>
-      </children>
-   </VBox>
+    <Button onAction="#clickedInvadeButton" text="Invade" />
+
+    <HBox>
+        <VBox>
+            <Label text="Starting province" />
+            <TextField fx:id="currenthumanprovince" />
+        </VBox>
+        <VBox>
+            <Label text="Destination province" />
+            <TextField fx:id="nexthumanprovince" />
+        </VBox>
+    </HBox>
 
     <HBox>
         <VBox />
@@ -68,6 +64,18 @@
          <Button mnemonicParsing="false" onAction="#clickedmakesure" text="make_sure" />
       </children>
    </VBox>
+
+
+    <Button onAction="#clickedmoveButton" text="Move" />
+
+   
+        <HBox prefHeight="42.0" prefWidth="230.0">
+            <children>
+               <Button mnemonicParsing="false" onAction="#clikedclearfeature" text="Clear" />
+            </children>
+         </HBox>
+
+    
    <HBox prefHeight="14.0" prefWidth="230.0">
       <children>
          <Label prefHeight="47.0" prefWidth="230.0" text="Recuit                    Unit" />
@@ -79,6 +87,23 @@
          <ChoiceBox fx:id="unit_choice" prefWidth="150.0" />
       </children>
    </HBox>
+   
+
+
+    <HBox prefHeight="14.0" prefWidth="230.0">
+      <children>
+         <Label prefHeight="47.0" prefWidth="230.0" text="Confirm                  TaxRate" />
+      </children>
+   </HBox>
+   <HBox prefHeight="49.0" prefWidth="230.0">
+      <children>
+         <Button mnemonicParsing="false" onAction="#clickedComfirmButton" text="Comfirm" textFill="#570a0a" />
+         <ChoiceBox fx:id="unit_choice" prefWidth="150.0" />
+      </children>
+   </HBox>
+
+
+
     
     <VBox>
         <Label text="Output from interactions" />
@@ -93,7 +118,15 @@
         </VBox>
     </HBox>
 
-
-
    <Button mnemonicParsing="false" onAction="#clickEndturn" text="End turn" />
+
+    <HBox>
+        <VBox>
+            <Label text="Faction Treasure" />
+            <TextField fx:id="faction_treasure" editable="false" text="" />
+        </VBox>
+    </HBox>
+
+
+
 </VBox>
