@@ -65,7 +65,7 @@ public class Unit {
             this.attack = 5.0;
             this.speed = 2;
             this.armour = 5;
-            this.numSoldiers = 0;
+            this.numSoldiers = 10;
             this.trainingTurns = 1;
             this.charge = 2;
             this.shield = 10.0;
@@ -75,7 +75,7 @@ public class Unit {
             this.attack = 10.0;
             this.speed = 2;
             this.armour = 0;
-            this.numSoldiers = 0;
+            this.numSoldiers = 10;
             this.trainingTurns = 4;
             this.charge = 2;
             this.shield = 0.0;
@@ -85,7 +85,7 @@ public class Unit {
             this.attack = 6.0;
             this.speed = 7;
             this.armour = 5;
-            this.numSoldiers = 0;
+            this.numSoldiers =10;
             this.trainingTurns = 3;
             this.charge = 5;
             this.shield = 10.0;
@@ -95,7 +95,7 @@ public class Unit {
             this.attack = 5.0;
             this.speed = 2;
             this.armour = 5;
-            this.numSoldiers = 0;
+            this.numSoldiers = 10;
             this.trainingTurns = 1;
             this.charge = 2;
             this.shield = 10.0;
@@ -105,7 +105,7 @@ public class Unit {
             this.attack = 5.0;
             this.speed = 2;
             this.armour = 5;
-            this.numSoldiers = 0;
+            this.numSoldiers = 10;
             this.trainingTurns = 3;
             this.charge = 2;
             this.shield = 10.0;
@@ -115,7 +115,7 @@ public class Unit {
             this.attack = 5.0;
             this.speed = 2;
             this.armour = 5;
-            this.numSoldiers = 0;
+            this.numSoldiers = 10;
             this.trainingTurns = 2;
             this.charge = 2;
             this.shield = 10.0;
@@ -125,7 +125,7 @@ public class Unit {
             this.attack = 5.0;
             this.speed = 2;
             this.armour = 5;
-            this.numSoldiers = 0;
+            this.numSoldiers = 10;
             this.trainingTurns = 1;
             this.charge = 2;
             this.shield = 10.0;
@@ -135,7 +135,7 @@ public class Unit {
             this.attack = 5.0;
             this.speed = 2;
             this.armour = 5;
-            this.numSoldiers = 0;
+            this.numSoldiers = 10;
             this.trainingTurns = 2;
             this.charge = 2;
             this.shield = 10.0;
@@ -145,7 +145,7 @@ public class Unit {
             this.attack = 5.0;
             this.speed = 2;
             this.armour = 5;
-            this.numSoldiers = 0;
+            this.numSoldiers = 10;
             this.trainingTurns = 1;
             this.charge = 2;
             this.shield = 10.0;
@@ -155,7 +155,7 @@ public class Unit {
             this.attack = 5.0;
             this.speed = 2;
             this.armour = 5;
-            this.numSoldiers = 0;
+            this.numSoldiers = 10;
             this.trainingTurns = 5;
             this.charge = 2;
             this.shield = 10.0;
@@ -165,7 +165,7 @@ public class Unit {
             this.attack = 5.0;
             this.speed = 2;
             this.armour = 5;
-            this.numSoldiers = 0;
+            this.numSoldiers = 10;
             this.trainingTurns = 2;
             this.charge = 2;
             this.shield = 10.0;
@@ -175,7 +175,7 @@ public class Unit {
             this.attack = 5.0;
             this.speed = 2;
             this.armour = 5;
-            this.numSoldiers = 0;
+            this.numSoldiers = 10;
             this.trainingTurns = 3;
             this.charge = 2;
             this.shield = 10.0;
@@ -185,7 +185,7 @@ public class Unit {
             this.attack = 10.0;
             this.speed = 2;
             this.armour = 5;
-            this.numSoldiers = 0;
+            this.numSoldiers =10;
             this.trainingTurns = 3;
             this.charge = 2;
             this.shield = 10.0;
@@ -195,7 +195,7 @@ public class Unit {
             this.attack = 3.0;
             this.speed = 2;
             this.armour = 4;
-            this.numSoldiers = 0;
+            this.numSoldiers = 10;
             this.trainingTurns = 2;
             this.charge = 2;
             this.shield = 10.0;

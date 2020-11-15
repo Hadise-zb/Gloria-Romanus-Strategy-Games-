@@ -401,6 +401,149 @@ public class Systemcontrol implements TurnSubject{
         return this.turn;
     }
 
+    public String battle_resolver_human(String humanProvince, String enemyProvince) {
+        String Win = "";
+        
+        Province humanprov = null;
+        Province enermyprov = null;
+
+        ArrayList<Unit> human_units = new ArrayList<Unit>();
+        ArrayList<Unit> enermy_units = new ArrayList<Unit>();
+        
+        for (Province p : myFaction.getProvinces()) {
+            if (p.get_name().equals(humanProvince)) {
+                humanprov = p;
+                human_units = p.get_units();
+            }
+        }
+        for (Province p : enermyFaction.getProvinces()) {
+            if (p.get_name().equals(enemyProvince)) {
+                enermyprov = p;
+                enermy_units = p.get_units();
+            }
+        }
+
+        Double human_strength = 0.0;
+        Double enermy_strength = 0.0;
+        int count1 = 0;
+        int count2 = 0;
+        for (Unit u : human_units) {
+            if (u.getTrainingTurn() <= 0) {
+                human_strength = human_strength + u.getNumSoldiers()*(u.get_attack()+ u.get_defence());
+                count1++;
+            }
+        }
+        for (Unit u : enermy_units) {
+            if (u.getTrainingTurn() <= 0) {
+                enermy_strength = enermy_strength + u.getNumSoldiers()*(u.get_attack()+ u.get_defence());
+                count2++;
+            }
+        }
+
+        if (human_strength > enermy_strength){
+            Win = "win";
+        } else if (human_strength < enermy_strength) {
+            Win = "lose";
+        } else if (human_strength.equals(enermy_strength)) {
+            Win = "draw";
+        }
+
+        if (Win.equals("win")) {
+            for (Unit u : human_units) {
+                enermyprov.get_units().add(u);
+            }
+            
+            myFaction.getProvinces().add(enermyprov);
+            enermyFaction.getProvinces().remove(enermyprov);
+
+            for (Province p : myFaction.getProvinces()) {
+                if (p.get_name().equals(humanProvince)) {
+                    p.get_units().clear();
+                }
+            }
+        } else if (Win.equals("lose")) {
+            for (Province p : myFaction.getProvinces()) {
+                if (p.get_name().equals(humanProvince)) {
+                    p.get_units().clear();
+                }
+            }
+        }
+        return Win;
+    }
+
+    public String battle_resolver_enermy(String humanProvince, String enemyProvince) {
+        String Win = "";
+        
+        Province humanprov = null;
+        Province enermyprov = null;
+
+        ArrayList<Unit> human_units = new ArrayList<Unit>();
+        ArrayList<Unit> enermy_units = new ArrayList<Unit>();
+        
+        for (Province p : myFaction.getProvinces()) {
+            if (p.get_name().equals(humanProvince)) {
+                humanprov = p;
+                human_units = p.get_units();
+            }
+        }
+        for (Province p : enermyFaction.getProvinces()) {
+            if (p.get_name().equals(enemyProvince)) {
+                enermyprov = p;
+                enermy_units = p.get_units();
+            }
+        }
+
+        Double human_strength = 0.0;
+        Double enermy_strength = 0.0;
+        int count1 = 0;
+        int count2 = 0;
+        for (Unit u : human_units) {
+            if (u.getTrainingTurn() <= 0) {
+                human_strength = human_strength + u.getNumSoldiers()*(u.get_attack()+ u.get_defence());
+                count1++;
+            }
+        }
+        for (Unit u : enermy_units) {
+            if (u.getTrainingTurn() <= 0) {
+                enermy_strength = enermy_strength + u.getNumSoldiers()*(u.get_attack()+ u.get_defence());
+                count2++;
+            }
+        }
+        
+        System.out.println(human_strength + "||" + enermy_strength);
+        
+        if (human_strength > enermy_strength){
+            Win = "lose";
+        } else if (human_strength < enermy_strength) {
+            Win = "win";
+        } else if (human_strength.equals(enermy_strength)) {
+            Win = "draw";
+        }
+
+        if (Win.equals("win")) {
+            for (Unit u : enermy_units) {
+                humanprov.get_units().add(u);
+            }
+            
+            enermyFaction.getProvinces().add(humanprov);
+            myFaction.getProvinces().remove(humanprov);
+
+            for (Province p : enermyFaction.getProvinces()) {
+                if (p.get_name().equals(enemyProvince)) {
+                    p.get_units().clear();
+                }
+            }
+        } else if (Win.equals("lose")) {
+            for (Province p : enermyFaction.getProvinces()) {
+                if (p.get_name().equals(enemyProvince)) {
+                    p.get_units().clear();
+                }
+            }
+        }
+        return Win;
+    }
+    
+
     public static void main(String[] args){
         /*
         Faction my_faction = new Faction("AUSTRALIA");

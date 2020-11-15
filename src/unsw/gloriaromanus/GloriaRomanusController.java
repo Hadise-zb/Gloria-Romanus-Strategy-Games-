@@ -288,9 +288,16 @@ public class GloriaRomanusController{
       //
       if (confirmIfProvincesConnected(humanProvince, enemyProvince)){
         // TODO = have better battle resolution than 50% chance of winning
-        Random r = new Random();
-        int choice = r.nextInt(2);
-        if (choice == 0){
+        //Random r = new Random();
+        //int choice = r.nextInt(2);
+        String result = "draw";
+        if (whose_turn.equals("human")) {
+          result = system.battle_resolver_human(humanProvince, enemyProvince);
+        } else {
+          result = system.battle_resolver_enermy(enemyProvince, humanProvince);
+        }
+
+        if (result.equals("win")){
           // human won. Transfer 40% of troops of human over. No casualties by human, but enemy loses all troops
           if (whose_turn.equals("human")) {
             int numTroopsToTransfer = provinceToNumberTroopsMap.get(humanProvince)*2/5;
@@ -306,11 +313,13 @@ public class GloriaRomanusController{
             printMessageToTerminal("Won battle!");
           }
         }
-        else{
+        else if (result.equals("lose")) {
           // enemy won. Human loses 60% of soldiers in the province
           int numTroopsLost = provinceToNumberTroopsMap.get(humanProvince)*3/5;
           provinceToNumberTroopsMap.put(humanProvince, provinceToNumberTroopsMap.get(humanProvince)-numTroopsLost);
           printMessageToTerminal("Lost battle!");
+        } else {
+          printMessageToTerminal("Draw!");
         }
         resetSelections();  // reset selections in UI
         addAllPointGraphics(); // reset graphics
