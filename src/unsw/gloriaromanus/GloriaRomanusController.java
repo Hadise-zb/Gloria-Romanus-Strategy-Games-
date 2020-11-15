@@ -151,6 +151,23 @@ public class GloriaRomanusController{
 
     initializeProvinceLayers();
   }
+
+  public void clickedComfirmButtom(Double taxrate){
+    String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
+    for (Province province : system.get_myfaction().getProvinces()) {
+      if (province.get_name().equals(humanProvince)){
+        province.adjustTaxRate(taxrate);
+        break;
+      }
+    }
+
+    for (Province province : system.get_enermyfaction().getProvinces()) {
+      if (province.get_name().equals(humanProvince)){
+        province.adjustTaxRate(taxrate);
+        break;
+      }
+    }
+  }
   
   public String recuit_unit(String new_unit) throws JsonParseException, JsonMappingException, IOException {
     //TODO, fix below code

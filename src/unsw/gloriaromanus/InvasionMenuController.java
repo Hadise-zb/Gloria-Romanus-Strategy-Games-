@@ -43,6 +43,9 @@ public class InvasionMenuController extends MenuController{
     @FXML
     private ChoiceBox <String> unit_choice;
 
+    @FXML
+    private ChoiceBox <Double> tax_choice;
+
     private String whose_turn = "human";
 
     // https://stackoverflow.com/a/30171444
@@ -92,6 +95,14 @@ public class InvasionMenuController extends MenuController{
         //Label player = new Label("");
 
         //Systemcontrol new_system = new Systemcontrol();
+        List<Double> taxList = new ArrayList<Double>();
+        taxList.add(0.1);
+        taxList.add(0.15);
+        taxList.add(0.2);
+        taxList.add(0.3);
+        
+        tax_choice.getItems().addAll(taxList);
+
     }
 
     @FXML
@@ -131,7 +142,8 @@ public class InvasionMenuController extends MenuController{
 
     @FXML
     public void clickedComfirmButton(ActionEvent e) throws IOException{
-       
+        Double taxRate = tax_choice.getValue();
+        getParent().clickedComfirmButtom(taxRate);
     }
     
     @FXML

@@ -98,7 +98,7 @@
    <HBox prefHeight="49.0" prefWidth="230.0">
       <children>
          <Button mnemonicParsing="false" onAction="#clickedComfirmButton" text="Comfirm" textFill="#570a0a" />
-         <ChoiceBox fx:id="unit_choice" prefWidth="150.0" />
+         <ChoiceBox fx:id="tax_choice" prefWidth="150.0" />
       </children>
    </HBox>
 
