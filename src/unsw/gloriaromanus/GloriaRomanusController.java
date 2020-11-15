@@ -217,27 +217,48 @@ public class GloriaRomanusController{
       Unit unit = new Unit(new_unit, humanFaction, "Artillery");
       String humanProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
       //System.out.println(humanProvince);
-      for (Province p : system.get_myfaction().getProvinces()) {
-        if (p.get_name().equals(humanProvince)) {          
-            p.get_units().add(unit);
-            break;
+    
+      if ((human_faction.getTreasure()- unit.get_cost()) < 0) {
+        printMessageToTerminal("Money is not enough, recuit failed!");
+      } else {
+        for (Province p : system.get_myfaction().getProvinces()) {
+          if (p.get_name().equals(humanProvince)) {          
+              p.get_units().add(unit);
+              break;
+          }
         }
+
+        human_faction.setTreasure(human_faction.getTreasure()- unit.get_cost());
+        ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setTreasure(human_faction.getTreasure());
       }
       addAllPointGraphics();
       return humanProvince;
     } else {
       Unit unit = new Unit(new_unit, enermyFaction, "Artillery");
       String enemyProvince = (String)currentlySelectedHumanProvince.getAttributes().get("name");
-      for (Province p : system.get_enermyfaction().getProvinces()) {
-        if (p.get_name().equals(enemyProvince)) {          
-            p.get_units().add(unit);
-            break;
+      
+      if ((enermy_faction.getTreasure() - unit.get_cost()) < 0) {
+        printMessageToTerminal("Money is not enough, recuit failed!");
+      } else {
+        for (Province p : system.get_enermyfaction().getProvinces()) {
+          if (p.get_name().equals(enemyProvince)) {          
+              p.get_units().add(unit);
+              break;
+          }
         }
+        enermy_faction.setTreasure(enermy_faction.getTreasure() - unit.get_cost());
+        ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setTreasure(enermy_faction.getTreasure());
       }
       addAllPointGraphics();
       return enemyProvince;
     }
   }
+
+  //String whoseFaction = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
+  //  Faction currentFaction = null;
+  //  if (whoseFaction.equals("human")) currentFaction = human_faction;
+  //  else currentFaction = enermy_faction;
+
 
   public void set_moved_unit(String unit) {
     this.moved_unit = unit;

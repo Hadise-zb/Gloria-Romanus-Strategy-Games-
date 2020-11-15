@@ -122,7 +122,7 @@
 
     <HBox>
         <VBox>
-            <TextField fx:id="current_turn" editable="false" text="" />
+            <TextField fx:id="current_turn" editable="false" prefHeight="26.0" prefWidth="92.0" text="" />
         </VBox>
    
          <Button mnemonicParsing="false" onAction="#clickEndturn" text="End turn" />

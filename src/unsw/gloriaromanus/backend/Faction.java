@@ -106,6 +106,10 @@ public class Faction implements TurnObserver{
         return this.treasure;
     }
 
+    public void setTreasure(double value){
+        this.treasure = value;
+    }
+
     public double getWealth(){
         return this.wealth;
     }
