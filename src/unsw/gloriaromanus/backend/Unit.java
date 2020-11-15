@@ -159,6 +159,16 @@ public class Unit {
             this.trainingTurns = 5;
             this.charge = 2;
             this.shield = 10.0;
+        } else {
+            this.defence = 5.0;
+            this.morale = 5.0;
+            this.attack = 5.0;
+            this.speed = 2;
+            this.armour = 5;
+            this.numSoldiers = 0;
+            this.trainingTurns = 5;
+            this.charge = 2;
+            this.shield = 10.0;
         }
         this.category = category;
         if (category.equals("Cavalry")) {

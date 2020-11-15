@@ -44,6 +44,14 @@
    <HBox prefHeight="27.0" prefWidth="426.0">
       <children>
           <Button onAction="#clickedSwitchMenu" prefHeight="26.0" prefWidth="192.0" text="Switch Menus" />
+         <HBox prefHeight="27.0" prefWidth="74.0" />
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <Button mnemonicParsing="false" onAction="#clickedsave" prefHeight="26.0" prefWidth="72.0" text="Save" />
+               <HBox prefHeight="27.0" prefWidth="45.0" />
+               <Button mnemonicParsing="false" onAction="#clickedload" text="Load" />
+            </children>
+         </HBox>
       </children>
    </HBox>
 </VBox>
