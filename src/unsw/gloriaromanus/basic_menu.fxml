@@ -32,13 +32,19 @@
       </children>
    </HBox>
    <Label prefHeight="18.0" prefWidth="431.0" text="Player 1                                               Player 2" />
-   <HBox prefHeight="100.0" prefWidth="445.0">
+   <HBox prefHeight="73.0" prefWidth="426.0">
       <children>
          <ChoiceBox fx:id="choose_player1" prefHeight="26.0" prefWidth="124.0" />
          <Button mnemonicParsing="false" onAction="#confirmplayer1" text="Confirm" textFill="#160101" />
          <VBox prefHeight="100.0" prefWidth="26.0" />
          <ChoiceBox fx:id="choose_player2" prefHeight="26.0" prefWidth="130.0" />
          <Button mnemonicParsing="false" onAction="#confirmplayer2" text="Confirm" />
+      </children>
+   </HBox>
+   <HBox prefHeight="58.0" prefWidth="426.0">
+      <children>
+         <HBox prefHeight="53.0" prefWidth="173.0" />
+         <Button mnemonicParsing="false" onAction="#clickedstartgame" text="Start Game" />
       </children>
    </HBox>
    <HBox prefHeight="27.0" prefWidth="426.0">

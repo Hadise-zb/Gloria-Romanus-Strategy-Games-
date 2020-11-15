@@ -97,6 +97,9 @@ public class GloriaRomanusController{
 
   private Faction human_faction;
   private Faction enermy_faction;
+  private String Humansfaction;
+  private String Enermysfaction;
+
   private Systemcontrol system;
 
   private String moved_unit = "";
@@ -150,8 +153,22 @@ public class GloriaRomanusController{
     stackPaneMain.getChildren().add(controllerParentPairs.get(0).getValue());
 
     initializeProvinceLayers();
+
+    // my fix here
+    //this.Humansfaction = ((BasicMenuController)controllerParentPairs.get(0).getKey()).get_human_unit();
+    //this.Enermysfaction = ((BasicMenuController)controllerParentPairs.get(0).getKey()).get_human_unit();
+    //addAllPointGraphics();
+    //
   }
   
+  //my fix here
+  public void start_game() throws JsonParseException, JsonMappingException, IOException {
+    this.Humansfaction = ((BasicMenuController)controllerParentPairs.get(0).getKey()).get_human_unit();
+    this.Enermysfaction = ((BasicMenuController)controllerParentPairs.get(0).getKey()).get_enermy_unit();
+    
+    addAllPointGraphics();
+  }
+
   /*
   public void clickedrecuitbutton(ActionEvent e) throws IOException {
     List<String> new_list = new ArrayList<String>();
@@ -306,7 +323,7 @@ public class GloriaRomanusController{
       }
     });
 
-    addAllPointGraphics();
+    //addAllPointGraphics();
   }
 
   private void addAllPointGraphics() throws JsonParseException, JsonMappingException, IOException {
@@ -353,7 +370,7 @@ public class GloriaRomanusController{
                 Graphic gPic3 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
             HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
@@ -374,8 +391,8 @@ public class GloriaRomanusController{
                 Graphic gPic4 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 //text.setOffsetX(-100);
@@ -393,8 +410,8 @@ public class GloriaRomanusController{
                 Graphic gPic5 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 //text.setOffsetX(-100);
@@ -413,8 +430,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(100);
@@ -433,7 +450,7 @@ public class GloriaRomanusController{
                 Graphic gPic7 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-                faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
                 HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
@@ -454,7 +471,7 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-                faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
                 HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
@@ -474,7 +491,7 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-                faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
                 HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
@@ -494,8 +511,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(-300);
@@ -514,8 +531,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(-30);
@@ -534,8 +551,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(120);
@@ -554,8 +571,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(-30);
@@ -574,8 +591,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(300);
@@ -594,8 +611,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(50);
@@ -615,8 +632,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(30);
@@ -635,8 +652,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Humansfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(40);
@@ -662,8 +679,8 @@ public class GloriaRomanusController{
                 Graphic gPic3 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(-100);
@@ -683,8 +700,8 @@ public class GloriaRomanusController{
                 Graphic gPic4 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 //text.setOffsetX(-100);
@@ -702,8 +719,8 @@ public class GloriaRomanusController{
                 Graphic gPic5 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 //text.setOffsetX(-100);
@@ -722,8 +739,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(100);
@@ -742,7 +759,7 @@ public class GloriaRomanusController{
                 Graphic gPic7 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-                faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
                 HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
@@ -763,7 +780,7 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-                faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
                 HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
@@ -783,7 +800,7 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-                faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
                 HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
@@ -803,8 +820,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(-300);
@@ -823,8 +840,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(-30);
@@ -843,8 +860,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(120);
@@ -863,8 +880,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(-30);
@@ -883,8 +900,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(300);
@@ -903,8 +920,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(50);
@@ -924,8 +941,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(30);
@@ -944,8 +961,8 @@ public class GloriaRomanusController{
                 Graphic gPic6 = new Graphic(curPoint, s3);
 
                 TextSymbol text = new TextSymbol(10,
-            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
-            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                this.Enermysfaction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
                 text.setHaloColor(0xFFFFFFFF);
                 text.setHaloWidth(2);
                 text.setOffsetX(40);
@@ -972,7 +989,7 @@ public class GloriaRomanusController{
 
             // you can pass in a filename to create a PictureMarkerSymbol...
             TextSymbol t = new TextSymbol(10,
-              faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
+            this.Enermysfaction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
               HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
 
             s = new PictureMarkerSymbol(new Image((new File("images/Celtic_Druid.png")).toURI().toString()));
@@ -989,7 +1006,7 @@ public class GloriaRomanusController{
           case "Rome":
             // you can also pass in a javafx Image to create a PictureMarkerSymbol (different to BufferedImage)
             t = new TextSymbol(10,
-              faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
+            this.Humansfaction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
               HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
 
             s = new PictureMarkerSymbol("images/legionary.png");
