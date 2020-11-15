@@ -152,18 +152,6 @@ public class GloriaRomanusController{
     initializeProvinceLayers();
   }
   
-  /*
-  public void clickedrecuitbutton(ActionEvent e) throws IOException {
-    List<String> new_list = new ArrayList<String>();
-    String a = "A";
-    String b = "B";
-    String c = "C";
-    new_list.add(a);
-    new_list.add(b);
-    new_list.add(c);
-    troop_choice.getItems().addAll(new_list);
-  }
-  */
   public String recuit_unit(String new_unit) throws JsonParseException, JsonMappingException, IOException {
     //TODO, fix below code
     String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
@@ -325,23 +313,7 @@ public class GloriaRomanusController{
         PictureMarkerSymbol s = null;
         String province = (String) f.getProperty("name");
         String faction = provinceToOwningFactionMap.get(province);
-        //Original code
-        //TextSymbol t = new TextSymbol(10,
-        //    faction + "\n" + province + "\n" + provinceToNumberTroopsMap.get(province), 0xFFFF0000,
-        //    HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM);
-
-
-        //my fix here 
-        //String whose_turn = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
-        //Faction new_faction = null;
-        //if (whose_turn.equals("human")) {
-        //  new_faction = system.get_myfaction();
-        //} else {
-        //  new_faction = system.get_enermyfaction();
-        //}
-        //System.out.println(system == null);
-        //System.out.println(system.get_myfaction() == null);
-        //System.out.println(system.get_myfaction().getProvinces() == null);
+        
         for (Province pro : system.get_myfaction().getProvinces()) {
           if (pro.get_name().equals(province)) {
             //System.out.println("yes");
@@ -832,8 +804,15 @@ public class GloriaRomanusController{
 
   public void EndTurn() {
     system.endTurn();
-    System.out.println(system.getTurn());
     ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setTurn(system.getTurn());
+
+    String whoseFaction = ((InvasionMenuController)controllerParentPairs.get(0).getKey()).judge_turn();
+    Faction currentFaction = null;
+    if (whoseFaction.equals("human")) currentFaction = human_faction;
+    else currentFaction = enermy_faction;
+
+
+    ((InvasionMenuController)controllerParentPairs.get(0).getKey()).setTreasure(currentFaction.getTreasure());
 
   }
 }
