@@ -68,14 +68,24 @@ public class InvasionMenuController extends MenuController{
     @FXML
     public void initialize() {
         List<String> new_list = new ArrayList<String>();
-        new_list.add("melee cavalry");
+        //new_list.add("melee cavalry");
         new_list.add("pikemen");
         new_list.add("hoplite");
-        new_list.add("javelin skirmisher");
+        //new_list.add("javelin skirmisher");
         new_list.add("elephant");
         new_list.add("horse archer");
         new_list.add("druid");
-        new_list.add("melee infantry");
+        //new_list.add("melee infantry");
+        new_list.add("Egyptian Archer");
+        new_list.add("Archer Man");
+        new_list.add("CamelArcher");
+        new_list.add("Cannon");
+        new_list.add("Chariot");
+        new_list.add("Horse Lancer");
+        new_list.add("Horse Heavy Cavalry");
+        new_list.add("Slinger Man");
+        new_list.add("Spearman");
+        new_list.add("Swordsman");
         unit_choice.getItems().addAll(new_list);
         //Label player = new Label("");
 

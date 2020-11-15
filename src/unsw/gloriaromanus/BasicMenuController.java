@@ -58,6 +58,16 @@ public class BasicMenuController extends MenuController{
         this.enermy_faction = choose_player2.getValue();
     }
 
+    @FXML
+    public void clickedsave() {
+        getParent().click_save();
+    }
+
+    @FXML
+    public void clickedload() {
+        getParent().click_load();
+    }
+
     public String get_human_unit() {
         return this.human_faction;
     }

@@ -27,6 +27,8 @@ public class Systemcontrol implements TurnSubject{
     private int turn;
     private ArrayList<TurnObserver> observers = new ArrayList<TurnObserver>();
     
+    private Save save_obj;
+
     @Override
     public void attach(TurnObserver o){
         observers.add(o);
@@ -58,6 +60,7 @@ public class Systemcontrol implements TurnSubject{
         //
         this.attach(myFaction);
         this.attach(enermyFaction);
+
         //
         try {
             JSONObject matrix = new JSONObject(
@@ -84,7 +87,10 @@ public class Systemcontrol implements TurnSubject{
             }
         } catch (JSONException | IOException e) {
             ((Throwable) e).printStackTrace();
-        }   
+        } 
+        //
+        this.save_obj = new Save(this);
+        //
     }
 
     public void endTurn(){
@@ -246,12 +252,7 @@ public class Systemcontrol implements TurnSubject{
 
     public void saveProgress(){
         try {
-            my_writetofile(myFaction);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            enermy_writetofile(enermyFaction);
+            my_writetofile(this.save_obj);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -259,36 +260,35 @@ public class Systemcontrol implements TurnSubject{
 
     public void continueProgress() {
         try {
-            this.myFaction = my_readfile();
-        } catch (ClassNotFoundException | IOException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            this.enermyFaction = enermy_readfile();
+            this.save_obj = my_readfile();
         } catch (ClassNotFoundException | IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public static void my_writetofile(Faction f) throws IOException {
+    public static void my_writetofile(Save f) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("values/myFaction.bin"));
         objectOutputStream.writeObject(f);
+        //objectOutputStream.close();
     }
 
-    public static Faction my_readfile() throws IOException, ClassNotFoundException {
+    public static Save my_readfile() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("values/myFaction.bin"));
-        Faction my = (Faction) objectInputStream.readObject();
+        Save my = (Save) objectInputStream.readObject();
+        //objectInputStream.close();
         return my;
     }
 
     public static void enermy_writetofile(Faction f) throws IOException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("values/enermyFaction.bin"));
         objectOutputStream.writeObject(f);
+        objectOutputStream.close();
     }
 
     public static Faction enermy_readfile() throws IOException, ClassNotFoundException {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("values/enermyFaction.bin"));
         Faction enermy = (Faction) objectInputStream.readObject();
+        objectInputStream.close();
         return enermy;
     }
     
@@ -353,6 +353,7 @@ public class Systemcontrol implements TurnSubject{
         System.out.println(p.getUnit());
         */
     }
+    
 
 
 }

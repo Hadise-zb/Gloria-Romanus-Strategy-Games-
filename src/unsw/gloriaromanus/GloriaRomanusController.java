@@ -367,12 +367,6 @@ public class GloriaRomanusController{
 
 
                 graphicsOverlay.getGraphics().add(gPic3);
-              } else if (u.get_name().equals("elephant")) {
-                PictureMarkerSymbol s3 = null;
-                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
-                s3.setOffsetX(-100);
-                Graphic gPic3 = new Graphic(curPoint, s3);
-                graphicsOverlay.getGraphics().add(gPic3); 
               } else if (u.get_name().equals("hoplite")){
                 PictureMarkerSymbol s3 = null;
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Hoplite/Hoplite_NB.png");
@@ -394,9 +388,22 @@ public class GloriaRomanusController{
                 graphicsOverlay.getGraphics().add(gPic4);
               } else if (u.get_name().equals("elephant")){
                 PictureMarkerSymbol s3 = null;
-                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant/Elephant_Archers");
                 s3.setOffsetY(-100);
                 Graphic gPic5 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                //text.setOffsetX(-100);
+                text.setOffsetY(-50);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
                 graphicsOverlay.getGraphics().add(gPic5);
               } else if (u.get_name().equals("horse archer")){
                 PictureMarkerSymbol s3 = null;
@@ -404,45 +411,308 @@ public class GloriaRomanusController{
                 s3.setOffsetX(100);
                 s3.setOffsetY(100);
                 Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(100);
+                text.setOffsetY(+190);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
                 graphicsOverlay.getGraphics().add(gPic6);
-              } else if (u.get_name().equals("melee infantry")){
+              } else if (u.get_name().equals("druid")){
                 PictureMarkerSymbol s3 = null;
-                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Heavy_Cavalry/Horse_Heavy_Cavalry_NB.png");
-                s3.setOffsetX(-100);
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Druid/Celtic_Druid_NB.png");
+                s3.setOffsetX(70);
                 s3.setOffsetY(-100);
                 Graphic gPic7 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+                faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(70);
+                text.setOffsetY(-50);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
                 graphicsOverlay.getGraphics().add(gPic7);
+            
+              } else if (u.get_name().equals("Egyptian Archer")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/ArcherMan/Egyptian/Egyptian_Archer_NB.png");
+                s3.setOffsetX(-70);
+                s3.setOffsetY(-100);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+                faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(-70);
+                text.setOffsetY(-50);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Archer Man")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/ArcherMan/Archer_Man_NB.png");
+                s3.setOffsetX(50);
+                s3.setOffsetY(50);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+                faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(50);
+                text.setOffsetY(100);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("CamelArcher")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Camel/CamelArcher/CamelArcher_NB.png");
+                s3.setOffsetX(-300);
+                s3.setOffsetY(300);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(-300);
+                text.setOffsetY(370);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Cannon")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Cannon/Cannon_NB.png");
+                s3.setOffsetX(-30);
+                s3.setOffsetY(30);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(-30);
+                text.setOffsetY(700);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Chariot")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Chariot/Chariot_NB.png");
+                s3.setOffsetX(120);
+                s3.setOffsetY(120);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(120);
+                text.setOffsetY(170);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Horse Lancer")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Lancer/Horse_Lancer_NB.png");
+                s3.setOffsetX(-30);
+                s3.setOffsetY(-100);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(-30);
+                text.setOffsetY(-50);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Horse Heavy Cavalry")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Heavy_Cavalry/Horse_Heavy_Cavalry_NB.png");
+                s3.setOffsetX(300);
+                s3.setOffsetY(-300);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(300);
+                text.setOffsetY(-220);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Slinger Man")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Slingerman/Slinger_Man_NB.png");
+                s3.setOffsetX(50);
+                s3.setOffsetY(-50);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(50);
+                //text.setOffsetY(0);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+            
+              } else if (u.get_name().equals("Spearman")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Spearman/Spearman_NB.png");
+                s3.setOffsetX(30);
+                s3.setOffsetY(-30);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(30);
+                text.setOffsetY(60);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Swordsman")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Swordsman/Swordsman_NB.png");
+                s3.setOffsetX(40);
+                s3.setOffsetY(-40);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(40);
+                text.setOffsetY(30);
+
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
               }
             } 
           }
         }
-
-        for (Province prov : system.get_enermyfaction().getProvinces()) {
-          if (prov.get_name().equals(province)) {
-            for (Unit u : prov.get_units()) {
+        for (Province pro : system.get_enermyfaction().getProvinces()) {
+          if (pro.get_name().equals(province)) {
+            //System.out.println("yes");
+            for (Unit u : pro.get_units()) {
               if (u.get_name().equals("pikemen")) {
                 PictureMarkerSymbol s3 = null;
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Pikeman/Pikeman_NB.png");
                 s3.setOffsetX(-100);
                 Graphic gPic3 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(-100);
+                text.setOffsetY(+50);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+                //graphicsOverlay.getGraphics().add(gPic3);
+
+
                 graphicsOverlay.getGraphics().add(gPic3);
-              } else if (u.get_name().equals("elephant")) {
-                PictureMarkerSymbol s3 = null;
-                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
-                s3.setOffsetX(-100);
-                Graphic gPic3 = new Graphic(curPoint, s3);
-                graphicsOverlay.getGraphics().add(gPic3); 
               } else if (u.get_name().equals("hoplite")){
                 PictureMarkerSymbol s3 = null;
                 s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Hoplite/Hoplite_NB.png");
                 s3.setOffsetY(100);
                 Graphic gPic4 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                //text.setOffsetX(-100);
+                text.setOffsetY(+170);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
                 graphicsOverlay.getGraphics().add(gPic4);
               } else if (u.get_name().equals("elephant")){
                 PictureMarkerSymbol s3 = null;
-                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant_Archers/Elephant_Archers_NB.png");
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Elephant/Elephant_Archers");
                 s3.setOffsetY(-100);
                 Graphic gPic5 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                //text.setOffsetX(-100);
+                text.setOffsetY(-50);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
                 graphicsOverlay.getGraphics().add(gPic5);
               } else if (u.get_name().equals("horse archer")){
                 PictureMarkerSymbol s3 = null;
@@ -450,16 +720,244 @@ public class GloriaRomanusController{
                 s3.setOffsetX(100);
                 s3.setOffsetY(100);
                 Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(100);
+                text.setOffsetY(+190);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
                 graphicsOverlay.getGraphics().add(gPic6);
-              } else if (u.get_name().equals("melee infantry")){
+              } else if (u.get_name().equals("druid")){
                 PictureMarkerSymbol s3 = null;
-                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Heavy_Cavalry/Horse_Heavy_Cavalry_NB.png");
-                s3.setOffsetX(-100);
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Druid/Celtic_Druid_NB.png");
+                s3.setOffsetX(70);
                 s3.setOffsetY(-100);
                 Graphic gPic7 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+                faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(70);
+                text.setOffsetY(-50);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
                 graphicsOverlay.getGraphics().add(gPic7);
+            
+              } else if (u.get_name().equals("Egyptian Archer")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/ArcherMan/Egyptian/Egyptian_Archer_NB.png");
+                s3.setOffsetX(-70);
+                s3.setOffsetY(-100);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+                faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(-70);
+                text.setOffsetY(-50);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Archer Man")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/ArcherMan/Archer_Man_NB.png");
+                s3.setOffsetX(50);
+                s3.setOffsetY(50);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+                faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+                HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(50);
+                text.setOffsetY(100);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("CamelArcher")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Camel/CamelArcher/CamelArcher_NB.png");
+                s3.setOffsetX(-300);
+                s3.setOffsetY(300);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(-300);
+                text.setOffsetY(370);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Cannon")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Cannon/Cannon_NB.png");
+                s3.setOffsetX(-30);
+                s3.setOffsetY(30);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(-30);
+                text.setOffsetY(700);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Chariot")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Chariot/Chariot_NB.png");
+                s3.setOffsetX(120);
+                s3.setOffsetY(120);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(120);
+                text.setOffsetY(170);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Horse Lancer")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Lancer/Horse_Lancer_NB.png");
+                s3.setOffsetX(-30);
+                s3.setOffsetY(-100);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(-30);
+                text.setOffsetY(-50);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Horse Heavy Cavalry")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Horse/Horse_Heavy_Cavalry/Horse_Heavy_Cavalry_NB.png");
+                s3.setOffsetX(300);
+                s3.setOffsetY(-300);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(300);
+                text.setOffsetY(-220);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Slinger Man")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Slingerman/Slinger_Man_NB.png");
+                s3.setOffsetX(50);
+                s3.setOffsetY(-50);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(50);
+                //text.setOffsetY(0);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+            
+              } else if (u.get_name().equals("Spearman")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Spearman/Spearman_NB.png");
+                s3.setOffsetX(30);
+                s3.setOffsetY(-30);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(30);
+                text.setOffsetY(60);
+    
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
+              } else if (u.get_name().equals("Swordsman")) {
+                PictureMarkerSymbol s3 = null;
+                s3 = new PictureMarkerSymbol("images/CS2511Sprites_No_Background/Swordsman/Swordsman_NB.png");
+                s3.setOffsetX(40);
+                s3.setOffsetY(-40);
+                Graphic gPic6 = new Graphic(curPoint, s3);
+
+                TextSymbol text = new TextSymbol(10,
+            faction + "\n" + province + "\n" + pro.numofUnit(u), 0xFFFF0000,
+            HorizontalAlignment.RIGHT, VerticalAlignment.BOTTOM);
+                text.setHaloColor(0xFFFFFFFF);
+                text.setHaloWidth(2);
+                text.setOffsetX(40);
+                text.setOffsetY(30);
+
+                Graphic gText = new Graphic(curPoint, text);
+                
+                graphicsOverlay.getGraphics().add(gText);
+
+                graphicsOverlay.getGraphics().add(gPic6);
               }
-            }
+            } 
           }
         }
         //
@@ -833,4 +1331,13 @@ public class GloriaRomanusController{
   public void EndTurn() {
     system.endTurn();
   }
+
+  public void click_save() {
+    system.saveProgress();
+  }
+
+  public void click_load() {
+    system.continueProgress();
+  }
+
 }
