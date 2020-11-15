@@ -72,7 +72,7 @@ public class InvasionMenuController extends MenuController{
         new_list.add("pikemen");
         new_list.add("hoplite");
         //new_list.add("javelin skirmisher");
-        new_list.add("elephant");
+        //new_list.add("elephant");
         new_list.add("horse archer");
         new_list.add("druid");
         //new_list.add("melee infantry");
@@ -106,7 +106,7 @@ public class InvasionMenuController extends MenuController{
         nexthumanprovince.setText("");
         invading_province.setText("");
         opponent_province.setText("");
-        output_terminal.clear();
+        //output_terminal.clear();
         troop_choice.getItems().clear();
 
         getParent().clear_feature();
