@@ -79,6 +79,16 @@ public class BasicMenuController extends MenuController {
         //music.musicplay2();
     }
 
+    @FXML
+    public void stop_music () {
+        getParent().music_stop();
+    }
+
+    @FXML
+    public void continue_music () {
+        getParent().music_continue();
+    }
+
     public String get_human_unit() {
         return this.human_faction;
     }

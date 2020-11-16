@@ -11,6 +11,7 @@ import javax.sound.sampled.Clip;
 
 public class PlayMusic {
     private Clip clip;
+    long clipTimePosition;
     void playMusic(String musiclocation) {
         try{
             File musicPath = new File(musiclocation);
@@ -36,6 +37,12 @@ public class PlayMusic {
     public void music_stop() {
         //long clipTimePosition = clip.getMicrosecondPosition();
         this.clip.stop();
+        this.clipTimePosition = clip.getMicrosecondPosition();
+    }
+
+    public void music_continue() {
+        this.clip.setMicrosecondPosition(clipTimePosition);
+        clip.start();
     }
 
 }
