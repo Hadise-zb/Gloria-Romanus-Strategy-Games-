@@ -198,6 +198,13 @@ public class GloriaRomanusController{
     this.music = musicObject;
   }
 
+  public void music_stop() {
+    this.music.music_stop();
+  }
+
+  public void music_continue() {
+    this.music.music_continue();
+  }
   /*
   public void clickedrecuitbutton(ActionEvent e) throws IOException {
     List<String> new_list = new ArrayList<String>();

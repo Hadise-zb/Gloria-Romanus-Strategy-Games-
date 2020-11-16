@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<VBox maxWidth="446.0" prefHeight="270.0" prefWidth="446.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.BasicMenuController">
+<VBox maxWidth="446.0" prefHeight="409.0" prefWidth="446.0" spacing="10" styleClass="panel-region" stylesheets="/unsw/gloriaromanus/style.css" StackPane.alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unsw.gloriaromanus.BasicMenuController">
     <padding>
         <Insets topRightBottomLeft="10" />
     </padding>
@@ -58,6 +58,21 @@
                <Button mnemonicParsing="false" onAction="#clickedload" text="Load" />
             </children>
          </HBox>
+      </children>
+   </HBox>
+   <VBox prefHeight="70.0" prefWidth="426.0" />
+   <HBox prefHeight="100.0" prefWidth="200.0">
+      <children>
+         <HBox prefHeight="71.0" prefWidth="200.0">
+            <children>
+               <Button mnemonicParsing="false" onAction="#stop_music" text="Stop music" />
+            </children>
+         </HBox>
+         <VBox prefHeight="100.0" prefWidth="176.0">
+            <children>
+               <Button mnemonicParsing="false" onAction="#continue_music" text="Continue music" />
+            </children>
+         </VBox>
       </children>
    </HBox>
 </VBox>
